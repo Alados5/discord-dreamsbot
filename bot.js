@@ -26,7 +26,7 @@ client.on('message', msg => {
       
     msg.channel.send(rolename);
       
-    if (msg.member.roles.has(therole)) {
+    if (msg.member.roles.has(therole.id)) {
         msg.member.removeRole(therole);
         msg.reply("Role removed!");
     }
