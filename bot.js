@@ -24,8 +24,6 @@ client.on('message', msg => {
     var therole = msg.guild.roles.find("name", rolename);
     if (!therole) return msg.reply("This role does not exist")
       
-    msg.channel.send(rolename);
-      
     if (msg.member.roles.has(therole.id)) {
         msg.member.removeRole(therole);
         msg.reply("Role removed!");
