@@ -17,16 +17,22 @@ client.on('message', msg => {
   const args = msg.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase(); 
     
-  if (command == 'aura') {
-    const userx = msg.author;
-        
+  if (command == 'aura') {       
     var rolename = args[0];
+    msg.channel.send("Role is" + rolename);
     if (!rolename) return msg.reply("You didn't put a role in there!")
         
     var therole = msg.guild.roles.find("name", rolename);
     if (!therole) return msg.reply("This role does not exist")
-        
-    userx.addRole(therole);
+      
+    if (msg.member.roles.has(therole) {
+        msg.member.removeRole(therole);
+        msg.reply("Role removed!");
+    }
+    else {
+        msg.member.addRole(therole);
+        msg.reply("Role added!");
+    }
   }
   
   
