@@ -26,14 +26,14 @@ client.on('message', msg => {
       
     msg.channel.send(rolename);
       
-    if (msg.member.roles.has(therole) {
-        msg.member.removeRole(therole);
-        msg.reply("Role removed!");
-    }
-    else {
-        msg.member.addRole(therole);
-        msg.reply("Role added!");
-    }
+    //if (msg.member.roles.has(therole) {
+    //    msg.member.removeRole(therole);
+    //    msg.reply("Role removed!");
+    //}
+    //else {
+    //    msg.member.addRole(therole);
+    //    msg.reply("Role added!");
+    //}
   }
   
   
