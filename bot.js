@@ -31,8 +31,8 @@ client.on('message', msg => {
     //    msg.reply("Role removed!");
     //}
     //else {
-    //    msg.member.addRole(therole);
-    //    msg.reply("Role added!");
+        msg.member.addRole(therole);
+        msg.reply("Role added!");
     //}
   }
   
