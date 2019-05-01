@@ -19,11 +19,12 @@ client.on('message', msg => {
     
   if (command == 'aura') {       
     var rolename = args[0];
-    msg.channel.send("Role is" + rolename);
     if (!rolename) return msg.reply("You didn't put a role in there!")
         
     var therole = msg.guild.roles.find("name", rolename);
     if (!therole) return msg.reply("This role does not exist")
+      
+    msg.channel.send(rolename);
       
     if (msg.member.roles.has(therole) {
         msg.member.removeRole(therole);
