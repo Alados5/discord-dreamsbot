@@ -39,6 +39,13 @@ client.on('message', msg => {
       var iconlink = 'https://indreams.me/guide/icons';
       msg.channel.send("La lista de iconos en Dreams puede encontrarse aquí: \n" + iconlink);
   }
+    
+  if (command == 'dreamsearch') {
+      var basesearchlink = 'https://indreams.me/search/results/?term=';
+      var searchterm = msg.content.slice(prefix.length);
+      searchterm = searchterm.replace(" ", "%20");
+      msg.channel.send("Tu búsqueda en indreams.me da esto: \n" + basesearchlink + searchterm);
+  }
   
   
 });
