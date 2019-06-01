@@ -27,17 +27,17 @@ client.on('message', msg => {
       
     if (msg.member.roles.has(therole.id)) {
         msg.member.removeRole(therole);
-        msg.reply("Role eliminado!");
+        msg.reply("Rol eliminado!");
     }
     else {
         msg.member.addRole(therole);
-        msg.reply("Role añadido!");
+        msg.reply("Rol añadido!");
     }
-  } /END AURA
+  } //END AURA
     
   if (command == 'iconos') {
       var iconlink = 'https://indreams.me/guide/icons';
-      msg.channel.send("La lista de iconos en Dreams puede encontrarse aquí: " + iconlink);
+      msg.channel.send("La lista de iconos en Dreams puede encontrarse aquí: \n" + iconlink);
   }
   
   
