@@ -42,8 +42,8 @@ client.on('message', msg => {
     
   if (command == 'dreamsearch') {
       var basesearchlink = 'https://indreams.me/search/results/?term=';
-      var searchterm = msg.content.slice(prefix.length);
-      searchterm = searchterm.replace(" ", "%20");
+      var searchterm = msg.content.slice(prefix.length+command.length);
+      searchterm = searchterm.replace(/ /g, "%20");
       msg.channel.send("Tu búsqueda en indreams.me da esto: \n" + basesearchlink + searchterm);
   }
   
