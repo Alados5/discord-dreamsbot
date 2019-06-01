@@ -37,7 +37,7 @@ client.on('message', msg => {
     
   if (command == 'iconos') {
       var iconlink = 'https://indreams.me/guide/icons';
-      msg.channel.send(["La lista de iconos en Dreams puede encontrarse aquí: ", iconlink]);
+      msg.channel.send("La lista de iconos en Dreams puede encontrarse aquí: " + iconlink);
   }
   
   
