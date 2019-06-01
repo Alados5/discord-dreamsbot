@@ -42,14 +42,14 @@ client.on('message', msg => {
     
   if (command == 'dreamsearch') {
       var basesearchlink = 'https://indreams.me/search/results/?term=';
-      var searchterm = msg.content.slice(prefix.length+command.length);
+      var searchterm = msg.content.slice(prefix.length+command.length+1);
       searchterm = searchterm.replace(/ /g, "%20");
       msg.channel.send("Tu búsqueda en indreams.me da esto: \n" + basesearchlink + searchterm);
   }
     
   if (command == 'dreamersearch') {
       var basesearchlink = 'https://indreams.me/search/results/?term=@'; 
-      var searchterm = msg.content.slice(prefix.length+command.length);
+      var searchterm = msg.content.slice(prefix.length+command.length+1);
       searchterm = searchterm.replace(/ /g, "%20");
       msg.channel.send("Tu búsqueda de un usuario en indreams.me da esto: \n" + basesearchlink + searchterm);
   }
