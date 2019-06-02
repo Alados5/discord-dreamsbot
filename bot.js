@@ -40,7 +40,7 @@ client.on('message', msg => {
     
     var therole;
     for(var auratype in rolenameslist) {
-        if(rolenameslist.auratype.indexOf(rolename) >= 0) {
+        if(rolenameslist[auratype].indexOf(rolename) >= 0) {
             therole = msg.guild.roles.find("name", auratype);
         }
     }
