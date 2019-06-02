@@ -12,10 +12,19 @@ client.on('message', msg => {
     
   //Returns if message doesn't start with prefix
   if(!msg.content.startsWith(prefix)) return;
-    
+   
   //Handles arguments to just take the first word
   const args = msg.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase(); 
+    
+  //ADMIN COMMANDS
+  if (msg.member.permissions.has('ADMINISTRATOR')) {
+    if (command == 'clear') {
+      var ntoclear = parseInt(args[0]);
+      if (!ntoclear || isNaN(ntoclear)) return msg.reply("Pon cuantos mensajes quieres eliminar!")
+      msg.channel.bulkDelete(ntoclear+1);
+    }
+  }
   
   //AURA - ADD/REMOVE DREAM ROLES
   if (command == 'aura') {       
