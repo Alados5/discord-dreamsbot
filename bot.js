@@ -28,7 +28,7 @@ client.on('message', msg => {
   
   //AURA - ADD/REMOVE DREAM ROLES
   if (command == 'aura') {       
-    var rolename = msg.content.slice(prefix.length+commmand.length+1).toLowerCase();
+    var rolename = msg.content.slice(prefix.length+command.length+1).toLowerCase();
     if (!rolename) return msg.reply("No has puesto ningún rol!")
       
     var rolenameslist = {"Artemaníacos":["art", "arte", "artemaníacos", "artemaniacos", "artemaniaco", "artista", "artist"],
