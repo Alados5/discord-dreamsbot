@@ -28,10 +28,22 @@ client.on('message', msg => {
   
   //AURA - ADD/REMOVE DREAM ROLES
   if (command == 'aura') {       
-    var rolename = args[0];
+    var rolename = msg.content.slice(prefix.length+commmand.length+1).toLowerCase();
     if (!rolename) return msg.reply("No has puesto ningún rol!")
-        
-    var therole = msg.guild.roles.find("name", rolename);
+      
+    var rolenameslist = {"Artemaníacos":["art", "arte", "artemaníacos", "artemaniacos", "artemaniaco", "artista", "artist"],
+                         "Hackermen":["design", "diseño", "logic", "logica", "lógica", "hackermen", "hackerman"],
+                         "Titiriteros":["animation", "animacion", "animación", "titiriteros", "titiritero", "animador", "animator"],
+                         "Los Notas":["music", "audio", "música", "los notas", "notas", "nota"],
+                         "Marie Kondo":["curation", "curacion", "curación", "organizar", "organizador", "marie kondo"],
+                         "Becarios":["play", "player", "jugar", "jugador", "jugadores", "4dplayers", "becario", "becarios"]};
+    
+    var therole;
+    for(var auratype in rolenameslist) {
+        if(rolenameslist.auratype.indexOf(rolename) >= 0) {
+            therole = msg.guild.roles.find("name", auratype);
+        }
+    }
     if (!therole) return msg.reply("Este rol no existe!")
       
     if (msg.member.roles.has(therole.id)) {
