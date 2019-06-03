@@ -62,7 +62,13 @@ client.on('message', msg => {
   // CHOOSE
   if (command == 'choose') {
       var randnum = Math.random();
-      msg.channel.send(randnum)
+      var chopt = msg.content.slice(prefix.length+command.length+1).split(', ');
+      var nopt = chopt.length;
+      
+      for (var opti=1; opti<=nopt; opti++) {
+          if (randnum <= opti/nopt) return msg.channel.send(chopt[opti-1])
+      }
+
   }
   // END CHOOSE
   
@@ -73,8 +79,15 @@ client.on('message', msg => {
   }
   // END ICON LIST
   
-  // SEARCH INDREAMS.ME
+  // INDREAMS.ME SEARCH
   if (command == 'dreamsearch') {
+      var basesearchlink = 'https://indreams.me/search/results/?term=';
+      var searchterm = msg.content.slice(prefix.length+command.length+1);
+      searchterm = searchterm.replace(/ /g, "%20");
+      msg.channel.send("Tu búsqueda en indreams.me da esto: \n" + basesearchlink + searchterm);
+  }
+    
+  if (command == 'dreamsearchf') {
       var basesearchlink = 'https://indreams.me/search/results/?term=';
       var searchterm = msg.content.slice(prefix.length+command.length+1);
       searchterm = searchterm.replace(/ /g, "%20");
@@ -87,7 +100,7 @@ client.on('message', msg => {
       searchterm = searchterm.replace(/ /g, "%20");
       msg.channel.send("Tu búsqueda de un usuario en indreams.me da esto: \n" + basesearchlink + searchterm);
   }
-  // END INDREAMS.ME
+  // END INDREAMS.ME SEARCH
   
 });
 
