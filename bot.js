@@ -5,19 +5,19 @@ var prefix = '!';
 
 client.on('message', msg => {
     
-  //Returns if author is a bot
+  // Returns if author is a bot
   if(msg.author.bot) return;
   
   var lowtext = msg.content.toLowerCase();
     
-  //Returns if message doesn't start with prefix
+  // Returns if message doesn't start with prefix
   if(!msg.content.startsWith(prefix)) return;
    
-  //Handles arguments to just take the first word
+  // Handles arguments to just take the first word
   const args = msg.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase(); 
     
-  //ADMIN COMMANDS
+  // ADMIN COMMANDS
   if (msg.member.permissions.has('ADMINISTRATOR')) {
     if (command == 'clear') {
       var ntoclear = parseInt(args[0]);
@@ -25,8 +25,10 @@ client.on('message', msg => {
       msg.channel.bulkDelete(ntoclear+1);
     }
   }
-  
-  //AURA - ADD/REMOVE DREAM ROLES
+  // END ADMIN COMMANDS
+
+    
+  // AURA - ADD/REMOVE DREAM ROLES
   if (command == 'aura') {       
     var rolename = msg.content.slice(prefix.length+command.length+1).toLowerCase();
     if (!rolename) return msg.reply("No has puesto ningún rol!")
@@ -54,13 +56,24 @@ client.on('message', msg => {
         msg.member.addRole(therole);
         msg.reply("Rol añadido!");
     }
-  } //END AURA
+  }
+  // END AURA
     
+  // CHOOSE
+  if (command == 'choose') {
+      var randnum = Math.random();
+      msg.channel.send(randnum)
+  }
+  // END CHOOSE
+  
+  // ICON LIST
   if (command == 'iconos') {
       var iconlink = 'https://indreams.me/guide/icons';
       msg.channel.send("La lista de iconos en Dreams puede encontrarse aquí: \n" + iconlink);
   }
-    
+  // END ICON LIST
+  
+  // SEARCH INDREAMS.ME
   if (command == 'dreamsearch') {
       var basesearchlink = 'https://indreams.me/search/results/?term=';
       var searchterm = msg.content.slice(prefix.length+command.length+1);
@@ -74,6 +87,7 @@ client.on('message', msg => {
       searchterm = searchterm.replace(/ /g, "%20");
       msg.channel.send("Tu búsqueda de un usuario en indreams.me da esto: \n" + basesearchlink + searchterm);
   }
+  // END INDREAMS.ME
   
 });
 
