@@ -89,9 +89,14 @@ client.on('message', msg => {
     
   if (command == 'dreamsearchf') {
       var basesearchlink = 'https://indreams.me/search/results/?term=';
-      var searchterm = msg.content.slice(prefix.length+command.length+1);
+      var requestsearch = msg.content.slice(prefix.length+command.length+1);
+      var filters = requestsearch.split('&&');
+      var searchterm = filters.shift();
       searchterm = searchterm.replace(/ /g, "%20");
-      msg.channel.send("Tu búsqueda en indreams.me da esto: \n" + basesearchlink + searchterm);
+      var searchstring = searchterm + "&type=" + filters[0] + "&sort=" + filters[1];
+      msg.channel.send("Tu búsqueda filtrada en indreams.me da esto: \n" + basesearchlink + searchstring);
+      
+      //&type=dreams&sort=mostliked
   }
     
   if (command == 'dreamersearch') {
