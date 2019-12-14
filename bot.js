@@ -109,7 +109,7 @@ client.on('message', msg => {
       var baselink = 'https://indreams.me/'; 
       var creator = msg.content.slice(prefix.length+command.length+1);
       var finallink = '/creations';
-      searchterm = searchterm.replace(/ /g, "%20");
+      creator = creator.replace(/ /g, "%20");
       msg.channel.send("Las creaciones del usuario que me has dado son: \n" + basesearchlink + searchterm + finallink);
   }
     
