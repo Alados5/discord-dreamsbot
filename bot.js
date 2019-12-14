@@ -110,7 +110,7 @@ client.on('message', msg => {
       var creator = msg.content.slice(prefix.length+command.length+1);
       var finallink = '/creations';
       creator = creator.replace(/ /g, "%20");
-      msg.channel.send("Las creaciones del usuario que me has dado son: \n" + basesearchlink + searchterm + finallink);
+      msg.channel.send("Las creaciones del usuario que me has dado son: \n" + baselink + creator + finallink);
   }
     
     
