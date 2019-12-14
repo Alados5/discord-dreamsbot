@@ -105,6 +105,16 @@ client.on('message', msg => {
       searchterm = searchterm.replace(/ /g, "%20");
       msg.channel.send("Tu búsqueda de un usuario en indreams.me da esto: \n" + basesearchlink + searchterm);
   }
+  if (command == 'creations') {
+      var baselink = 'https://indreams.me/'; 
+      var creator = msg.content.slice(prefix.length+command.length+1);
+      var finallink = '/creations';
+      searchterm = searchterm.replace(/ /g, "%20");
+      msg.channel.send("Las creaciones del usuario que me has dado son: \n" + basesearchlink + searchterm + finallink);
+  }
+    
+    
+    
   // END INDREAMS.ME SEARCH
   
 });
