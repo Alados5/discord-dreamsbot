@@ -3,6 +3,15 @@ const client = new Discord.Client();
 
 var prefix = '!';
 
+
+client.on('guildMemberAdd', member => {
+  const channel = member.guild.channels.find('name', 'general');
+  if (!channel) return;
+  if (channel.id = "530381279749865484") {
+      channel.send(`¡Muy buenas, ${member}! ¡Te damos la bienvenida al Servidor de Dreams en Español!`);
+  }
+});
+
 client.on('message', msg => {
     
   // Returns if author is a bot
