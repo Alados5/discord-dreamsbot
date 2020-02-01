@@ -33,12 +33,12 @@ client.on('message', msg => {
     var rolename = msg.content.slice(prefix.length+command.length+1).toLowerCase();
     if (!rolename) return msg.reply("No has puesto ningún rol!")
       
-    var rolenameslist = {"Artemaníacos":["art", "arte", "artemaníacos", "artemaniacos", "artemaniaco", "artista", "artist"],
-                         "Hackermen":["design", "diseño", "logic", "logica", "lógica", "hackermen", "hackerman"],
-                         "Titiriteros":["animation", "animacion", "animación", "titiriteros", "titiritero", "animador", "animator"],
-                         "Los Notas":["music", "audio", "música", "los notas", "notas", "nota"],
-                         "Marie Kondo":["curation", "curacion", "curación", "organizar", "organizador", "marie kondo"],
-                         "Becarios":["play", "player", "jugar", "jugador", "jugadores", "4dplayers", "becario", "becarios"]};
+    var rolenameslist = {"Arte":["art", "arte", "artemaníacos", "artemaniacos", "artemaniaco", "artista", "artist"],
+                         "Diseño":["design", "diseño", "logic", "logica", "lógica", "hackermen", "hackerman"],
+                         "Animación":["animation", "animacion", "animación", "titiriteros", "titiritero", "animador", "animator"],
+                         "Audio":["music", "audio", "música", "los notas", "notas", "nota"],
+                         "Gestión":["curation", "curacion", "curación", "gestion", "gestión", "organizar", "organizador", "marie kondo"],
+                         "Juego":["play", "player", "juego", "jugar", "jugador", "jugadores", "4dplayers", "becario", "becarios"]};
     
     var therole;
     for(var auratype in rolenameslist) {
