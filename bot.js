@@ -12,10 +12,10 @@ client.on('guildMemberAdd', member => {
                    `\nA modo de presentación, y para romper el hielo, `+
                    `normalmente pedimos a los nuevos qué faceta de Dreams les gusta más, `+
                    `y qué están haciendo o quieren hacer en el juego.`+
-                   `\nNo dudes en compartir tus creaciones, o pedir ayuda si te hace falta! :D`+
-                   `\nÉchale un ojo a las normas del servidor, seguro que pronto un humano hablará contigo`+
+                   `\n¡No dudes en compartir tus creaciones, o pedir ayuda si te hace falta! :D`+
+                   `\nÉchale un ojo a las normas del servidor, seguro que pronto un humano hablará contigo `+
                    `para darte una bienvenida mejor que la que te puedo dar yo.`+
-                   `\nPero no dudes en usarme para lo que necesites!`+
+                   `\n¡Pero no dudes en usarme para lo que necesites!`+
                    `\n \n    ***Beep boop, yo soy un bot creado por Alados5***`);
   }
 });
