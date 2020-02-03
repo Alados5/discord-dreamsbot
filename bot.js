@@ -131,8 +131,39 @@ client.on('message', msg => {
   }
     
     
-    
   // END INDREAMS.ME SEARCH
+
+  
+  // START EMBED
+  if (command == 'embed') {
+    var alltext = msg.content.slice(7).split('|');
+    var notembed = alltext[0];
+    var msgtitle = alltext[1];
+    var desctext = alltext[2];
+    var msgcolor = parseInt(alltext[3]);
+    msg.channel.send(" ", {files: [notembed]})
+    msg.channel.send({embed: {
+      color: msgcolor,
+      author: {
+        name: msg.author.username,
+        icon_url: msg.author.avatarURL
+      },
+      description:desctext,
+      title: msgtitle,
+      //fields: [
+      //  {
+      //    name: "CAMPO 1",
+      //    value: "Texto 1"
+      //  },
+      //  {
+      //    name: "CAMPO 2",
+      //    value: "Texto 2"
+      //  }
+      //]
+    }})
+  }
+  // END EMBED
+  
   
 });
 
