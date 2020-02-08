@@ -166,9 +166,9 @@ client.on('message', msg => {
   
   // START EMBED WELCOME (PLACEHOLDER)
   if (command == 'welcome') {
-    var msgtitle = "¡Muy buenas, " + msg.author.username + "!\n¡Te damos la bienvenida al Servidor de Dreams en Español!";
+    var msgtitle = "¡Bienvenid@ al Servidor de Dreams en Español!";
     var desctext = "A modo de presentación, y para romper el hielo, "+
-                   "normalmente pedimos a los nuevos miebros qué faceta de Dreams les gusta más, "+
+                   "normalmente pedimos a los nuevos miembros qué faceta de Dreams les gusta más, "+
                    "y qué están haciendo o quieren hacer en el juego."+
                    "\n\n¡No dudes en compartir tus creaciones, o pedir ayuda si te hace falta! :D"+
                    "\n\nÉchale un ojo a las normas del servidor, "+
@@ -176,8 +176,8 @@ client.on('message', msg => {
                    "\n\n¡Pero no dudes en usarme para lo que necesites!";
 
     var msgcolor = 8388863;
-    msg.channel.send("Hola, "+msg.author);
-    msg.channel.send({embed: {
+    //msg.channel.send("¡Muy buenas, " + msg.author + "!");
+    msg.channel.send("¡Muy buenas, " + msg.author + "!", {embed: {
       color: msgcolor,
       description: desctext,
       title: msgtitle,
