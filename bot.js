@@ -7,7 +7,7 @@ var prefix = '!';
 client.on('guildMemberAdd', member => {
   const channel = member.guild.channels.find('name', 'general');
   if (!channel) return;
-  if (channel.id == "530381279749865484" || channel.id == "402992536148377602") {
+  if (channel.id == 530381279749865484 || channel.id == 402992536148377602) {
     var msgcolor = 8388863;
     var msgtitle = "¡Bienvenid@ al Servidor de Dreams en Español!";
     var desctext = "A modo de presentación, y para romper el hielo, "+
@@ -17,7 +17,7 @@ client.on('guildMemberAdd', member => {
                    "\n\nÉchale un ojo a las normas del servidor, "+
                    "seguro que pronto un humano hablará contigo para darte una bienvenida mejor que la que te puedo dar yo."+
                    "\n\n¡Pero no dudes en usarme para lo que necesites!";
-    channel.send("¡Muy buenas, " + member + "!", {embed: {
+    channel.send("¡Muy buenas, " + member.username + "!", {embed: {
       color: msgcolor,
       description: desctext,
       title: msgtitle,
