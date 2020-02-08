@@ -3,7 +3,7 @@ const client = new Discord.Client();
 
 var prefix = '!';
 
-
+// WELCOME MESSAGE
 client.on('guildMemberAdd', member => {
   const channel = member.guild.channels.find('name', 'general');
   if (!channel) return;
@@ -163,6 +163,31 @@ client.on('message', msg => {
     }})
   }
   // END EMBED
+  
+  // START EMBED WELCOME (PLACEHOLDER)
+  if (command == 'welcome') {
+    var alltext = msg.content.slice(7).split('|');
+    var msgtitle = alltext[0];
+    var desctext = alltext[1];
+    var msgcolor = 8388863;
+    msg.channel.send({embed: {
+      color: msgcolor,
+      description: desctext,
+      title: msgtitle,
+      thumbnail: {
+        "url": msg.author.avatarURL
+      },
+      image: {
+        "url": "https://i.imgur.com/pdmBuaV.png"
+      },
+      footer: {
+        "icon_url": "https://images-ext-2.discordapp.net/external/nT8HH6V_sT5nhEVJE1sgYbsiAIv44AJlyK6kbhwGabE/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/284104569586450434/9c4e15c73c4f4d7709ca9981527b2a64.png",
+        "text": "Beep boop, soy un Bot creado por Alados5"
+      }
+    }})
+  }
+  // END EMBED WELCOME (PLACEHOLDER)
+  
   
   
 });
