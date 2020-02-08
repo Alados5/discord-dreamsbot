@@ -17,12 +17,12 @@ client.on('guildMemberAdd', member => {
                    "\n\nÉchale un ojo a las normas del servidor, "+
                    "seguro que pronto un humano hablará contigo para darte una bienvenida mejor que la que te puedo dar yo."+
                    "\n\n¡Pero no dudes en usarme para lo que necesites!";
-    channel.send("¡Muy buenas, " + member.user.username + "!", {embed: {
+    channel.send("¡Muy buenas, " + member + "!", {embed: {
       color: msgcolor,
       description: desctext,
       title: msgtitle,
       thumbnail: {
-        "url": "https://cdn.discordapp.com/avatars/" +member.id+ "/" +member.avatar+ ".png"
+        "url": member.user.avatarURL
       },
       image: {
         "url": "https://i.imgur.com/pdmBuaV.png"
