@@ -8,15 +8,42 @@ client.on('guildMemberAdd', member => {
   const channel = member.guild.channels.find('name', 'general');
   if (!channel) return;
   if (channel.id = "530381279749865484") {
-      channel.send(`¡Muy buenas, ${member}! ¡Te damos la bienvenida al Servidor de Dreams en Español!`+
-                   `\nA modo de presentación, y para romper el hielo, `+
-                   `normalmente pedimos a los nuevos qué faceta de Dreams les gusta más, `+
-                   `y qué están haciendo o quieren hacer en el juego.`+
-                   `\n¡No dudes en compartir tus creaciones, o pedir ayuda si te hace falta! :D`+
-                   `\nÉchale un ojo a las normas del servidor, seguro que pronto un humano hablará contigo `+
-                   `para darte una bienvenida mejor que la que te puedo dar yo.`+
-                   `\n¡Pero no dudes en usarme para lo que necesites!`+
-                   `\n \n    ***Beep boop, yo soy un bot creado por Alados5***`);
+    var msgcolor = 8388863;
+    var msgtitle = "¡Bienvenid@ al Servidor de Dreams en Español!";
+    var desctext = "A modo de presentación, y para romper el hielo, "+
+                   "normalmente pedimos a los nuevos miembros qué faceta de Dreams les gusta más, "+
+                   "y qué están haciendo o quieren hacer en el juego."+
+                   "\n\n¡No dudes en compartir tus creaciones, o pedir ayuda si te hace falta! :D"+
+                   "\n\nÉchale un ojo a las normas del servidor, "+
+                   "seguro que pronto un humano hablará contigo para darte una bienvenida mejor que la que te puedo dar yo."+
+                   "\n\n¡Pero no dudes en usarme para lo que necesites!";
+    channel.send("¡Muy buenas, " + member + "!", {embed: {
+      color: msgcolor,
+      description: desctext,
+      title: msgtitle,
+      thumbnail: {
+        "url": member.avatarURL
+      },
+      image: {
+        "url": "https://i.imgur.com/pdmBuaV.png"
+      },
+      footer: {
+        "icon_url": "https://images-ext-2.discordapp.net/external/nT8HH6V_sT5nhEVJE1sgYbsiAIv44AJlyK6kbhwGabE/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/284104569586450434/9c4e15c73c4f4d7709ca9981527b2a64.png",
+        "text": "Beep boop, yo soy un bot creado por Alados5"
+      }
+    }})
+    
+    /*
+    channel.send(`¡Muy buenas, ${member}! ¡Te damos la bienvenida al Servidor de Dreams en Español!`+
+                 `\nA modo de presentación, y para romper el hielo, `+
+                 `normalmente pedimos a los nuevos qué faceta de Dreams les gusta más, `+
+                 `y qué están haciendo o quieren hacer en el juego.`+
+                 `\n¡No dudes en compartir tus creaciones, o pedir ayuda si te hace falta! :D`+
+                 `\nÉchale un ojo a las normas del servidor, seguro que pronto un humano hablará contigo `+
+                 `para darte una bienvenida mejor que la que te puedo dar yo.`+
+                 `\n¡Pero no dudes en usarme para lo que necesites!`+
+                 `\n \n    ***Beep boop, yo soy un bot creado por Alados5***`);
+    */
   }
 });
 
@@ -164,7 +191,7 @@ client.on('message', msg => {
   }
   // END EMBED
   
-  // START EMBED WELCOME (PLACEHOLDER)
+  /* START EMBED WELCOME (PLACEHOLDER)
   if (command == 'welcome') {
     var msgtitle = "¡Bienvenid@ al Servidor de Dreams en Español!";
     var desctext = "A modo de presentación, y para romper el hielo, "+
@@ -176,7 +203,6 @@ client.on('message', msg => {
                    "\n\n¡Pero no dudes en usarme para lo que necesites!";
 
     var msgcolor = 8388863;
-    //msg.channel.send("¡Muy buenas, " + msg.author + "!");
     msg.channel.send("¡Muy buenas, " + msg.author + "!", {embed: {
       color: msgcolor,
       description: desctext,
@@ -194,7 +220,7 @@ client.on('message', msg => {
     }})
   }
   // END EMBED WELCOME (PLACEHOLDER)
-  
+  */
   
   
 });
