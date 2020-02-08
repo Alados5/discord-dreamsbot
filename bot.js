@@ -178,8 +178,8 @@ client.on('message', msg => {
                    "\n\n¡Pero no dudes en usarme para lo que necesites!";
 
     var msgcolor = 8388863;
-    
-    msg.channel.send({embed: {
+    //msg.channel.send(
+    msg.reply({embed: {
       color: msgcolor,
       description: desctext,
       title: msgtitle,
