@@ -7,7 +7,7 @@ var prefix = '!';
 client.on('guildMemberAdd', member => {
   const channel = member.guild.channels.find('name', 'general');
   if (!channel) return;
-  if (channel.id = "530381279749865484") {
+  if (channel.id == "530381279749865484" || channel.id == "402992536148377602") {
     var msgcolor = 8388863;
     var msgtitle = "¡Bienvenid@ al Servidor de Dreams en Español!";
     var desctext = "A modo de presentación, y para romper el hielo, "+
