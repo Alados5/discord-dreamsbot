@@ -22,7 +22,7 @@ client.on('guildMemberAdd', member => {
       description: desctext,
       title: msgtitle,
       thumbnail: {
-        "url": member.avatar
+        "url": "https://cdn.discordapp.com/avatars/" +member.id+ "/" +member.avatar+ ".png";
       },
       image: {
         "url": "https://i.imgur.com/pdmBuaV.png"
