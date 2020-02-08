@@ -167,7 +167,7 @@ client.on('message', msg => {
   // START EMBED WELCOME (PLACEHOLDER)
   if (command == 'welcome') {
     var alltext = msg.content.slice(9).split('|');
-    var msgtitle = alltext[0];
+    var msgtitle = "Hola "+msg.author;
     //¡Muy buenas, [user]! ¡Te damos la bienvenida al Servidor de Dreams en Español!
     var desctext = "A modo de presentación, y para romper el hielo, "+
                    "normalmente pedimos a los nuevos qué faceta de Dreams les gusta más, "+
@@ -178,6 +178,7 @@ client.on('message', msg => {
                    "\n\n¡Pero no dudes en usarme para lo que necesites!";
 
     var msgcolor = 8388863;
+    
     msg.channel.send({embed: {
       color: msgcolor,
       description: desctext,
