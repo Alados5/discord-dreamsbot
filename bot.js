@@ -176,7 +176,7 @@ client.on('message', msg => {
                    "\n\n¡Pero no dudes en usarme para lo que necesites!";
 
     var msgcolor = 8388863;
-    msg.channel.send(msg.author);
+    msg.channel.send("Hola, "+msg.author);
     msg.channel.send({embed: {
       color: msgcolor,
       description: desctext,
