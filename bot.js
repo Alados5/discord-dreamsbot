@@ -191,7 +191,7 @@ client.on('message', msg => {
   }
   // END EMBED
   
-  /* START EMBED WELCOME (PLACEHOLDER)
+  //START EMBED WELCOME (PLACEHOLDER)
   if (command == 'welcome') {
     var msgtitle = "¡Bienvenid@ al Servidor de Dreams en Español!";
     var desctext = "A modo de presentación, y para romper el hielo, "+
@@ -220,7 +220,6 @@ client.on('message', msg => {
     }})
   }
   // END EMBED WELCOME (PLACEHOLDER)
-  */
   
   
 });
