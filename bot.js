@@ -166,7 +166,7 @@ client.on('message', msg => {
   
   // START EMBED WELCOME (PLACEHOLDER)
   if (command == 'welcome') {
-    var alltext = msg.content.slice(7).split('|');
+    var alltext = msg.content.slice(9).split('|');
     var msgtitle = alltext[0];
     //¡Muy buenas, [user]! ¡Te damos la bienvenida al Servidor de Dreams en Español!
     var desctext = "A modo de presentación, y para romper el hielo, "+
