@@ -17,7 +17,7 @@ client.on('guildMemberAdd', member => {
                    "\n\nÉchale un ojo a las normas del servidor, "+
                    "seguro que pronto un humano hablará contigo para darte una bienvenida mejor que la que te puedo dar yo."+
                    "\n\n¡Pero no dudes en usarme para lo que necesites!";
-    /*
+    
     channel.send("¡Muy buenas, " + member + "!", {embed: {
       color: msgcolor,
       description: desctext,
@@ -33,9 +33,9 @@ client.on('guildMemberAdd', member => {
         "text": "Beep boop, yo soy un bot creado por Alados5"
       }
     }})
-    */
     
-    //
+    
+    /*
     channel.send(`¡Muy buenas, ${member}! ¡Te damos la bienvenida al Servidor de Dreams en Español!`+
                  `\nA modo de presentación, y para romper el hielo, `+
                  `normalmente pedimos a los nuevos qué faceta de Dreams les gusta más, `+
@@ -45,7 +45,7 @@ client.on('guildMemberAdd', member => {
                  `para darte una bienvenida mejor que la que te puedo dar yo.`+
                  `\n¡Pero no dudes en usarme para lo que necesites!`+
                  `\n \n    ***Beep boop, yo soy un bot creado por Alados5***`);
-    //*/
+    */
   }
 });
 
