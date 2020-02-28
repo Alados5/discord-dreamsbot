@@ -85,6 +85,7 @@ client.on('message', msg => {
                          "Audio":["music", "audio", "música", "los notas", "notas", "nota"],
                          "Gestión":["curation", "curacion", "curación", "gestion", "gestión", "organizar", "organizador", "marie kondo"],
                          "Juego":["play", "player", "juego", "jugar", "jugador", "jugadores", "4dplayers", "becario", "becarios"]};
+    var modslist = ["mod", "mods", "moderador", "moderadores", "admin", "admins"];
     
     var therole;
     for(var auratype in rolenameslist) {
@@ -92,7 +93,16 @@ client.on('message', msg => {
             therole = msg.guild.roles.find("name", auratype);
         }
     }
-    if (!therole) return msg.reply("Este rol no existe!")
+    
+    
+    if (!therole) {
+      if (modslist.indexOf(rolename) >= 0) {
+          return msg.reply("Buen intento, pero no puedo hacerte mod.\n¡No es un aura de Dreams! ;)")
+      }
+      else {
+          return msg.reply("Este rol no existe!")
+      }
+    }
       
     if (msg.member.roles.has(therole.id)) {
         msg.member.removeRole(therole);
