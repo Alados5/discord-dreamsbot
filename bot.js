@@ -63,12 +63,12 @@ client.on('message', msg => {
     var utc = fecha.getTime();
     var tensec = 10000;
     //var oneweek = 604800000;
-    if (utc % tensec < 1000) {
+    if (utc % tensec < 5000) {
       var server = msg.guild;
-      if (server.id != 530381279749865482) return
-      var compartir = server.channels.find(c => c.id == 567722499052404756 && c.type == "category");
+      if (server.id != 530381279749865482) return;
+      var compartir = server.channels.find(567722499052404756);
       var modsch = server.channels.find('name','mods');
-      modsch.send(compartir.children);
+      modsch.send(compartir.name);
     }
   }
    
