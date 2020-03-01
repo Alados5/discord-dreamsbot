@@ -68,7 +68,8 @@ client.on('message', msg => {
       if (server.id != 530381279749865482) return;
       //var compartir = server.channels.find('id', '567722499052404756');
       var modsch = server.channels.find('name','mods');
-      modsch.send(compartir.name);
+      //modsch.send(compartir.name);
+      modsch.send(modsch.name)
     }
     return;
   }
