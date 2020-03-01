@@ -66,10 +66,11 @@ client.on('message', msg => {
     if (utc % tensec < 5000) {
       var server = msg.guild;
       if (server.id != 530381279749865482) return;
-      var compartir = server.channels.find(567722499052404756);
+      var compartir = server.channels.find('id', '567722499052404756');
       var modsch = server.channels.find('name','mods');
       modsch.send(compartir.name);
     }
+    return;
   }
    
   // Handles arguments to just take the first word
@@ -245,12 +246,6 @@ client.on('message', msg => {
     }})
   }
   // END EMBED WELCOME (PLACEHOLDER)
-  
-  
-  if (command == 'ttest') {
-    msg.channel.send(utc);
-  }
-  
   
 });
 
