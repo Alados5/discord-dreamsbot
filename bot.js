@@ -69,7 +69,8 @@ client.on('message', msg => {
       var compartir = server.channels.get(567722499052404756);
       var modsch = server.channels.find('name','mods');
       modsch.send(modsch.name)
-      modsch.send(compartir.name);
+      if (!compartir) modsch.send("No.");
+      else modsch.send("Yes.");
     }
     return;
   }
