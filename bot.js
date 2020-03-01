@@ -67,9 +67,9 @@ client.on('message', msg => {
       var server = msg.guild;
       if (server.id != 530381279749865482) return;
       var modsch = server.channels.find('name','mods');
-      var asign = server.channels.find('name','asignaciones');
+      var asign = server.channels.find('type','category');
       if (!asign) modsch.send("No.");
-      else modsch.send(asign.parent_id);
+      else modsch.send(asign.name);
     }
     return;
   }
