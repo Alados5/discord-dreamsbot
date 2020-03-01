@@ -250,6 +250,10 @@ client.on('message', msg => {
   // END EMBED WELCOME (PLACEHOLDER)
   
   
+  if (command == 'ttest') {
+    msg.channel.send(utc);
+  }
+  
 });
 
 // THIS  MUST  BE  THIS  WAY
