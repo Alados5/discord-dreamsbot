@@ -3,22 +3,6 @@ const client = new Discord.Client();
 
 var prefix = '!';
 
-// PURGE PROJECTS
-var fecha = new Date();
-var utc = fecha.getTime();
-var tensec = 10;
-//var oneweek = 604800000;
-if (utc % tensec == 0) {
-  var guilds = client.guilds;
-  var server = guilds.find("530381279749865482");
-  var modsch = server.channels.find('name','mods');
-  if (!modsch) pass
-  else {
-    modsch.send("Prueba");
-  }
-}
-
-
 // WELCOME MESSAGE
 client.on('guildMemberAdd', member => {
   const channel = member.guild.channels.find('name', 'general');
@@ -253,6 +237,21 @@ client.on('message', msg => {
   if (command == 'ttest') {
     msg.channel.send(utc);
   }
+  
+  else {
+    // PURGE PROJECTS
+    var fecha = new Date();
+    var utc = fecha.getTime();
+    var tensec = 10000;
+    //var oneweek = 604800000;
+    if (utc % tensec < 1000) {
+      var server = msg.guild;
+      if (server.id != 530381279749865482) return
+      var modsch = server.channels.find('name','mods');
+      modsch.send(utc);
+    }
+  }
+  
   
 });
 
