@@ -66,11 +66,10 @@ client.on('message', msg => {
     if (utc % tensec < 5000) {
       var server = msg.guild;
       if (server.id != 530381279749865482) return;
-      var compartir = server.channels.get(567722499052404756);
       var modsch = server.channels.find('name','mods');
-      modsch.send(modsch.name)
-      if (!compartir) modsch.send("No.");
-      else modsch.send("Yes.");
+      var asign = server.channels.find('name','asignaciones');
+      if (!asign) modsch.send("No.");
+      else modsch.send(asign.parent_id);
     }
     return;
   }
