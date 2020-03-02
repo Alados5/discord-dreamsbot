@@ -215,7 +215,7 @@ client.on('message', msg => {
   if (command == 'trucos') {
     //dbindex = {1:{name:"...", tags:["..."], desc: "..."}, ...}
     if (args[0] == "todo") {
-      var response = "";
+      var response = "Todos los trucos: \n";
       for (var ntrick in dbindex) {
         if (dbindex.hasOwnProperty(ntrick)) {
           response = response + ntrick + ": " + dbindex[ntrick].name + "\n";
@@ -223,6 +223,19 @@ client.on('message', msg => {
       }
       msg.channel.send(response)
     }
+    
+    else if (args[0] == "tag") {
+      if (!args[1]) return msg.reply("No has especificado ninguna palabra clave!");
+      
+      var response = "Lista de trucos con esta palabra clave: \n";
+      for (var ntrick in dbindex) {
+        if (dbindex.hasOwnProperty(ntrick)) {
+          var tagsi = ;
+          if (dbindex[ntrick].tags.includes(args[1])) {
+            response = response + ntrick + ": " + dbindex[ntrick].name + "\n";
+          }
+        }
+      }
     
     
   }
