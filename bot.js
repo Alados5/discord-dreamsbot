@@ -221,7 +221,7 @@ client.on('message', msg => {
           response = response + ntrick + ": " + dbindex[ntrick].name + "\n";
         }
       }
-      msg.channel.send(response)
+      msg.channel.send(response);
     }
     
     else if (args[0] == "tag") {
@@ -230,14 +230,12 @@ client.on('message', msg => {
       var response = "Lista de trucos con esta palabra clave: \n";
       for (var ntrick in dbindex) {
         if (dbindex.hasOwnProperty(ntrick)) {
-          var tagsi = ;
           if (dbindex[ntrick].tags.includes(args[1])) {
             response = response + ntrick + ": " + dbindex[ntrick].name + "\n";
           }
         }
       }
-    
-    
+      msg.channel.send(response);
   }
   
 
