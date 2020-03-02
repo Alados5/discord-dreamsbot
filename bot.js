@@ -223,8 +223,7 @@ client.on('message', msg => {
       }
       msg.channel.send(response);
     }
-    
-    
+
     else if (args[0] == "tag") {
       if (!args[1]) return msg.reply("No has especificado ninguna palabra clave!");
       
@@ -238,6 +237,15 @@ client.on('message', msg => {
       }
       msg.channel.send(response);
     }
+    
+    else if (!isNaN(parseInt(args[0]))) {
+      var response = "**TRUCO " + args[0] + ": " + dbindex[args[0]].name + "** \n";
+      response = response + dbindex[args[0]].desc + "\n";
+      if (dbindex[args[0]].link) response = response + "Enlace o contenido multimedia: \n" + dbindex[args[0]].link + "\n";
+      response = response + "Enviado por: " + dbindex[args[0]].user;
+      msg.channel.send(response);
+    }
+    
   }
   
 
