@@ -224,6 +224,7 @@ client.on('message', msg => {
       msg.channel.send(response);
     }
     
+    
     else if (args[0] == "tag") {
       if (!args[1]) return msg.reply("No has especificado ninguna palabra clave!");
       
@@ -236,6 +237,7 @@ client.on('message', msg => {
         }
       }
       msg.channel.send(response);
+    }
   }
   
 
