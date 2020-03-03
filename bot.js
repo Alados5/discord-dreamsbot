@@ -62,15 +62,15 @@ client.on('message', msg => {
   // Returns if message doesn't start with prefix
   if(!msg.content.startsWith(prefix)) {
     // TRIGGER OF PURGE PROJECTS
-    var fecha = new Date();
-    var utc = fecha.getTime();
+    //var fecha = new Date();
+    //var utc = fecha.getTime();
     //var oneweek = 604800000;
-    var tensec = 10000;
-    if (utc % tensec < 5000) {
-      var server = msg.guild;
-      if (server.id != 530381279749865482) return;
-      var modsch = server.channels.find('name','mods');
-    }
+    //var tensec = 10000;
+    //if (utc % tensec < 5000) {
+      //var server = msg.guild;
+      //if (server.id != 530381279749865482) return;
+      //var modsch = server.channels.find('name','mods');
+    //}
     return;
   }
    
@@ -220,9 +220,9 @@ client.on('message', msg => {
   
   // CREATE CHANNEL
   if (command == 'nuevocanal') {
-    var askedname = msg.content.slice(prefix.length+command.length+1);
-    var server = msg.guild;
-    var chname = "px_" + askedname;
+    //var askedname = msg.content.slice(prefix.length+command.length+1);
+    //var server = msg.guild;
+    //var chname = "px_" + askedname;
     var newch = await msg.guild.createChannel('test'); 
     newch.setParent('567722499052404756');
     //server.channels.create(chname, {type:"text"});//, parent:"567722499052404756"});
