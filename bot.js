@@ -215,7 +215,7 @@ client.on('message', msg => {
   // START MKCH
   if (command == 'nuevocanal') {
     msg.reply("Comando recibido");
-    msg.guild.createChannel('test').then(ch => ch.setTopic('Hola'));
+    msg.guild.createChannel('estonoesunprojecto').then(ch => ch.setParent('552432711072088074'));
     //msg.guild.createChannel('test', {type: 'text'}).then(channel => {
     //})
     //channel = await channel.setParent('552432711072088074');
