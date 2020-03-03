@@ -223,7 +223,8 @@ client.on('message', msg => {
     var askedname = msg.content.slice(prefix.length+command.length+1);
     var server = msg.guild;
     var chname = "px_" + askedname;
-    server.createChannel(chname, {type:"text"});//, parent:"567722499052404756"});
+    server.channels.create(chname, {type:"text"});//, parent:"567722499052404756"});
+    msg.channel.send("Ok I guess");
   }
   // END CREATE CHANNEL
   
