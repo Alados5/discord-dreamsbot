@@ -233,6 +233,13 @@ client.on('message', msg => {
     msg.channel.edit({ parentID:'552432711072088074' });
     msg.channel.send("Hecho?")
   }
+  
+  if (command == 'chinfo') {
+    msg.channel.send("ID del canal: ")
+    msg.channel.send(msg.channel.id)
+    msg.channel.send("Parent ID: ")
+    msg.channel.send(msg.channel.parentID)
+  }
   // END MKCH
   
   
