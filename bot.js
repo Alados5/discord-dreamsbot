@@ -212,9 +212,14 @@ client.on('message', msg => {
   }
   // END EMBED
   
+  // START MKCH
   if (command == 'nuevocanal') {
-    msg.reply("De momento no hago nada.");
+    const newch = msg.guild.createChannel('test'); 
+    newch.setParent('552432711072088074');
+    msg.reply("Debería haberse creado y asignado bajo Proyectos");
   }
+  // END MKCH
+  
   
   // START TRUCOS
   if (command == 'trucos') {
