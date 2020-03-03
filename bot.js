@@ -214,7 +214,7 @@ client.on('message', msg => {
   
   // START MKCH
   if (command == 'nuevocanal') {
-    msg.reply("Comando recibido: nueva manera (channels.create)");
+    msg.reply("Comando recibido (new syntax: channels.create)");
     msg.guild.channels.create('test').then(ch => ch.setTopic('Hola'));
     //newch = newch.setParent('552432711072088074');
     //newch.setParent('552432711072088074');
@@ -223,7 +223,7 @@ client.on('message', msg => {
   }
   
   if (command == 'mkch') {
-    msg.reply("Comando recibido: nueva manera (createChannel)");
+    msg.reply("Comando recibido (old syntax: createChannel)");
     msg.guild.createChannel('test');
     //msg.guild.createChannel('test', {type: 'text'}).then(channel => {
     //  channel.setTopic('Test channel')
