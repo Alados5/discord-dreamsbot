@@ -212,6 +212,11 @@ client.on('message', msg => {
   }
   // END EMBED
   
+  if (command == 'nuevocanal') {
+    msg.reply("De momento no hago nada.");
+  }
+  
+  // START TRUCOS
   if (command == 'trucos') {
     //dbindex = {1:{name:"...", tags:["..."], desc: "..."}, ...}
     if (args[0] == "todo") {
@@ -247,6 +252,7 @@ client.on('message', msg => {
     }
     
   }
+  // END TRUCOS
   
 
   
