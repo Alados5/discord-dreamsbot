@@ -214,23 +214,12 @@ client.on('message', msg => {
   
   // START MKCH
   if (command == 'nuevocanal') {
-    msg.reply("Comando recibido (new syntax: channels.create)");
-    msg.guild.channels.create('test').then(ch => ch.setTopic('Hola'));
-    //newch = newch.setParent('552432711072088074');
-    //newch.setParent('552432711072088074');
-    
-    msg.channel.send('Final del comando.')
-  }
-  
-  if (command == 'mkch') {
-    msg.reply("Comando recibido (old syntax: createChannel)");
-    msg.guild.createChannel('test');
+    msg.reply("Comando recibido");
+    msg.guild.createChannel('test').then(ch => ch.setTopic('Hola'));
     //msg.guild.createChannel('test', {type: 'text'}).then(channel => {
-    //  channel.setTopic('Test channel')
-    //let channel = await message.guild.createChannel('foo');
-    //channel = await channel.setParent('552432711072088074');
     //})
-    msg.channel.send('Final del comando.')
+    //channel = await channel.setParent('552432711072088074');
+    msg.channel.send('Canal creado. En principio. He hecho lo que he podido, lo juro.')
   }
   // END MKCH
   
