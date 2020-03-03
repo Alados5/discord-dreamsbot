@@ -214,22 +214,23 @@ client.on('message', msg => {
   
   // START MKCH
   if (command == 'nuevocanal') {
-    //msg.guild.channels.create('test'); 
-    //msg.guild.createChannel('test', {type: 'text'}).then(channel => {
-    //  channel.setTopic('Test channel')
-    //})
-    //let channel = await message.guild.createChannel('foo');
+    msg.reply("Comando recibido: nueva manera (channels.create)");
+    msg.guild.channels.create('test').then(ch => ch.setTopic('Hola'));
     //newch = newch.setParent('552432711072088074');
-    //channel = await channel.setParent('462771637910241290');
     //newch.setParent('552432711072088074');
-    msg.reply("Comando recibido");
-    msg.channel.send('El server es: ')
-    msg.channel.send(msg.guild.name)
-    msg.channel.send(msg.guild.id)
+    
+    msg.channel.send('Final del comando.')
   }
   
   if (command == 'mkch') {
-    msg.reply("WIP")
+    msg.reply("Comando recibido: nueva manera (createChannel)");
+    msg.guild.createChannel('test');
+    //msg.guild.createChannel('test', {type: 'text'}).then(channel => {
+    //  channel.setTopic('Test channel')
+    //let channel = await message.guild.createChannel('foo');
+    //channel = await channel.setParent('552432711072088074');
+    //})
+    msg.channel.send('Final del comando.')
   }
   // END MKCH
   
