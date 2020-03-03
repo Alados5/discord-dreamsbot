@@ -62,9 +62,15 @@ client.on('message', msg => {
   // Returns if message doesn't start with prefix
   if(!msg.content.startsWith(prefix)) {
     // TRIGGER OF PURGE PROJECTS
-    //var fecha = new Date();
-    //var utc = fecha.getTime();
+    var fecha = new Date();
+    var utc = fecha.getTime();
     //var oneweek = 604800000;
+    var tensec = 10000;
+    if (utc % tensec < 5000) {
+      var server = msg.guild;
+      if (server.id != 530381279749865482) return;
+      var modsch = server.channels.find('name','mods');
+    }
     return;
   }
    
@@ -212,6 +218,17 @@ client.on('message', msg => {
   }
   // END EMBED
   
+  // CREATE CHANNEL
+  if (command == 'nuevocanal') {
+    var askedname = msg.content.slice(prefix.length+command.length+1);
+    var server = msg.guild;
+    var chname = "px_" + askedname;
+    server.createChannel(chname, {type:"text"});//, parent:"567722499052404756"});
+  }
+  // END CREATE CHANNEL
+  
+  
+  // TRUCOS
   if (command == 'trucos') {
     //dbindex = {1:{name:"...", tags:["..."], desc: "..."}, ...}
     if (args[0] == "todo") {
@@ -247,6 +264,7 @@ client.on('message', msg => {
     }
     
   }
+  // END TRUCOS
   
 
   
