@@ -225,6 +225,10 @@ client.on('message', msg => {
     //channel = await channel.setParent('552432711072088074');
     msg.channel.send('Canal creado. En principio. He hecho lo que he podido, lo juro.')
   }
+  
+  if (command == 'movercanal') {
+    msg.channel.setParent('552432711072088074').then(ch => ch.send('Hecho.'));
+  }
   // END MKCH
   
   
