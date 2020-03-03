@@ -214,8 +214,11 @@ client.on('message', msg => {
   
   // START MKCH
   if (command == 'nuevocanal') {
-    const newch = msg.guild.channels.create('test'); 
-    newch.setParent('552432711072088074');
+    let newch = await msg.guild.channels.create('test'); 
+    //let channel = await message.guild.createChannel('foo');
+    newch = await newch.setParent('552432711072088074');
+    //channel = await channel.setParent('462771637910241290');
+    //newch.setParent('552432711072088074');
     msg.reply("Debería haberse creado y asignado bajo Proyectos");
   }
   // END MKCH
