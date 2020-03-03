@@ -227,7 +227,11 @@ client.on('message', msg => {
   }
   
   if (command == 'movercanal') {
-    msg.channel.setParent('552432711072088074').then(ch => ch.send('Hecho.'));
+    msg.channel.send("Voy.")
+    //channel.edit({ name: 'new-channel' })
+    //msg.channel.setParent('552432711072088074').then(ch => ch.send('Hecho.'));
+    msg.channel.edit({ parentID:'552432711072088074' });
+    msg.channel.send("Hecho?")
   }
   // END MKCH
   
