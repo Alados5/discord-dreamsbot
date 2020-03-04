@@ -215,7 +215,8 @@ client.on('message', msg => {
   
   // START MKPROJ
   if (command == 'nuevoproyecto') {
-    var chname = msg.content.slice(prefix.length+command.length+1);
+    var givenname = msg.content.slice(prefix.length+command.length+1);
+    var chname = givenname.replace(/ /g, "_");
     if (msg.channel.id != 572891836687843328 && msg.channel.id != 552435323108589579) return msg.reply("Comando válido sólo en el canal de asignaciones!");
     msg.reply("Creando canal...");
     msg.guild.createChannel(chname, "text").then(ch => {
@@ -226,8 +227,9 @@ client.on('message', msg => {
     
     // Count projects, assign n (new already created)
     var projcateg = msg.guild.channels.find('id','552432711072088074');
-    var totalproj = projcateg.children.size; // - 2;
-    msg.channel.send(totalproj)
+    var totalproj = projcateg.children.size - 1;
+    var rolename = "P" + totalproj + " - " + givenname;
+    msg.channel.send(rolename)
     
     //msg.channel.send("Creando rol...");
     //Gray color: #95a5a6
