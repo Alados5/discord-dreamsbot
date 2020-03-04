@@ -219,10 +219,10 @@ client.on('message', msg => {
     if (msg.channel.id != 572891836687843328 && msg.channel.id != 552435323108589579) return msg.reply("Comando válido sólo en el canal de asignaciones!");
     msg.reply("Creando canal...");
     msg.guild.createChannel(chname, "text").then(ch => {
-      ch.setTopic('Proyecto');
+      ch.setTopic('Proyecto creado por '+msg.author.username),
       ch.setParent('552432711072088074')
     })
-    msg.channel.send('Canal del Proyecto '+chname+' creado.')
+    msg.channel.send('Canal del Proyecto ***'+chname+'*** creado.')
   }
   // END MKPROJ
   
@@ -231,7 +231,7 @@ client.on('message', msg => {
     var chname = msg.content.slice(prefix.length+command.length+1);
     msg.channel.send("Creando categoría...")
     msg.guild.createChannel(chname, "category")
-    msg.channel.send("Categoría "+chname+" creada.")
+    msg.channel.send("Categoría ***"+chname+"*** creada.")
   }
   // END MKCATEGORY
   
