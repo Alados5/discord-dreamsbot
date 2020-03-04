@@ -221,6 +221,7 @@ client.on('message', msg => {
     //  ch.setParent('552432711072088074')
     //});
     var newch = msg.guild.createChannel(chname, "text")
+    newch.setParent('552432711072088074')
     //msg.guild.createChannel('test', {type: 'text'}).then(channel => {
     //})
     //channel = await channel.setParent('552432711072088074');
