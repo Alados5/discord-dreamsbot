@@ -218,7 +218,7 @@ client.on('message', msg => {
     msg.reply("Comando recibido. Nombre del canal:");
     msg.channel.send(chname)
     msg.guild.createChannel(chname).then(ch => {
-      ch.setParent(552432711072088074)
+      ch.setParent('552432711072088074')
     });
     //msg.guild.createChannel('test', {type: 'text'}).then(channel => {
     //})
@@ -241,14 +241,18 @@ client.on('message', msg => {
     msg.channel.send(msg.channel.type)
     msg.channel.send("Parent ID: ")
     msg.channel.send(msg.channel.parentID)
+    var thiscateg = msg.guild.channels.find(c => c.name == "tests" && c.type == "category");
+    msg.channel.send("Category: ")
+    msg.channel.send(thiscateg.name)
     
   }
   
   if (command == 'mkcategory') {
     msg.channel.send("Voy")
-    msg.guild.createChannel('Pruebas', {type:"category"})
+    msg.guild.createChannel('Pruebas', "category")
     msg.channel.send("Hecho?")
   }
+
   // END MKCH
   
   
