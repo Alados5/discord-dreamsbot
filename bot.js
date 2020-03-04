@@ -240,6 +240,10 @@ client.on('message', msg => {
     msg.channel.send("Parent ID: ")
     msg.channel.send(msg.channel.parentID)
   }
+  
+  if (command == 'mkcategory') {
+    msg.guild.createChannel('Pruebas', "category")
+  }
   // END MKCH
   
   
