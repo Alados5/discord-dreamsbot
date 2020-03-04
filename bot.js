@@ -216,14 +216,11 @@ client.on('message', msg => {
   if (command == 'nuevocanal') {
     var chname = msg.content.slice(prefix.length+command.length+1);
     msg.reply("Creando canal...");
-    //msg.guild.createChannel(chname).then(ch => {
-    //  ch.setParent('552432711072088074')
-    //});
     msg.guild.createChannel(chname, "text").then(ch => {
-      ch.setTopic('Proyecto')
+      //ch.setTopic('Proyecto');
+      ch.setParent('552432711072088074')
     })
     //newch.setParent('552432711072088074')
-    //channel = await channel.setParent('552432711072088074');
     msg.channel.send('Canal '+chname+' creado. En principio.')
   }
   
