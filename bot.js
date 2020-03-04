@@ -229,15 +229,14 @@ client.on('message', msg => {
     var projcateg = msg.guild.channels.find('id','552432711072088074');
     var totalproj = projcateg.children.size - 1;
     var rolename = "P" + totalproj + " - " + givenname;
-    msg.channel.send(rolename)
+    //msg.channel.send(rolename)
     
-    //msg.channel.send("Creando rol...");
+    msg.channel.send("Creando rol...");
     //Gray color: #95a5a6
-    //msg.guild.createRole({name:chname, color:'#95a5a6'});
-    //var projrole = msg.guild.roles.find("name", chname);
-    //msg.member.addRole(projrole);
-    //msg.channel.send("Rol creado y asignado. Todo hecho!")
-    
+    msg.guild.createRole({name:rolename, color:'#95a5a6'});
+    var projrole = msg.guild.roles.find("name", rolename);
+    msg.member.addRole(projrole);
+    msg.channel.send("Rol creado y asignado.\nTodo listo! Disfruta con tu nuevo Proyecto!")
   }
   // END MKPROJ
   
