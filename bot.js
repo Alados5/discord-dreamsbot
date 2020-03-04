@@ -237,8 +237,11 @@ client.on('message', msg => {
   if (command == 'chinfo') {
     msg.channel.send("ID del canal: ")
     msg.channel.send(msg.channel.id)
+    msg.channel.send("Type: ")
+    msg.channel.send(msg.channel.type)
     msg.channel.send("Parent ID: ")
     msg.channel.send(msg.channel.parentID)
+    
   }
   
   if (command == 'mkcategory') {
