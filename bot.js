@@ -215,44 +215,30 @@ client.on('message', msg => {
   // START MKCH
   if (command == 'nuevocanal') {
     var chname = msg.content.slice(prefix.length+command.length+1);
-    msg.reply("Comando recibido. Nombre del canal:");
-    msg.channel.send(chname)
+    msg.reply("Creando canal...");
     //msg.guild.createChannel(chname).then(ch => {
     //  ch.setParent('552432711072088074')
     //});
-    var newch = msg.guild.createChannel(chname, "text")
-    newch.setParent('552432711072088074')
-    //msg.guild.createChannel('test', {type: 'text'}).then(channel => {
-    //})
+    msg.guild.createChannel(chname, "text").then(ch => {
+      ch.setTopic('Proyecto')
+    })
+    //newch.setParent('552432711072088074')
     //channel = await channel.setParent('552432711072088074');
-    msg.channel.send('Canal creado. En principio. He hecho lo que he podido, lo juro.')
+    msg.channel.send('Canal '+chname+' creado. En principio.')
   }
   
   if (command == 'movercanal') {
     msg.channel.send("Voy.")
     //channel.edit({ name: 'new-channel' })
     //msg.channel.setParent('552432711072088074').then(ch => ch.send('Hecho.'));
-    msg.channel.edit({ parentID:'552432711072088074' });
+    msg.channel.edit({ parentID: '552432711072088074' });
     msg.channel.send("Hecho?")
-  }
-  
-  if (command == 'chinfo') {
-    msg.channel.send("ID del canal: ")
-    msg.channel.send(msg.channel.id)
-    msg.channel.send("Type: ")
-    msg.channel.send(msg.channel.type)
-    msg.channel.send("Parent ID: ")
-    msg.channel.send(msg.channel.parentID)
-    //var thiscateg = msg.guild.channels.find(c => c.name == "tests" && c.type == "category");
-    //msg.channel.send("Category: ")
-    //msg.channel.send(thiscateg.name)
-    
   }
   
   if (command == 'mkcategory') {
-    msg.channel.send("Voy")
-    msg.guild.createChannel('Pruebas', "category")
-    msg.channel.send("Hecho?")
+    msg.channel.send("Creando categoría...")
+    msg.guild.createChannel('pruebas', "category")
+    msg.channel.send("Categoría pruebas creada.")
   }
 
   // END MKCH
