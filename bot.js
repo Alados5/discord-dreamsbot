@@ -242,7 +242,9 @@ client.on('message', msg => {
   }
   
   if (command == 'mkcategory') {
-    msg.guild.createChannel('Pruebas', "category")
+    msg.channel.send("Voy")
+    msg.guild.createChannel('Pruebas', {type:"category"})
+    msg.channel.send("Hecho?")
   }
   // END MKCH
   
