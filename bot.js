@@ -235,8 +235,10 @@ client.on('message', msg => {
     //Gray color: #95a5a6
     msg.guild.createRole({name:rolename, color:'#95a5a6'});
     var projrole = msg.guild.roles.find("name", rolename);
-    if (!projrole) msg.channel.send("Ojo! Error.")
-    msg.author.addRole(projrole);
+    if (!projrole) {
+      msg.channel.send("Ojo! Error.");
+    }
+    msg.member.addRole(projrole);
     msg.channel.send("Rol creado y asignado.\nTodo listo! Disfruta con tu nuevo Proyecto!")
   }
   // END MKPROJ
