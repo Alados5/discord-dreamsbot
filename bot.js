@@ -224,10 +224,10 @@ client.on('message', msg => {
     });
     msg.channel.send('Canal del Proyecto ***'+chname+'*** creado.')
     
-    // Count projects, assign n+1
+    // Count projects, assign n (new already created)
     var projcateg = msg.guild.channels.find('id','552432711072088074');
-    //var totalproj = Object.keys(projcateg.children).length - 2;
-    msg.channel.send(projcateg.name)
+    var totalproj = projcateg.children.size; // - 2;
+    msg.channel.send(totalproj)
     
     //msg.channel.send("Creando rol...");
     //Gray color: #95a5a6
