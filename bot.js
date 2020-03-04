@@ -241,9 +241,9 @@ client.on('message', msg => {
     msg.channel.send(msg.channel.type)
     msg.channel.send("Parent ID: ")
     msg.channel.send(msg.channel.parentID)
-    var thiscateg = msg.guild.channels.find(c => c.name == "tests" && c.type == "category");
-    msg.channel.send("Category: ")
-    msg.channel.send(thiscateg.name)
+    //var thiscateg = msg.guild.channels.find(c => c.name == "tests" && c.type == "category");
+    //msg.channel.send("Category: ")
+    //msg.channel.send(thiscateg.name)
     
   }
   
