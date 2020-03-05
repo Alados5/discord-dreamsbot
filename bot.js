@@ -237,9 +237,9 @@ client.on('message', msg => {
       msg.member.addRole(projrole)
       projrole.setMentionable(true)
       msg.channel.send("Rol "+projrole+" creado y asignado.")
+      msg.channel.send("Todo listo! Disfruta con tu nuevo Proyecto!")
     });
-    
-    msg.channel.send("Todo listo! Disfruta con tu nuevo Proyecto!")
+
   }
   // END MKPROJ
   
