@@ -36,7 +36,14 @@ var dbindex = {
           "reduce su valor, y prueba de nuevo. Para más detalles consulta el truco 3.",
     user: "Alados5",
     link: ""
-  }
+  },
+  5: {
+    name: "Vacío",
+    tags: ["blank"],
+    desc: "Ejemplo",
+    user: "N/A",
+    link: ""
+  },
 
 };
 
