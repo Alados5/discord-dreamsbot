@@ -7,17 +7,22 @@ var dbindex = require("./trucos_db/index.js");
 dbindex = dbindex.dbindex;
 
 // EMBED AS FUNCTION
-function mkembed(msgtitle, desctext, msgfields, msgcolor) {
+function mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron) {
   var embedobj = {
       description:desctext,
       title: msgtitle,
-      footer: {
-        "icon_url": "https://images-ext-2.discordapp.net/external/nT8HH6V_sT5nhEVJE1sgYbsiAIv44AJlyK6kbhwGabE/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/284104569586450434/9c4e15c73c4f4d7709ca9981527b2a64.png",
-        "text": "Beep boop, yo soy un bot creado por Alados5"
-      }
   }
   if (msgcolor) {
     embedobj.color = msgcolor;
+  }
+  if (msgauthor) {
+    embedobj.author = msgauthor;
+  }
+  if (footeron) {
+    embedobj.footer = {
+      "icon_url": "https://images-ext-2.discordapp.net/external/nT8HH6V_sT5nhEVJE1sgYbsiAIv44AJlyK6kbhwGabE/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/284104569586450434/9c4e15c73c4f4d7709ca9981527b2a64.png",
+      "text": "Beep boop, yo soy un bot creado por Alados5"
+    }
   }
   if (msgfields) {
     /*
@@ -245,10 +250,14 @@ client.on('message', msg => {
   }
   
   if (command == "embedfn") {
-    //mkembed(msgtitle, desctext, msgfields, msgcolor)
+    //mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron)
     var alltext = msg.content.slice(7).split('|');
+    var theauthor = {
+        name: msg.author.username,
+        icon_url: msg.author.avatarURL
+    };
     var notembed = alltext[0];
-    var embedobj = mkembed(alltext[1], alltext[2], [], parseInt(alltext[3]));
+    var embedobj = mkembed(alltext[1], alltext[2], [], parseInt(alltext[3]), theauthor, true);
     msg.channel.send(" ", {files: [notembed]})
     msg.channel.send({embed:embedobj})
   }
