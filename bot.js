@@ -221,35 +221,7 @@ client.on('message', msg => {
 
   
   // START EMBED
-  if (command == 'embed') {
-    var alltext = msg.content.slice(7).split('|');
-    var notembed = alltext[0];
-    var msgtitle = alltext[1];
-    var desctext = alltext[2];
-    var msgcolor = parseInt(alltext[3]);
-    msg.channel.send(" ", {files: [notembed]})
-    msg.channel.send({embed: {
-      color: msgcolor,
-      author: {
-        name: msg.author.username,
-        icon_url: msg.author.avatarURL
-      },
-      description:desctext,
-      title: msgtitle,
-      //fields: [
-      //  {
-      //    name: "CAMPO 1",
-      //    value: "Texto 1"
-      //  },
-      //  {
-      //    name: "CAMPO 2",
-      //    value: "Texto 2"
-      //  }
-      //]
-    }})
-  }
-  
-  if (command == "embedfn") {
+  if (command == "embed") {
     //mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron)
     var alltext = msg.content.slice(7).split('|');
     var theauthor = {
@@ -257,9 +229,9 @@ client.on('message', msg => {
         icon_url: msg.author.avatarURL
     };
     var notembed = alltext[0];
-    var embedobj = mkembed(alltext[1], alltext[2], [], parseInt(alltext[3]), theauthor, true);
-    msg.channel.send(" ", {files: [notembed]})
+    var embedobj = mkembed(alltext[1], alltext[2], [], parseInt(alltext[3]), theauthor, false);
     msg.channel.send({embed:embedobj})
+    msg.channel.send(" ", {files: [notembed]})
   }
   // END EMBED
   
@@ -307,6 +279,7 @@ client.on('message', msg => {
   // START TRUCOS
   if (command == 'trucos') {
     //dbindex = {1:{name:"...", tags:["..."], desc: "..."}, ...}
+    //mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron)
     if (args[0] == "todo") {
       var response = "Todos los trucos: \n";
       for (var ntrick in dbindex) {
@@ -348,6 +321,20 @@ client.on('message', msg => {
       if (dbindex[args[0]].link) response = response + "Enlace o contenido multimedia: \n" + dbindex[args[0]].link + "\n";
       response = response + "Enviado por: " + dbindex[args[0]].user;
       msg.channel.send(response);
+    }
+    
+    else {
+      var response = "";
+      if (!args[0]) response = response + "No has especificado qué hacer! \n";
+      else response = response + "Comando no válido! \n";
+      response = response + "`!trucos` accede a una base de datos de trucos, pero tienes que indicar más cosas: \n"+
+                     "  - `!trucos todo` devuelve una lista numerada con los títulos de todos los trucos \n"+
+                     "  - `!trucos tag [TAG]` devuelve una lista numerada con todos los trucos con esa palabra clave. \n"+
+                     "       Por ejemplo: `!trucos tag Esculpir` \n"+
+                     "  - `!trucos [N]` devuelve el truco del número escrito, completo con descripción, imagen y autor \n"+
+                     "       Por ejemplo: `!trucos 3` \n"+
+                     " Si tienes un truco y quieres que esté en la base de datos, no dudes en decirlo!";
+      msg.reply(response);
     }
     
   }
