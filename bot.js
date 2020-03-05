@@ -24,20 +24,16 @@ function mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron) {
       "text": "Beep boop, yo soy un bot creado por Alados5"
     }
   }
-  if (msgfields) {
-    /*
-    fields: [
-      {
-        name: "CAMPO 1",
-        value: "Texto 1"
-      },
-      {
-        name: "CAMPO 2",
-        value: "Texto 2"
-      }
-    ]
-    */
-    embedobj.fields = msgfields;
+  if (msgfields.length && Array.isArray(msgfields)) {
+    //msgfields = [["name1","value1"],["name2","value2"]...];
+    var fieldsarray = [];
+    for (var f=0; f<msgfields.length; f++) {
+      var nvarray = msgfields[f];
+      var fieldobj = { name: nvarray[0], value: nvarray[1] };
+      fieldsarray.push(fieldobj);
+    }
+    embedobj.fields = fieldsarray;
+    //fields: [ {name: "field name", value: "field text value"}, {...}, ...]
   }
   
   return embedobj
@@ -233,6 +229,19 @@ client.on('message', msg => {
     msg.channel.send({embed:embedobj})
     msg.channel.send(" ", {files: [notembed]})
   }
+  
+  if (command == "embedf") {
+    var alltext = msg.content.slice(7).split('|');
+    var theauthor = {
+        name: msg.author.username,
+        icon_url: msg.author.avatarURL
+    };
+    var notembed = alltext[0];
+    var msgfields = [["Campo 1", "Texto 1"], ["Campo 2", "Texto 2"]];
+    var embedobj = mkembed(alltext[1], alltext[2], msgfields, parseInt(alltext[3]), theauthor, false);
+    msg.channel.send({embed:embedobj})
+    msg.channel.send(" ", {files: [notembed]})
+  }
   // END EMBED
   
   
@@ -333,7 +342,7 @@ client.on('message', msg => {
                      "       Por ejemplo: `!trucos tag Esculpir` \n\n"+
                      "  - `!trucos [N]` devuelve el truco del número escrito, completo con descripción, imagen y autor \n"+
                      "       Por ejemplo: `!trucos 3` \n\n"+
-                     " Si tienes un truco y quieres que esté en la base de datos, no dudes en decirlo!";
+                     "Si tienes un truco, consejo, ayuda o tutorial chulo y quieres que esté en la base de datos, no dudes en decirlo!";
       msg.reply(response);
     }
     
