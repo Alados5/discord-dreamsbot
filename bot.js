@@ -236,9 +236,10 @@ client.on('message', msg => {
     msg.guild.createRole({name:rolename, color:'#95a5a6'}).then(projrole => {
       msg.member.addRole(projrole)
       projrole.setMentionable(true)
+      msg.channel.send("Rol "+projrole+" creado y asignado.")
     });
     
-    msg.channel.send("Rol creado y asignado.\nTodo listo! Disfruta con tu nuevo Proyecto!")
+    msg.channel.send("Todo listo! Disfruta con tu nuevo Proyecto!")
   }
   // END MKPROJ
   
