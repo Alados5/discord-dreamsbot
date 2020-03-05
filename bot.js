@@ -325,14 +325,14 @@ client.on('message', msg => {
     
     else {
       var response = "";
-      if (!args[0]) response = response + "No has especificado qué hacer! \n";
-      else response = response + "Comando no válido! \n";
-      response = response + "`!trucos` accede a una base de datos de trucos, pero tienes que indicar más cosas: \n"+
-                     "  - `!trucos todo` devuelve una lista numerada con los títulos de todos los trucos \n"+
+      if (!args[0]) response = response + "No has especificado qué hacer! \n\n";
+      else response = response + "Comando no válido! \n\n";
+      response = response + "`!trucos` accede a una base de datos de trucos, pero tienes que indicar más cosas. Aquí tienes las posibles opciones: \n\n"+
+                     "  - `!trucos todo` devuelve una lista numerada con los títulos de todos los trucos de la base de datos \n\n"+
                      "  - `!trucos tag [TAG]` devuelve una lista numerada con todos los trucos con esa palabra clave. \n"+
-                     "       Por ejemplo: `!trucos tag Esculpir` \n"+
+                     "       Por ejemplo: `!trucos tag Esculpir` \n\n"+
                      "  - `!trucos [N]` devuelve el truco del número escrito, completo con descripción, imagen y autor \n"+
-                     "       Por ejemplo: `!trucos 3` \n"+
+                     "       Por ejemplo: `!trucos 3` \n\n"+
                      " Si tienes un truco y quieres que esté en la base de datos, no dudes en decirlo!";
       msg.reply(response);
     }
