@@ -270,14 +270,25 @@ client.on('message', msg => {
       if (!args[1]) return msg.reply("No has especificado ninguna palabra clave!");
       
       var response = "Lista de trucos con esta palabra clave: \n";
+      var matchfound = false;
       for (var ntrick in dbindex) {
         if (dbindex.hasOwnProperty(ntrick)) {
           if (dbindex[ntrick].tags.includes(args[1])) {
             response = response + ntrick + ": " + dbindex[ntrick].name + "\n";
+            matchfound = true;
           }
         }
       }
-      msg.channel.send(response);
+      if (matchfound) {
+        msg.channel.send(response);
+      }
+      else {
+        var nomatch = "No hay trucos con esta palabra clave. \n"+
+                      "Prueba `!trucos todo` para una lista completa con los nombres y números de los trucos. \n"+
+                      "Si crees que algún truco debería tener la etiqueta propuesta no dudes en decirlo!";
+        msg.channel.send(nomatch)
+      }
+          
     }
     
     else if (!isNaN(parseInt(args[0]))) {
