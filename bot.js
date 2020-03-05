@@ -237,8 +237,8 @@ client.on('message', msg => {
         icon_url: msg.author.avatarURL
     };
     var notembed = alltext[0];
-    var msgfields = [["Campo 1", "Texto 1"], ["Campo 2", "Texto 2"]];
-    var embedobj = mkembed(alltext[1], alltext[2], msgfields, parseInt(alltext[3]), theauthor, false);
+    var msgfields = [["Palabras clave:", "Meme, Prueba, Básico"], ["Truco proporcionado por:", "Alados5"]];
+    var embedobj = mkembed(alltext[1], alltext[2], msgfields, parseInt(alltext[3]), theauthor, true);
     msg.channel.send({embed:embedobj})
     msg.channel.send(" ", {files: [notembed]})
   }
