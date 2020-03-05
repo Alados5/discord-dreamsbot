@@ -230,15 +230,11 @@ client.on('message', msg => {
     msg.channel.send(" ", {files: [notembed]})
   }
   
-  if (command == "embedf") {
+  if (command == "embedt") {
     var alltext = msg.content.slice(7).split('|');
-    var theauthor = {
-        name: msg.author.username,
-        icon_url: msg.author.avatarURL
-    };
     var notembed = alltext[0];
     var msgfields = [["Palabras clave:", "Meme, Prueba, Básico"], ["Truco proporcionado por:", "Alados5"]];
-    var embedobj = mkembed(alltext[1], alltext[2], msgfields, parseInt(alltext[3]), theauthor, true);
+    var embedobj = mkembed(alltext[1], alltext[2], msgfields, 11075328, "", true);
     msg.channel.send({embed:embedobj})
     msg.channel.send(" ", {files: [notembed]})
   }
