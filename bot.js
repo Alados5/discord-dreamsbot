@@ -105,8 +105,8 @@ client.on('message', msg => {
       msg.channel.fetchMessages({limit:1}).then(msgcol => {
         var lastmsg = msgcol.first(1);
         var lasttime = lastmsg.createdAt; //.getTime();
-        //msg.channel.send("Fecha del mensaje: "+lasttime)
         msg.channel.send("Fecha de ahora: "+utc)
+        msg.channel.send("Fecha del mensaje: "+lasttime)
       }); 
       
     }
