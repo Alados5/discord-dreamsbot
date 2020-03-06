@@ -99,16 +99,17 @@ client.on('message', msg => {
     var fecha = new Date();
     var utc = fecha.getTime();
     //var oneweek = 604800000;
-    var tensec = 10000;
-    if (utc % tensec > 5000) return;
+    var onemin = 60000;
+    if (utc % onemin > 30000) return;
     var debugch = msg.guild.channels.find('id','684539074224455763');
     var checkch = msg.guild.channels.find('id','552435323108589579');
 
     checkch.fetchMessages({limit:1}).then(msgcol => {
       var lastmsg = msgcol.first();
       var lasttime = lastmsg.createdAt.getTime();
-      debugch.send("UTC de ahora: "+utc)
-      debugch.send("UTC del último mensaje por mods: "+lasttime)
+      if (utc-lasttime > 60000) {
+        debugch.send("Hace más de un minuto del último mensaje por mods!")
+      }
     }); 
       
     return;
