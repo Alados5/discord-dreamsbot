@@ -73,11 +73,10 @@ client.on('guildMemberAdd', member => {
       }
     }})
     var nmembers = member.guild.memberCount;
-    var milestonemsg = "\n¡Es un momento importante para el servidor! \n"+
+    var milestonemsg = " \n¡Es un momento importante para el servidor! \n"+
                        "¡Con la llegada de " +member+ ", ya somos " +nmembers+ " imps en esta comunidad! \n"+
                        "¡Gracias y felicidades a todos! :D";
-    var debugch = member.guild.channels.find('id','684539074224455763');
-    if (nmembers % 1 == 0) debugch.send(milestonemsg);
+    if (nmembers % 100 == 0) channel.send(milestonemsg);
     
     /*
     channel.send(`¡Muy buenas, ${member}! ¡Te damos la bienvenida al Servidor de Dreams en Español!`+
