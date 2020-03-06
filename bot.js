@@ -98,8 +98,12 @@ client.on('message', msg => {
     // TRIGGER OF PURGE PROJECTS
     var fecha = new Date();
     var utc = fecha.getTime();
-    if (msg.channel.id == 684539074224455763) msg.channel.send(utc); 
     //var oneweek = 604800000;
+    var tensec = 10000;
+    if (msg.channel.id == 684539074224455763) {
+      var lastmsg = msg.channel.fetchMessages({limit:1}); 
+      msg.channel.send(lastmsg);
+    }
     return;
   }
    
@@ -287,7 +291,7 @@ client.on('message', msg => {
     //dbindex = {1:{name:"...", tags:["..."], desc: "..."}, ...}
     //mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron)
     if (args[0] == "todo") {
-      var response = "*Nota: Se muestran sólo los títulos. Para leer el truco entero se debe pedir con `!trucos` seguido del número correspondiente. \n";
+      var response = "*Nota: Se muestran sólo los títulos. Para leer el truco entero se debe pedir con `!trucos` seguido del número correspondiente.* \n\n";
       for (var ntrick in dbindex) {
         if (dbindex.hasOwnProperty(ntrick)) {
           response = response + ntrick + ": " + dbindex[ntrick].name + "\n";
