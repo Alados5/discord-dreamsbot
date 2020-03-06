@@ -286,18 +286,18 @@ client.on('message', msg => {
     //dbindex = {1:{name:"...", tags:["..."], desc: "..."}, ...}
     //mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron)
     if (args[0] == "todo") {
-      var response = "Todos los trucos: \n";
+      var response = "";
       for (var ntrick in dbindex) {
         if (dbindex.hasOwnProperty(ntrick)) {
           response = response + ntrick + ": " + dbindex[ntrick].name + "\n";
         }
       }
-      msg.channel.send(response);
+      var embedobj = mkembed("Lista de todos los trucos", response, [], 11075328, "", true)
+      msg.channel.send({embed:embedobj});
     }
 
     else if (args[0] == "tag") {
       if (!args[1]) return msg.reply("No has especificado ninguna palabra clave!");
-      
       var response = "Lista de trucos con esta palabra clave: \n";
       var matchfound = false;
       for (var ntrick in dbindex) {
