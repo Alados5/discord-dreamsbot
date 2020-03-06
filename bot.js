@@ -114,23 +114,15 @@ client.on('message', msg => {
     for (var proji=0; proji<projchans.length; proji++) {
       if (projchans[proji].name == 'guía' || projchans[proji].name == 'asignaciones') continue;
       var projich = projchans[proji];
-      /*
+      
       projich.fetchMessages({limit:1}).then(msgcol => {
         var lastmsg = msgcol.first();
         var lasttime = lastmsg.createdAt.getTime();
         if (utc-lasttime > 600000) {
           debugch.send("En el proyecto " +projich.name+ " hace más de diez minutos del último mensaje.");
         }
+        debugch.send(projich.name)
       });
-      */
-      var msgcol = projich.fetchMessages({limit:1});
-      var lastmsg = msgcol.first();
-      var lasttime = lastmsg.createdAt.getTime();
-      if (utc-lasttime > 600000) {
-        debugch.send("En el proyecto " +projich.name+ " hace más de diez minutos del último mensaje.");
-      }
-      
-      debugch.send(projich.name)
     }
       
     return;
