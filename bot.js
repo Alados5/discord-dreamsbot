@@ -42,6 +42,19 @@ function mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron) {
 }  
 // -----------------
 
+
+// SLEEP FUNCTION
+function sleep(mstime) {
+  const tini = Date.now();
+  var tend = tini;
+  while (tend <= tini+mstime) {
+    tend = Date.now();
+  }
+}
+// --------------
+
+
+
 // WELCOME MESSAGE
 client.on('guildMemberAdd', member => {
   const channel = member.guild.channels.find('name', 'general');
@@ -116,12 +129,13 @@ client.on('message', msg => {
       var projich = projchans[proji];
       
       projich.fetchMessages({limit:1}).then(msgcol => {
+        var projich2 = projich;
         var lastmsg = msgcol.first();
         var lasttime = lastmsg.createdAt.getTime();
         if (utc-lasttime > 600000) {
-          debugch.send("En el proyecto " +projich.name+ " hace más de diez minutos del último mensaje.");
+          debugch.send("En el proyecto " +projich2.name+ " hace más de diez minutos del último mensaje.");
         }
-        debugch.send(projich.name)
+        debugch.send(projich2.name)
       });
     }
       
