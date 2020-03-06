@@ -102,11 +102,12 @@ client.on('message', msg => {
     var tensec = 10000;
     if (utc % tensec > 5000) return;
     if (msg.channel.id == 684539074224455763) {
-      msg.channel.fetchMessages({limit:2}).then(msgcol => {
+      msg.channel.fetchMessages({limit:1}).then(msgcol => {
         var lastmsg = msgcol.first();
         var lasttime = lastmsg.createdAt; //.getTime();
         msg.channel.send("Fecha de ahora: "+utc)
-        msg.channel.send(lastmsg.content)
+        msg.channel.send("Mensaje: "+lastmsg.content)
+        msg.channel.send("Fecha del mensaje: "+lasttime)
       }); 
       
     }
