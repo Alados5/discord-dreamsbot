@@ -135,13 +135,10 @@ client.on('message', msg => {
         var realch = lastmsg.channel;
         var lasttime = lastmsg.createdAt.getTime();
         if (utc-lasttime > 600000) {
-          debugch.send("En el proyecto " +realch.name+ " hace más de diez minutos del último mensaje.");
-          flag = "true";
+          debugch.send("En #" +realch.name+ " hace más de diez minutos del último mensaje.");
+
         }
       });
-      //debugch.send(flag);
-      //debugch.send(projich.name);
-      //sleep(1000);
     }
       
     return;
