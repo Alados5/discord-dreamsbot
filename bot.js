@@ -3,6 +3,7 @@ const client = new Discord.Client();
 
 var prefix = '!';
 var oneweek = 604800000;
+var oneday = 86400000;
 
 var dbindex = require("./trucos_db/index.js");
 dbindex = dbindex.dbindex;
@@ -72,8 +73,11 @@ client.on('guildMemberAdd', member => {
       }
     }})
     var nmembers = member.guild.memberCount;
+    var milestonemsg = "\n¡Es un momento importante para el servidor! \n"+
+                       "¡Con la llegada de " +member+ ", ya somos " +nmembers+ " imps en esta comunidad! \n"+
+                       "¡Gracias y felicidades a todos! :D";
     var debugch = member.guild.channels.find('id','684539074224455763');
-    if (nmembers % 1 == 0) debugch.send("¡Felicidades "+member+"! Eres el miembro número + " + nmembers + "\n¡Gracias por unirte!");
+    if (nmembers % 1 == 0) debugch.send(milestonemsg);
     
     /*
     channel.send(`¡Muy buenas, ${member}! ¡Te damos la bienvenida al Servidor de Dreams en Español!`+
@@ -105,6 +109,7 @@ client.on('message', msg => {
     
     var debugch = msg.guild.channels.find('id','684539074224455763');
     var checkch = msg.guild.channels.find('id','552435323108589579');
+    
     // ID Categoría Proyectos: 552432711072088074
     var projcat = msg.guild.channels.find('id','552432711072088074');
     var projchans = projcat.children;
