@@ -100,11 +100,13 @@ client.on('message', msg => {
     var utc = fecha.getTime();
     //var oneweek = 604800000;
     var tensec = 10000;
+    if (utc % tensec > 5000) return;
     if (msg.channel.id == 684539074224455763) {
       msg.channel.fetchMessages({limit:1}).then(msgcol => {
         var lastmsg = msgcol.first(1);
-        msg.channel.send(lastmsg.createdAt)
-        msg.channel.send(utc)
+        var lasttime = lastmsg.createdAt.getTime();
+        msg.channel.send("Fecha del mensaje: "+lasttime)
+        msg.channel.send("Fecha de ahora: "+utc)
       }); 
       
     }
