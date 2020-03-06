@@ -103,7 +103,8 @@ client.on('message', msg => {
     if (msg.channel.id == 684539074224455763) {
       msg.channel.fetchMessages({limit:1}).then(msgcol => {
         var lastmsg = msgcol.first(1);
-        msg.channel.send(lastmsg);
+        msg.channel.send(lastmsg.createdAt)
+        msg.channel.send(utc)
       }); 
       
     }
