@@ -107,22 +107,24 @@ client.on('message', msg => {
     if (utc % 60000 > 30000) return;
     
     var debugch = msg.guild.channels.find('id','684539074224455763');
-    var checkch = msg.guild.channels.find('id','552435323108589579');
     
     // ID Categoría Proyectos: 552432711072088074
     var projcat = msg.guild.channels.find('id','552432711072088074');
     var projchans = Array.from(projcat.children.values());
     for (var proji=0; proji<projchans.length; proji++) {
-      debugch.send(projchans[proji].name)
+      if (projchans[proji].name == 'guía' || projchans[proji].name == 'asignaciones') continue;
+      var projich = projchans[proji];
+      
+      projich.fetchMessages({limit:1}).then(msgcol => {
+        var lastmsg = msgcol.first();
+        var lasttime = lastmsg.createdAt.getTime();
+        if (utc-lasttime > 600000) {
+          debugch.send("En el proyecto " +projich.name+ " hace más de diez minutos del último mensaje.")
+        }
+      });
+      
+      debugch.send(projich.name)
     }
-    
-    checkch.fetchMessages({limit:1}).then(msgcol => {
-      var lastmsg = msgcol.first();
-      var lasttime = lastmsg.createdAt.getTime();
-      if (utc-lasttime > 600000) {
-        debugch.send("Hace más de diez minutos del último mensaje por mods!")
-      }
-    }); 
       
     return;
   }
