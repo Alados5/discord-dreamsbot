@@ -128,6 +128,7 @@ client.on('message', msg => {
     for (var proji=0; proji<projchans.length; proji++) {
       if (projchans[proji].name == 'guía' || projchans[proji].name == 'asignaciones') continue;
       var projich = projchans[proji];
+      var flag = "false";
       
       projich.fetchMessages({limit:1}).then(msgcol => {
         const projich2 = projich;
@@ -135,10 +136,12 @@ client.on('message', msg => {
         var lasttime = lastmsg.createdAt.getTime();
         if (utc-lasttime > 600000) {
           debugch.send("En el proyecto " +projich2.name+ " hace más de diez minutos del último mensaje.");
+          flag = "true";
         }
       });
-      debugch.send(projich.name);
-      sleep(1000);
+      //debugch.send(flag);
+      //debugch.send(projich.name);
+      //sleep(1000);
     }
       
     return;
