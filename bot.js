@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 var prefix = '!';
+var oneweek = 604800000;
 
 var dbindex = require("./trucos_db/index.js");
 dbindex = dbindex.dbindex;
@@ -98,17 +99,19 @@ client.on('message', msg => {
     // TRIGGER OF PURGE PROJECTS
     var fecha = new Date();
     var utc = fecha.getTime();
-    //var oneweek = 604800000;
-    var onemin = 60000;
-    if (utc % onemin > 30000) return;
+    if (utc % 60000 > 30000) return;
+    
     var debugch = msg.guild.channels.find('id','684539074224455763');
     var checkch = msg.guild.channels.find('id','552435323108589579');
+    // ID Categoría Proyectos: 567722499052404756
+    var projcat = msg.guild.channels.find('id','567722499052404756');
 
     checkch.fetchMessages({limit:1}).then(msgcol => {
       var lastmsg = msgcol.first();
       var lasttime = lastmsg.createdAt.getTime();
-      if (utc-lasttime > 60000) {
-        debugch.send("Hace más de un minuto del último mensaje por mods!")
+      if (utc-lasttime > 600000) {
+        debugch.send("Hace más de diez minutos del último mensaje por mods!")
+        debugch.send(projcat.name)
       }
     }); 
       
