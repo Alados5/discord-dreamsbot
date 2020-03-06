@@ -123,7 +123,7 @@ client.on('message', msg => {
         }
       });
       */
-      var msgcol = await projich.fetchMessages({limit:1});
+      var msgcol = projich.fetchMessages({limit:1});
       var lastmsg = msgcol.first();
       var lasttime = lastmsg.createdAt.getTime();
       if (utc-lasttime > 600000) {
