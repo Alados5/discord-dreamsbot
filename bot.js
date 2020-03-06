@@ -131,11 +131,11 @@ client.on('message', msg => {
       var flag = "false";
       
       projich.fetchMessages({limit:1}).then(msgcol => {
-        const projich2 = projich;
         var lastmsg = msgcol.first();
+        var realch = lastmsg.channel;
         var lasttime = lastmsg.createdAt.getTime();
         if (utc-lasttime > 600000) {
-          debugch.send("En el proyecto " +projich2.name+ " hace más de diez minutos del último mensaje.");
+          debugch.send("En el proyecto " +realch.name+ " hace más de diez minutos del último mensaje.");
           flag = "true";
         }
       });
