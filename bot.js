@@ -96,8 +96,9 @@ client.on('message', msg => {
   // Returns if message doesn't start with prefix
   if(!msg.content.startsWith(prefix)) {
     // TRIGGER OF PURGE PROJECTS
-    //var fecha = new Date();
-    //var utc = fecha.getTime();
+    var fecha = new Date();
+    var utc = fecha.getTime();
+    if (msg.channel.id == 684539074224455763) msg.channel.send(utc); 
     //var oneweek = 604800000;
     return;
   }
@@ -286,7 +287,7 @@ client.on('message', msg => {
     //dbindex = {1:{name:"...", tags:["..."], desc: "..."}, ...}
     //mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron)
     if (args[0] == "todo") {
-      var response = "*Nota: Se muestran sólo los títulos* \n***Usa `!trucos` seguido del número del truco que quieras ver***";
+      var response = "";
       for (var ntrick in dbindex) {
         if (dbindex.hasOwnProperty(ntrick)) {
           response = response + ntrick + ": " + dbindex[ntrick].name + "\n";
@@ -294,6 +295,7 @@ client.on('message', msg => {
       }
       var embedobj = mkembed("Lista de todos los trucos", response, [], 11075328, "", true)
       msg.channel.send({embed:embedobj});
+      msg.channel.send("*Nota: En esta lista se muestran sólo los títulos* \n***Usa `!trucos` seguido del número del truco que quieras ver. Ej: \n```!trucos 3```***")
     }
 
     else if (args[0] == "tag") {
