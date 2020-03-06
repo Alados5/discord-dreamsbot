@@ -111,14 +111,15 @@ client.on('message', msg => {
     
     // ID Categoría Proyectos: 552432711072088074
     var projcat = msg.guild.channels.find('id','552432711072088074');
-    var projchans = projcat.children;
+    var projchans = Array.from(projcat.children.values());
+    
 
     checkch.fetchMessages({limit:1}).then(msgcol => {
       var lastmsg = msgcol.first();
       var lasttime = lastmsg.createdAt.getTime();
       if (utc-lasttime > 600000) {
         debugch.send("Hace más de diez minutos del último mensaje por mods!")
-        debugch.send(projcat.name)
+        debugch.send(projchans[0].name)
       }
     }); 
       
