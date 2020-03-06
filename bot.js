@@ -286,7 +286,7 @@ client.on('message', msg => {
     //dbindex = {1:{name:"...", tags:["..."], desc: "..."}, ...}
     //mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron)
     if (args[0] == "todo") {
-      var response = "";
+      var response = "*Nota: Se muestran sólo los títulos* \n***Usa `!trucos` seguido del número del truco que quieras ver***";
       for (var ntrick in dbindex) {
         if (dbindex.hasOwnProperty(ntrick)) {
           response = response + ntrick + ": " + dbindex[ntrick].name + "\n";
