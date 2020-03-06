@@ -101,8 +101,11 @@ client.on('message', msg => {
     //var oneweek = 604800000;
     var tensec = 10000;
     if (msg.channel.id == 684539074224455763) {
-      var lastmsg = msg.channel.fetchMessages({limit:1}); 
-      msg.channel.send(lastmsg);
+      msg.channel.fetchMessages({limit:1}).then(msgcol => {
+        var lastmsg = msgcol.first();
+        msg.channel.send(lastmsg);
+      }); 
+      
     }
     return;
   }
