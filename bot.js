@@ -135,7 +135,7 @@ client.on('message', msg => {
         if (utc-lasttime > 600000) {
           debugch.send("En el proyecto " +projich2.name+ " hace más de diez minutos del último mensaje.");
         }
-        debugch.send(projich2.name)
+        sleep(500);
       });
     }
       
