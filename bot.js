@@ -287,7 +287,7 @@ client.on('message', msg => {
     //dbindex = {1:{name:"...", tags:["..."], desc: "..."}, ...}
     //mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron)
     if (args[0] == "todo") {
-      var response = "";
+      var response = "*Nota: Se muestran sólo los títulos. Para leer el truco entero se debe pedir con `!trucos` seguido del número correspondiente. \n";
       for (var ntrick in dbindex) {
         if (dbindex.hasOwnProperty(ntrick)) {
           response = response + ntrick + ": " + dbindex[ntrick].name + "\n";
@@ -295,7 +295,9 @@ client.on('message', msg => {
       }
       var embedobj = mkembed("Lista de todos los trucos", response, [], 11075328, "", true)
       msg.channel.send({embed:embedobj});
-      msg.channel.send("*Nota: En esta lista se muestran sólo los títulos* \n***Usa `!trucos` seguido del número del truco que quieras ver. Ej: \n```!trucos 3```***")
+      //msg.channel.send("*Nota: En esta lista se muestran sólo los títulos de los trucos* \n"+
+      //                 "*Para leer un truco de la base de datos, usa `!trucos` seguido del número del truco que quieras ver.* \n"+
+      //                 "*Por ejemplo: `!trucos 3`*")
     }
 
     else if (args[0] == "tag") {
