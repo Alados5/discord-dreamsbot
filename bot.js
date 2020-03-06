@@ -71,7 +71,9 @@ client.on('guildMemberAdd', member => {
         "text": "Beep boop, yo soy un bot creado por Alados5"
       }
     }})
-    
+    var nmembers = member.guild.memberCount;
+    var debugch = member.guild.channels.find('id','684539074224455763');
+    if (nmembers % 1 == 0) debugch.send("¡Felicidades "+member+"! Eres el miembro número + " + nmembers + "\n¡Gracias por unirte!");
     
     /*
     channel.send(`¡Muy buenas, ${member}! ¡Te damos la bienvenida al Servidor de Dreams en Español!`+
@@ -103,8 +105,9 @@ client.on('message', msg => {
     
     var debugch = msg.guild.channels.find('id','684539074224455763');
     var checkch = msg.guild.channels.find('id','552435323108589579');
-    // ID Categoría Proyectos: 567722499052404756
-    var projcat = msg.guild.channels.find('id','567722499052404756');
+    // ID Categoría Proyectos: 552432711072088074
+    var projcat = msg.guild.channels.find('id','552432711072088074');
+    var projchans = projcat.children;
 
     checkch.fetchMessages({limit:1}).then(msgcol => {
       var lastmsg = msgcol.first();
