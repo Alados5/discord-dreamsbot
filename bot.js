@@ -118,11 +118,11 @@ client.on('message', msg => {
     // TRIGGER OF PURGE PROJECTS
     var fecha = new Date();
     var utc = fecha.getTime();
-    if (purgeflag) return;
     if (utc % 60000 > 15000) {
       purgeflag = false;
       return;
     }
+    if (purgeflag) return;
     
     purgeflag = true;
     var debugch = msg.guild.channels.find('id','684539074224455763');
