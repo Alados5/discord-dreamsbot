@@ -130,9 +130,9 @@ client.on('message', msg => {
     // ID Categoría Proyectos: 552432711072088074
     var projcat = msg.guild.channels.find('id','552432711072088074');
     var projchans = Array.from(projcat.children.values());
+    debugch.send("Canales en la categoría: "+projchans.length);
     
     for (var proji=0; proji<projchans.length; proji++) {
-      debugch.send(projchans[proji].name);
       if (projchans[proji].name == 'guía' || projchans[proji].name == 'asignaciones') continue;
       var projich = projchans[proji];
       var flag = "false";
@@ -143,9 +143,9 @@ client.on('message', msg => {
         var lasttime = lastmsg.createdAt.getTime();
         if (utc-lasttime > 300000) {
           debugch.send("En " +realch+ " hace más de 5min del último mensaje.");
-
         }
       });
+      debugch.send(projchans[proji].name);
     }
       
     return;
