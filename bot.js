@@ -118,7 +118,7 @@ client.on('message', msg => {
     // TRIGGER OF PURGE PROJECTS
     var fecha = new Date();
     var utc = fecha.getTime();
-    if (utc % 60000 > 15000) {
+    if (utc % 60000 > 5000) {
       purgeflag = false;
       return;
     }
