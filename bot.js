@@ -4,6 +4,7 @@ const client = new Discord.Client();
 var prefix = '!';
 var oneweek = 604800000;
 var oneday = 86400000;
+var purgeflag = false;
 
 var dbindex = require("./trucos_db/index.js");
 dbindex = dbindex.dbindex;
@@ -117,8 +118,13 @@ client.on('message', msg => {
     // TRIGGER OF PURGE PROJECTS
     var fecha = new Date();
     var utc = fecha.getTime();
-    if (utc % 60000 > 30000) return;
+    if (purgeflag) return;
+    if (utc % 60000 > 15000) {
+      purgeflag = false;
+      return;
+    }
     
+    purgeflag = true;
     var debugch = msg.guild.channels.find('id','684539074224455763');
     
     // ID Categoría Proyectos: 552432711072088074
@@ -126,6 +132,7 @@ client.on('message', msg => {
     var projchans = Array.from(projcat.children.values());
     
     for (var proji=0; proji<projchans.length; proji++) {
+      debugch.send(projchans[proji].name);
       if (projchans[proji].name == 'guía' || projchans[proji].name == 'asignaciones') continue;
       var projich = projchans[proji];
       var flag = "false";
@@ -134,8 +141,8 @@ client.on('message', msg => {
         var lastmsg = msgcol.first();
         var realch = lastmsg.channel;
         var lasttime = lastmsg.createdAt.getTime();
-        if (utc-lasttime > 600000) {
-          debugch.send("En #" +realch.name+ " hace más de diez minutos del último mensaje.");
+        if (utc-lasttime > 300000) {
+          debugch.send("En " +realch+ " hace más de 5min del último mensaje.");
 
         }
       });
