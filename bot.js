@@ -145,9 +145,7 @@ client.on('message', msg => {
           debugch.send("En " +realch+ " hace más de 5min del último mensaje.");
         }
       });
-      debugch.send(projchans[proji].name);
     }
-      
     return;
   }
    
