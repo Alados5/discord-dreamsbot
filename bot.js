@@ -120,6 +120,8 @@ client.on('message', msg => {
     // TRIGGER OF PURGE PROJECTS
     var fecha = new Date();
     var utc = fecha.getTime();
+    
+    // Purge only once a day [DEBUG: changed oneday by 60000 and >3600000 by >5000]
     if (utc % 60000 > 5000) {
       purgeflag = false;
       return;
@@ -129,7 +131,7 @@ client.on('message', msg => {
     purgeflag = true;
     var debugch = msg.guild.channels.find('id','684539074224455763');
     
-    // ID Categoría Proyectos: 552432711072088074
+    // Project Category ID: 552432711072088074
     var projcat = msg.guild.channels.find('id','552432711072088074');
     var projchans = Array.from(projcat.children.values());
     debugch.send("Canales en la categoría: "+projchans.length);
@@ -144,21 +146,30 @@ client.on('message', msg => {
         var realch = lastmsg.channel;
         var lasttime = lastmsg.createdAt.getTime();
 
+        // More than two months from the last message: warn users
         if (utc-lasttime > twomonths) {
           debugch.send("Aviso por inactividad en " +realch);
           // Send info message
+          // Mention correct role
+          
         }
+        
         // Bot Discord User ID: 573146997419278336
         else if (lastmsg.author.id == 573146997419278336) {
+          // More than a month since archived: delete [DEBUG: changed twomonths/2 by 300000]
           if (lastmsg.content === "PROYECTO ARCHIVADO") {
-            if (utc-lasttime > 600000) {
+            if (utc-lasttime > 300000) {
               // DELETE PROJECT
-              realch.send("PROYECTO "+realch+" [DEBERÍA SER] ELIMINADO");
+              // Send notice through "asignaciones" [DEBUG: sent to debug channel]
+              debugch.send("PROYECTO "+realch+" [DEBERÍA SER] ELIMINADO");
             }
           }
-          else if (utc-lasttime > 60000) {
+          // More than a week since warning: archive (mention users again) [DEBUG: changed oneweek by 120000]
+          else if (utc-lasttime > 120000) {
             realch.send("No se ha respondido al aviso, se archivará el canal durante un mes.");
             // Archive channel -> Hide it from everyone except corresponding role and admins
+            // Mention them again
+            // Send exactly this message:
             realch.send("PROYECTO ARCHIVADO");
           }
         }
