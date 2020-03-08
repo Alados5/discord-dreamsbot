@@ -143,10 +143,12 @@ client.on('message', msg => {
         var lastmsg = msgcol.first();
         var realch = lastmsg.channel;
         var lasttime = lastmsg.createdAt.getTime();
+        
+        debugch.send("El último mensaje de "+realch+" fue enviado por "+lastmsg.author.username);
+
         if (utc-lasttime > twomonths) {
           debugch.send("Aviso por inactividad en " +realch);
         }
-        debugch.send("El último mensaje de "+projich+" fue enviado por "+lastmsg.author.username+", con ID: "+lastmsg.author.id);
         // Bot Discord User ID: 573146997419278336
       });
     }
