@@ -153,13 +153,13 @@ client.on('message', msg => {
           if (lastmsg.content === "PROYECTO ARCHIVADO") {
             if (utc-lasttime > 600000) {
               // DELETE PROJECT
-              debugch.send("PROYECTO "+realch+" [DEBERÍA SER] ELIMINADO");
+              realch.send("PROYECTO "+realch+" [DEBERÍA SER] ELIMINADO");
             }
           }
           else if (utc-lasttime > 60000) {
-            debugch.send("No se ha respondido al aviso, se archivará el canal durante un mes.");
+            realch.send("No se ha respondido al aviso, se archivará el canal durante un mes.");
             // Archive channel -> Hide it from everyone except corresponding role and admins
-            debugch.send("PROYECTO ARCHIVADO");
+            realch.send("PROYECTO ARCHIVADO");
           }
         }
       });
