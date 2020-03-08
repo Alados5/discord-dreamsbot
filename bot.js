@@ -143,13 +143,25 @@ client.on('message', msg => {
         var lastmsg = msgcol.first();
         var realch = lastmsg.channel;
         var lasttime = lastmsg.createdAt.getTime();
-        
-        debugch.send("El último mensaje de "+realch+" fue enviado por "+lastmsg.author.username);
 
         if (utc-lasttime > twomonths) {
           debugch.send("Aviso por inactividad en " +realch);
+          // Send info message
         }
         // Bot Discord User ID: 573146997419278336
+        else if (lastmsg.author.id == 573146997419278336) {
+          if (lastmsg.content === "PROYECTO ARCHIVADO") {
+            if (utc-lasttime > 600000) {
+              // DELETE PROJECT
+              debugch.send("PROYECTO "+realch+" [DEBERÍA SER] ELIMINADO");
+            }
+          }
+          else if (utc-lasttime > 60000) {
+            debugch.send("No se ha respondido al aviso, se archivará el canal durante un mes.");
+            // Archive channel -> Hide it from everyone except corresponding role and admins
+            debugch.send("PROYECTO ARCHIVADO");
+          }
+        }
       });
     }
     return;
@@ -303,8 +315,8 @@ client.on('message', msg => {
     msg.guild.createChannel(chname, "text").then(ch => {
       ch.setParent('552432711072088074')
       ch.setTopic('Proyecto creado por '+msg.author.username)
+      msg.channel.send('Canal del Proyecto ***'+chname+'*** creado.')
     });
-    msg.channel.send('Canal del Proyecto ***'+chname+'*** creado.')
     
     // Count projects, assign n (new already created)
     var projcateg = msg.guild.channels.find('id','552432711072088074');
@@ -319,7 +331,12 @@ client.on('message', msg => {
       projrole.setMentionable(true)
       msg.channel.send("Rol "+projrole+" creado y asignado.")
       msg.channel.send("Todo listo! Disfruta con tu nuevo Proyecto!")
+      
+      var newch = msg.guild.channels.find("name",chname);
+      newch.send("¡Aquí tienes "+projrole+"! ¡Llena este canal de creatividad!");
     });
+    
+
 
   }
   // END MKPROJ
