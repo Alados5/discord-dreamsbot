@@ -2,8 +2,10 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 var prefix = '!';
-var oneweek = 604800000;
+
 var oneday = 86400000;
+var oneweek = 604800000;
+var twomonths = 5270400000;
 var purgeflag = false;
 
 var dbindex = require("./trucos_db/index.js");
@@ -141,9 +143,11 @@ client.on('message', msg => {
         var lastmsg = msgcol.first();
         var realch = lastmsg.channel;
         var lasttime = lastmsg.createdAt.getTime();
-        if (utc-lasttime > 300000) {
-          debugch.send("En " +realch+ " hace más de 5min del último mensaje.");
+        if (utc-lasttime > twomonths) {
+          debugch.send("Aviso por inactividad en " +realch);
         }
+        debugch.send("El último mensaje de "+projich+" fue enviado por "+lastmsg.author.username+", con ID: "+lastmsg.author.id);
+        // Bot Discord User ID: 573146997419278336
       });
     }
     return;
