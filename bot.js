@@ -149,18 +149,19 @@ client.on('message', msg => {
         // Get corresponding role:
         var rolelist = Array.from(lastmsg.guild.roles.values());
         var foundrole = false;
-        //for (var rolei=0; rolei<rolelist.length; rolei++) {
-        //  if(rolelist[rolei].name.replace(/ /g, "_").toLowerCase().indexOf(realch.name) >= 0) {
-        //    var projrole = rolelist[rolei];
-        //    foundrole = true;
-        //  }
-        //}
+        for (var rolei=0; rolei<rolelist.length; rolei++) {
+          if(rolelist[rolei].name.replace(/ /g, "_").toLowerCase().indexOf(realch.name) >= 0) {
+            var projrole = rolelist[rolei];
+            foundrole = true;
+          }
+        }
         
         // More than two months from the last message: warn users
         if (utc-lasttime > twomonths) {
           debugch.send("Aviso por inactividad en " +realch);
           // Send info message
           // Mention correct role
+          if(foundrole) debugch.send("Alerta, "+projrole);
           
         }
         
