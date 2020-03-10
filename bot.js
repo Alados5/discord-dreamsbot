@@ -177,7 +177,9 @@ client.on('message', msg => {
           // More than a month since ARCHIVED: delete [DEBUG: changed twomonths/2 by 180000]
           if (lastmsg.content === "```md\n<PROYECTO ARCHIVADO>\n```") {
             if (utc-lasttime > 180000) {
-              // DELETE PROJECT
+              // DELETE PROJECT & ROLE
+              realch.delete();
+              projrole.delete();
               
               // Send notice through "asignaciones" [DEBUG: sent to debug channel]
               debugch.send('```prolog\nPROYECTO "'+realch.name.toUpperCase()+'" ELIMINADO\n```');
