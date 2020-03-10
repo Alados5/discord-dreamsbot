@@ -7,6 +7,7 @@ var oneday = 86400000;
 var oneweek = 604800000;
 var twomonths = 5270400000;
 var purgeflag = false;
+var mkproj_cd = false;
 
 var dbindex = require("./trucos_db/index.js");
 dbindex = dbindex.dbindex;
@@ -363,6 +364,8 @@ client.on('message', msg => {
   
   // START MKPROJ
   if (command == 'nuevoproyecto') {
+    if (mkproj_cd) return msg.reply("Un momento, aún estoy trabajando en la petición anterior!");
+    mkproj_cd = true;
     var givenname = msg.content.slice(prefix.length+command.length+1);
     var chname = givenname.replace(/ /g, "_");
     if (msg.channel.id != 572891836687843328 && msg.channel.id != 552435323108589579) return msg.reply("Comando válido sólo en el canal de asignaciones!");
@@ -371,27 +374,29 @@ client.on('message', msg => {
       ch.setParent('552432711072088074')
       ch.setTopic('Proyecto creado por '+msg.author.username)
       msg.channel.send('Canal del Proyecto ***'+chname+'*** creado.')
-    });
     
-    // Count projects, assign n (new already created)
-    var projcateg = msg.guild.channels.find('id','552432711072088074');
-    var totalproj = projcateg.children.size - 1;
-    var rolename = "P" + totalproj + " - " + givenname;
-    //msg.channel.send(rolename)
     
-    msg.channel.send("Creando rol...");
-    //Gray color: #95a5a6
-    msg.guild.createRole({name:rolename, color:'#95a5a6'}).then(projrole => {
-      msg.member.addRole(projrole)
-      projrole.setMentionable(true)
-      // Make role be able to manage channel and messages!
-      // MANAGE_MESSAGES
+      // Count projects, assign n (new already created)
+      var projcateg = msg.guild.channels.find('id','552432711072088074');
+      var totalproj = projcateg.children.size - 1;
+      var rolename = "P" + totalproj + " - " + givenname;
+      //msg.channel.send(rolename)
+    
+      msg.channel.send("Creando rol...");
+      //Gray color: #95a5a6
+      msg.guild.createRole({name:rolename, color:'#95a5a6'}).then(projrole => {
+        msg.member.addRole(projrole)
+        projrole.setMentionable(true)
+        // Make role be able to manage channel and messages!
+        // MANAGE_MESSAGES
       
-      msg.channel.send("Rol "+projrole+" creado y asignado.")
-      msg.channel.send("Todo listo! Disfruta con tu nuevo Proyecto!")
+        msg.channel.send("Rol "+projrole+" creado y asignado.")
+        msg.channel.send("Todo listo! Disfruta con tu nuevo Proyecto!")
       
-      var newch = msg.guild.channels.find("name",chname);
-      newch.send("¡Aquí tienes "+projrole+"! ¡Llena este canal de creatividad!");
+        var newch = msg.guild.channels.find("name",chname);
+        newch.send("¡Aquí tienes "+projrole+"! ¡Llena este canal de creatividad!");
+        mkproj_cd = false;
+      });
     });
   }
   // END MKPROJ
