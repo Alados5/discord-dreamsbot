@@ -393,8 +393,7 @@ client.on('message', msg => {
         msg.channel.send("Rol "+projrole+" creado y asignado.")
         msg.channel.send("Todo listo! Disfruta con tu nuevo Proyecto!")
       
-        var newch = msg.guild.channels.find("name",chname);
-        newch.send("¡Aquí tienes "+projrole+"! ¡Llena este canal de creatividad!");
+        ch.send("¡Aquí tienes "+projrole+"! ¡Llena este canal de creatividad!");
         mkproj_cd = false;
       });
     });
