@@ -389,6 +389,7 @@ client.on('message', msg => {
         projrole.setMentionable(true)
         // Make role be able to manage channel and messages!
         // MANAGE_MESSAGES
+        ch.overwritePermissions(projrole, {MANAGE_MESSAGES:true, MANAGE_CHANNEL:true});
       
         msg.channel.send("Rol "+projrole+" creado y asignado.")
         msg.channel.send("Todo listo! Disfruta con tu nuevo Proyecto!")
@@ -411,6 +412,12 @@ client.on('message', msg => {
     msg.reply("¡Lo siento, esto aún no está implementado!\nAlados5 está trabajando en ello.\nCuando puede. Y gratis. No se va a quejar por una donación")
   }
   // END RECOVERPROJ
+  
+  // START EDITPROJ
+  if (command == 'editarproyecto') {
+    msg.reply("¡Lo siento, esto aún no está implementado!\nAlados5 está trabajando en ello.\nCuando puede. Y gratis. No se va a quejar por una donación")
+  }
+  // END EDITPROJ
   
   
   // START MKCATEGORY
