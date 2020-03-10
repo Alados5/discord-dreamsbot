@@ -191,6 +191,7 @@ client.on('message', msg => {
               realch.send("Esta es la segunda fase del proceso de purga de proyectos inactivos.\n"+
                           "Para detenerlo, cualquier mensaje por este canal bastará.\n"+
                           "Ahora el canal quedará invisible menos para los Mods y el rol de este proyecto.\n"+
+                          "Para restaurarlo se puede usar `!restauraproyecto` o contactar con un Mod\n"+
                           "Si no se dice nada por este canal en menos de **UN MES**, ```prolog\n"+
                           "ESTE PROYECTO VA A SER ELIMINADO\n"+
                           "```Este es el último aviso, **¡si no hay actividad durante un mes no habrá vuelta atrás!**");
@@ -387,17 +388,20 @@ client.on('message', msg => {
       var newch = msg.guild.channels.find("name",chname);
       newch.send("¡Aquí tienes "+projrole+"! ¡Llena este canal de creatividad!");
     });
-    
-
-
   }
   // END MKPROJ
   
   // START RMPROJ
   if (command == 'purgaproyecto') {
-    msg.reply("¡Lo siento, esto aún no está implementado! Alados5 está trabajando en ello.\nCuando puede. Y gratis. No se va a quejar por una donación")
+    msg.reply("¡Lo siento, esto aún no está implementado!\nAlados5 está trabajando en ello.\nCuando puede. Y gratis. No se va a quejar por una donación")
   }
   // END RMPROJ
+  
+  // START RECOVERPROJ
+  if (command == 'restauraproyecto') {
+    msg.reply("¡Lo siento, esto aún no está implementado!\nAlados5 está trabajando en ello.\nCuando puede. Y gratis. No se va a quejar por una donación")
+  }
+  // END RECOVERPROJ
   
   
   // START MKCATEGORY
