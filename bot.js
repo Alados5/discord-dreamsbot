@@ -190,6 +190,7 @@ client.on('message', msg => {
                                         "No se ha respondido al aviso de inactividad.");
               realch.send("Esta es la segunda fase del proceso de purga de proyectos inactivos.\n"+
                           "Para detenerlo, cualquier mensaje por este canal bastará.\n"+
+                          "Ahora el canal quedará invisible menos para los Mods y el rol de este proyecto.\n"+
                           "Si no se dice nada por este canal en menos de **UN MES**, ```prolog\n"+
                           "ESTE PROYECTO VA A SER ELIMINADO\n"+
                           "```Este es el último aviso, **¡si no hay actividad durante un mes no habrá vuelta atrás!**");
@@ -197,9 +198,13 @@ client.on('message', msg => {
             
               // Archive channel -> Hide it from everyone except corresponding role and admins
               // SEND_MESSAGES, VIEW_CHANNEL
-            
-              // Send exactly this message:
-              realch.send("```md\n<PROYECTO ARCHIVADO>\n```");
+              realch.overwritePermissions(realch.guild.defaultRole, {VIEW_CHANNEL:false}).then(archch => {
+                archch.overwritePermissions(projrole, {VIEW_CHANNEL:true});
+                
+                // Send exactly this message:
+                archch.send("```md\n<PROYECTO ARCHIVADO>\n```");
+              });
+
             }
           }
         }
