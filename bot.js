@@ -385,6 +385,7 @@ client.on('message', msg => {
       msg.member.addRole(projrole)
       projrole.setMentionable(true)
       // Make role be able to manage channel and messages!
+      // MANAGE_MESSAGES
       
       msg.channel.send("Rol "+projrole+" creado y asignado.")
       msg.channel.send("Todo listo! Disfruta con tu nuevo Proyecto!")
