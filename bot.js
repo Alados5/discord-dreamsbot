@@ -89,11 +89,15 @@ client.on('guildMemberAdd', member => {
         "text": "Beep boop, yo soy un bot creado por Alados5"
       }
     }})
+    
     var nmembers = member.guild.memberCount;
-    var milestonemsg = " \n¡Es un momento importante para el servidor! \n"+
-                       "¡Con la llegada de " +member+ ", ya somos " +nmembers+ " imps en esta comunidad! \n"+
-                       "¡Gracias y felicidades a todos! :D";
-    if (nmembers % 100 == 0) channel.send(milestonemsg);
+    if (nmembers % 100 == 0) {
+      var milestonemsg = " \n¡Es un momento importante para el servidor! \n"+
+                         "¡Con la llegada de " +member+ ", ya somos " +nmembers+ " imps en esta comunidad! \n"+
+                         "¡Gracias y felicidades a todos! :D";
+      var celebgif = "https://cdn.discordapp.com/attachments/552435323108589579/685906847835619335/normie.gif";
+      channel.send(milestonemsg, {files: [celebgif]});
+    }
     
     /*
     channel.send(`¡Muy buenas, ${member}! ¡Te damos la bienvenida al Servidor de Dreams en Español!`+
@@ -167,7 +171,7 @@ client.on('message', msg => {
                        "Para detenerlo, cualquier mensaje por este canal bastará.\n"+
                        "Si no se responde a este mensaje en menos de **UNA SEMANA**, este proyecto quedará **ARCHIVADO** durante **UN MES**.\n"+
                        "Si dentro de ese mes tampoco hay actividad, el proyecto será **ELIMINADO**.");
-          debugch.send("¿Está abandonado este proyecto? También se puede eliminar inmediatamente con `!purgaproyecto` y una mención al canal.");
+          debugch.send(" \n¿Está abandonado este proyecto? También se puede eliminar inmediatamente con `!purgaproyecto` y una mención al canal.\n ");
           
           // Send exactly this message: [DEBUG: debugch instead of realch]
           debugch.send("```md\n<PROYECTO INACTIVO>\n```");
@@ -198,7 +202,7 @@ client.on('message', msg => {
                           "Si no se dice nada por este canal en menos de **UN MES**, ```prolog\n"+
                           "ESTE PROYECTO VA A SER ELIMINADO\n"+
                           "```Este es el último aviso, **¡si no hay actividad durante un mes no habrá vuelta atrás!**");
-              realch.send("¿Está abandonado este proyecto? También se puede eliminar inmediatamente con `!purgaproyecto` y una mención al canal.");
+              realch.send(" \n¿Está abandonado este proyecto? También se puede eliminar inmediatamente con `!purgaproyecto` y una mención al canal.\n ");
             
               // Archive channel -> Hide it from everyone except corresponding role and admins
               // SEND_MESSAGES, VIEW_CHANNEL
@@ -232,6 +236,21 @@ client.on('message', msg => {
     if (command == 'reply') {
       msg.delete();
       msg.channel.send(msg.content.slice(7));
+    }
+    
+    if (command == 'mkcategory') {
+      var chname = msg.content.slice(prefix.length+command.length+1);
+      msg.channel.send("Creando categoría...")
+      msg.guild.createChannel(chname, "category")
+      msg.channel.send("Categoría ***"+chname+"*** creada.")
+    }
+    
+    if (command == 'cele100') {
+      var milestonemsg = " \n¡Es un momento importante para el servidor! \n"+
+                         "¡Con la llegada de [X], ya somos 100 imps en esta comunidad! \n"+
+                         "¡Gracias y felicidades a todos! :D";
+      var celebgif = "https://cdn.discordapp.com/attachments/552435323108589579/685906847835619335/normie.gif";
+      msg.channel.send(milestonemsg, {files: [celebgif]});
     }
     
   }
@@ -391,9 +410,9 @@ client.on('message', msg => {
         ch.overwritePermissions(projrole, {MANAGE_MESSAGES:true});
       
         msg.channel.send("Rol "+projrole+" creado y asignado.")
-        msg.channel.send("Todo listo! Disfruta con tu nuevo Proyecto!")
+        msg.channel.send("Todo listo! Disfruta del nuevo Proyecto!")
       
-        ch.send("¡Aquí tienes "+projrole+"! ¡Llena este canal de creatividad!");
+        ch.send("¡Aquí está, "+projrole+"! ¡Llena este canal de creatividad!");
         mkproj_cd = false;
       });
     });
@@ -418,16 +437,7 @@ client.on('message', msg => {
   }
   // END EDITPROJ
   
-  
-  // START MKCATEGORY
-  if (command == 'mkcategory') {
-    var chname = msg.content.slice(prefix.length+command.length+1);
-    msg.channel.send("Creando categoría...")
-    msg.guild.createChannel(chname, "category")
-    msg.channel.send("Categoría ***"+chname+"*** creada.")
-  }
-  // END MKCATEGORY
-  
+ 
   
   // START TRUCOS
   if (command == 'trucos') {
