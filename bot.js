@@ -387,9 +387,8 @@ client.on('message', msg => {
       msg.guild.createRole({name:rolename, color:'#95a5a6'}).then(projrole => {
         msg.member.addRole(projrole)
         projrole.setMentionable(true)
-        // Make role be able to manage channel and messages!
-        // MANAGE_MESSAGES
-        ch.overwritePermissions(projrole, {MANAGE_MESSAGES:true, MANAGE_CHANNEL:true});
+        // Make role be able to manage messages!
+        ch.overwritePermissions(projrole, {MANAGE_MESSAGES:true});
       
         msg.channel.send("Rol "+projrole+" creado y asignado.")
         msg.channel.send("Todo listo! Disfruta con tu nuevo Proyecto!")
