@@ -163,7 +163,7 @@ client.on('message', msg => {
                        "No se ha detectado ningún mensaje en los últimos dos meses en este proyecto.");
           debugch.send("Esta es la primera fase del proceso de purga de proyectos inactivos.\n"+
                        "Para detenerlo, cualquier mensaje por este canal bastará.\n"+
-                       "Si no se responde a este mensaje en menos de **UNA SEMANA**, este proyecto quedará **ARCHIVADO** durante **UN MES**.\n+
+                       "Si no se responde a este mensaje en menos de **UNA SEMANA**, este proyecto quedará **ARCHIVADO** durante **UN MES**.\n"+
                        "Si dentro de ese mes tampoco hay actividad, el proyecto será **ELIMINADO**.");
           debugch.send("¿Está abandonado este proyecto? También se puede eliminar inmediatamente con `!purgaproyecto` y una mención al canal");
           
