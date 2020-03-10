@@ -158,38 +158,38 @@ client.on('message', msg => {
         
         // More than two months from the last message: warn users
         if (utc-lasttime > twomonths) {
-          if(foundrole) debugch.send("¡Atención, "+projrole+"!");
-          debugch.send("¡Esto es un aviso por inactividad!\n"+
-                       "No se ha detectado ningún mensaje en los últimos dos meses en este proyecto.");
+          if(foundrole) debugch.send("¡Atención, "+projrole+"!\n"+
+                                     "Esto es un aviso por inactividad:\n"+
+                                     "No se ha detectado ningún mensaje en los últimos dos meses en este proyecto.");
           debugch.send("Esta es la primera fase del proceso de purga de proyectos inactivos.\n"+
                        "Para detenerlo, cualquier mensaje por este canal bastará.\n"+
                        "Si no se responde a este mensaje en menos de **UNA SEMANA**, este proyecto quedará **ARCHIVADO** durante **UN MES**.\n"+
                        "Si dentro de ese mes tampoco hay actividad, el proyecto será **ELIMINADO**.");
-          debugch.send("¿Está abandonado este proyecto? También se puede eliminar inmediatamente con `!purgaproyecto` y una mención al canal");
+          debugch.send("¿Está abandonado este proyecto? También se puede eliminar inmediatamente con `!purgaproyecto` y una mención al canal.");
           
         }
         
         // Bot Discord User ID: 573146997419278336
         else if (lastmsg.author.id == 573146997419278336) {
-          // More than a month since archived: delete [DEBUG: changed twomonths/2 by 300000]
+          // More than a month since archived: delete [DEBUG: changed twomonths/2 by 180000]
           if (lastmsg.content === "```md\n<PROYECTO ARCHIVADO>\n```") {
-            if (utc-lasttime > 300000) {
+            if (utc-lasttime > 180000) {
               // DELETE PROJECT
               
               // Send notice through "asignaciones" [DEBUG: sent to debug channel]
-              debugch.send("PROYECTO "+realch+" [DEBERÍA SER] ELIMINADO");
+              debugch.send('```prolog\nPROYECTO "'+realch.name.toUpperCase()+'" ELIMINADO\n```');
             }
           }
-          // More than a week since warning: archive (mention users again) [DEBUG: changed oneweek by 120000]
-          else if (utc-lasttime > 120000) {
-            if(foundrole) debugch.send("¡Alerta, "+projrole+"!");
-            realch.send("No se ha respondido al aviso de inactividad.");
+          // More than a week since warning: archive (mention users again) [DEBUG: changed oneweek by 60000]
+          else if (utc-lasttime > 60000) {
+            if(foundrole) realch.send("¡Alerta, "+projrole+"!\n"+
+                                      "No se ha respondido al aviso de inactividad.");
             realch.send("Esta es la segunda fase del proceso de purga de proyectos inactivos.\n"+
                         "Para detenerlo, cualquier mensaje por este canal bastará.\n"+
                         "Si no se dice nada por este canal en menos de **UN MES**, ```prolog\n"+
                         "ESTE PROYECTO VA A SER ELIMINADO\n"+
-                        "``` Este es el último aviso, **¡si no hay actividad durante un mes no habrá vuelta atrás!**");
-            realch.send("¿Está abandonado este proyecto? También se puede eliminar inmediatamente con `!purgaproyecto` y una mención al canal");
+                        "```Este es el último aviso, **¡si no hay actividad durante un mes no habrá vuelta atrás!**");
+            realch.send("¿Está abandonado este proyecto? También se puede eliminar inmediatamente con `!purgaproyecto` y una mención al canal.");
             
             // Archive channel -> Hide it from everyone except corresponding role and admins
             // SEND_MESSAGES, VIEW_CHANNEL
