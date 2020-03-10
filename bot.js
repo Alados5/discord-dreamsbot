@@ -388,6 +388,13 @@ client.on('message', msg => {
   }
   // END MKPROJ
   
+  // START RMPROJ
+  if (command == 'purgaproyecto') {
+    msg.reply("¡Lo siento, esto aún no está implementado! Alados5 está trabajando en ello.\nCuando puede. Y gratis. No se va a quejar por una donación")
+  }
+  // END RMPROJ
+  
+  
   // START MKCATEGORY
   if (command == 'mkcategory') {
     var chname = msg.content.slice(prefix.length+command.length+1);
