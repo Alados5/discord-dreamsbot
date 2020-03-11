@@ -551,12 +551,12 @@ client.on('message', msg => {
       var debugch = msg.guild.channels.find('id','684539074224455763');
       msg.channel.send("¿Seguro? ¡Esta acción es irreversible!\n"+
                        "Reacciona con el tick en menos de 10 segundos para confirmar.").then(sentmsg => {
-        sentmsg.react('✅').then(tickreaction => {
-          var purge_filter = (reaction, user) => reaction.emoji.name === '✅' && (user.roles.has(projrole)) //|| user.permissions.has('ADMINISTRATOR'));
-          tickreaction.message.awaitReactions(purge_filter, { time: 10000 }).then(tickreaction.message.channel.send("OK"));
+        sentmsg.react('✅')
+        var purge_filter = (reaction, user) => reaction.emoji.name === '✅' && (user.roles.has(projrole)) //|| user.permissions.has('ADMINISTRATOR'));
+        sentmsg.awaitReactions(purge_filter, { time: 10000 }).then(sentmsg.channel.send("OK"));
             //.then(reactcol => debugch.send('```prolog\nPROYECTO "'+sentmsg.channel.name.toUpperCase()+'" ELIMINADO\n```'))
             //.catch(sentmsg.channel.send("No se ha confirmado."))
-        });
+        
       });  
     }
     else {
