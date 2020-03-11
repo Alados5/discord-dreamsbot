@@ -1,18 +1,22 @@
+// CLIENT:
 const Discord = require('discord.js');
 const client = new Discord.Client();
-
 var prefix = '!';
 
+// PROJECTS INITIAL DATA:
 var oneday = 86400000;
 var oneweek = 604800000;
 var twomonths = 5270400000;
 var purgeflag = false;
 var mkproj_cd = false;
 
+// TRICKS DATABASE:
 var dbindex = require("./trucos_db/index.js");
 dbindex = dbindex.dbindex;
 
-// EMBED AS FUNCTION
+
+
+// - EMBED AS FUNCTION ------------
 function mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron) {
   var embedobj = {
       description:desctext,
@@ -44,10 +48,11 @@ function mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron) {
   
   return embedobj
 }  
-// -----------------
+// --------------------------------
 
 
-// SLEEP FUNCTION
+
+// - SLEEP FUNCTION ---------------
 function sleep(mstime) {
   const tini = Date.now();
   var tend = tini;
@@ -55,7 +60,7 @@ function sleep(mstime) {
     tend = Date.now();
   }
 }
-// --------------
+// --------------------------------
 
 
 
