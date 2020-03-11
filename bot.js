@@ -552,8 +552,8 @@ client.on('message', msg => {
       msg.channel.send("¿Seguro? ¡Esta acción es irreversible!\n"+
                        "Reacciona con el tick en menos de 10 segundos para confirmar.").then(sentmsg => {
         sentmsg.react('✅').then(tickreaction => {
-          const filter = (reaction, user) => reaction.emoji.name === '✅' && (user.roles.has(projrole) || user.permissions.has('ADMINISTRATOR'));
-          tickreaction.message.awaitReactions(filter, { time: 10000 }).then(tickreaction.message.channel.send("OK"));
+          var purge_filter = (reaction, user) => reaction.emoji.name === '✅' && (user.roles.has(projrole)) //|| user.permissions.has('ADMINISTRATOR'));
+          tickreaction.message.awaitReactions(purge_filter, { time: 10000 }).then(tickreaction.message.channel.send("OK"));
             //.then(reactcol => debugch.send('```prolog\nPROYECTO "'+sentmsg.channel.name.toUpperCase()+'" ELIMINADO\n```'))
             //.catch(sentmsg.channel.send("No se ha confirmado."))
         });
