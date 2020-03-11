@@ -486,23 +486,39 @@ client.on('message', msg => {
         var chname = intext.replace(/ /g, "_");
         msg.channel.setName(chname);
         projrole.setName(projrole.name.slice(0,5)+intext);
-        msg.reply("Hecho!")
+        msg.reply("¡Hecho!")
       }
       else if (args[0] == 'tema') {
         var intext = msg.content.slice(prefix.length+command.length+6);
         if (!intext) return msg.reply("¡No has escrito nada!");
         msg.channel.setTopic(intext);
-        msg.reply("Hecho!")
+        msg.reply("¡Hecho!")
       }
       else if (args[0] == 'miembros') {
-        msg.reply("WIP - Con esto podrás añadir colaboradores! :)");
+        var mentionlist = Array.from(msg.mentions.members.values());
+        if (mentionlist.length == 0) return msg.reply("¡No has mencionado a ningún usuario!")
+        
+        for (var mentioni=0; mentioni<mentionlist.length; mentioni++) {
+          if (mentionlist[mentioni].roles.has(projrole.id)) {
+            mentionlist[mentioni].removeRole(projrole);
+            msg.channel.send(mentionlist[mentioni]+" ya no colabora en este proyecto.");
+          }
+          else {
+            mentionlist[mentioni].addRole(projrole);
+            msg.channel.send(mentionlist[mentioni]+" ahora colabora en este proyecto.");
+          }
+        }
+        
+        msg.channel.send("Recordad que con el rol compartís permisos sobre este canal.");
+        msg.reply("¡Hecho!");
       }
       else {
         msg.reply("Debes especificar qué editar: nombre, tema o miembros.\n"+
                   "`!editaproyecto nombre` cambia el nombre del proyecto y del rol asociado a lo que escribas después.\n"+
                   "`!editaproyecto tema` cambia el tema (la descripción que ves arriba desde PC"+
                   " o en la barra lateral derecha desde móvil) del canal a lo que escribas después.\n"+
-                  "`!editaproyecto miembros` le dará el rol de este proyecto a quién menciones. \n\n"+
+                  "`!editaproyecto miembros` le dará el rol de este proyecto a quién menciones."+
+                  " Si mencionas a alguien que ya colabora, se le quitará el rol.\n\n"+
                   "Si lo que quieres es eliminar el proyecto, usa `!purgaproyecto`. Pero cuidado, porque no hay vuelta atrás!");
       }
     }
