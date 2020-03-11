@@ -481,21 +481,30 @@ client.on('message', msg => {
     if (msg.member.roles.has(projrole.id) || msg.member.permissions.has('ADMINISTRATOR')) {
       // Edit Name - Topic - Members (add project role to others)
       if (args[0] == 'nombre') {
+        var intext = msg.content.slice(prefix.length+command.length+8);
+        if (!intext) return msg.reply("¡No has escrito nada!");
+        //msg.channel.setName(intext);
+        //CHANGE ROLE NAME
+        msg.channel.send(intext);
         msg.reply("WIP");
       }
       else if (args[0] == 'tema') {
-        msg.reply("WIP");
+        var intext = msg.content.slice(prefix.length+command.length+6);
+        if (!intext) return msg.reply("¡No has escrito nada!");
+        msg.channel.setTopic(intext);
+        msg.reply("Hecho!")
       }
       else if (args[0] == 'miembros') {
         msg.reply("WIP");
       }
       else {
-        msg.reply("Not good.");
+        msg.reply("Debes especificar qué editar: nombre, tema o miembros.\n"+
+                  "`!editaproyecto nombre` cambia el nombre del proyecto y del rol asociado a lo que escribas después.\n"+
+                  "`!editaproyecto tema` cambia el tema (la descripción que ves arriba desde PC"+
+                  " o en la barra lateral derecha desde móvil) del canal a lo que escribas después.\n"+
+                  "`!editaproyecto miembros` le dará el rol de este proyecto a quién menciones. \n\n"+
+                  "Si lo que quieres es eliminar el proyecto, usa `!purgaproyecto`. Pero cuidado, porque no hay vuelta atrás!");
       }
-      
-      msg.reply("¡Lo siento, esto aún no está implementado!\nAlados5 está trabajando en ello.\nCuando puede. Y gratis. No se va a quejar por una donación")
-      
-      
     }
     else {
       return msg.reply("No formas parte de este proyecto (no tienes el rol): No puedes editar este canal.");
