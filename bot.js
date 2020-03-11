@@ -176,7 +176,7 @@ client.on('message', msg => {
                        "Para detenerlo, cualquier mensaje por este canal bastará.\n"+
                        "Si no se responde a este mensaje en menos de **UNA SEMANA**, este proyecto quedará **ARCHIVADO** durante **UN MES**.\n"+
                        "Si dentro de ese mes tampoco hay actividad, el proyecto será **ELIMINADO**.");
-          debugch.send(" \n¿Está abandonado este proyecto? También se puede eliminar inmediatamente con `!purgaproyecto` y una mención al canal.\n ");
+          debugch.send("¿Está abandonado este proyecto? También se puede eliminar inmediatamente mandando `!purgaproyecto` en este canal.");
           
           // Send exactly this message: [DEBUG: debugch instead of realch]
           debugch.send("```md\n<PROYECTO INACTIVO>\n```");
@@ -207,7 +207,7 @@ client.on('message', msg => {
                           "Si no se dice nada por este canal en menos de **UN MES**, ```prolog\n"+
                           "ESTE PROYECTO VA A SER ELIMINADO\n"+
                           "```Este es el último aviso, **¡si no hay actividad durante un mes no habrá vuelta atrás!**");
-              realch.send(" \n¿Está abandonado este proyecto? También se puede eliminar inmediatamente con `!purgaproyecto` y una mención al canal.\n ");
+              realch.send("¿Está abandonado este proyecto? También se puede eliminar inmediatamente mandando `!purgaproyecto` en este canal.");
             
               // Archive channel -> Hide it from everyone except corresponding role and admins
               // SEND_MESSAGES, VIEW_CHANNEL
@@ -459,6 +459,7 @@ client.on('message', msg => {
   
   // START EDITPROJ
   if (command == 'editarproyecto') {
+    // Edit Name - Topic - Members (add project role to others)
     msg.reply("¡Lo siento, esto aún no está implementado!\nAlados5 está trabajando en ello.\nCuando puede. Y gratis. No se va a quejar por una donación")
   }
   // END EDITPROJ
