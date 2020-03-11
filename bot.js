@@ -483,7 +483,7 @@ client.on('message', msg => {
       if (args[0] == 'nombre') {
         var intext = msg.content.slice(prefix.length+command.length+8);
         if (!intext) return msg.reply("¡No has escrito nada!");
-        var chname = givenname.replace(/ /g, "_");
+        var chname = intext.replace(/ /g, "_");
         msg.channel.setName(chname);
         projrole.setName(projrole.name.slice(0,5)+intext);
         msg.reply("Hecho!")
