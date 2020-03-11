@@ -483,10 +483,10 @@ client.on('message', msg => {
       if (args[0] == 'nombre') {
         var intext = msg.content.slice(prefix.length+command.length+8);
         if (!intext) return msg.reply("¡No has escrito nada!");
-        //msg.channel.setName(intext);
-        //CHANGE ROLE NAME
-        msg.channel.send(intext);
-        msg.reply("WIP");
+        var chname = givenname.replace(/ /g, "_");
+        msg.channel.setName(chname);
+        projrole.setName(projrole.name.slice(0,5)+intext);
+        msg.reply("Hecho!")
       }
       else if (args[0] == 'tema') {
         var intext = msg.content.slice(prefix.length+command.length+6);
@@ -495,7 +495,7 @@ client.on('message', msg => {
         msg.reply("Hecho!")
       }
       else if (args[0] == 'miembros') {
-        msg.reply("WIP");
+        msg.reply("WIP - Con esto podrás añadir colaboradores! :)");
       }
       else {
         msg.reply("Debes especificar qué editar: nombre, tema o miembros.\n"+
