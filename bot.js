@@ -437,17 +437,11 @@ client.on('message', msg => {
   }
   // END MKPROJ
   
-  // START RMPROJ
-  if (command == 'purgaproyecto') {
-    msg.reply("¡Lo siento, esto aún no está implementado!\nAlados5 está trabajando en ello.\nCuando puede. Y gratis. No se va a quejar por una donación")
-  }
-  // END RMPROJ
-  
   // START RECOVERPROJ
   if (command == 'restauraproyecto') {
-    if (msg.channel.parentID != 552432711072088074) return;
+    if (msg.channel.parentID != 552432711072088074) return msg.reply("Esto no es el canal de un proyecto.");
     var chname = msg.channel.name;
-    if (chname === "guía" || chname === "asignaciones") return;
+    if (chname === "guía" || chname === "asignaciones") return msg.reply("Esto no es el canal de un proyecto.");
     var rolelist = Array.from(msg.guild.roles.values());
     var foundrole = false;
     for (var rolei=0; rolei<rolelist.length; rolei++) {
@@ -457,6 +451,7 @@ client.on('message', msg => {
       }
     }
     if (!foundrole) return msg.reply("Error. No se ha encontrado el rol de este proyecto.");
+    
     if (msg.member.roles.has(projrole.id) || msg.member.permissions.has('ADMINISTRATOR')) {
       msg.channel.overwritePermissions(msg.guild.defaultRole, {VIEW_CHANNEL:true});
       msg.channel.send("```md\n<PROYECTO RESTAURADO>\n```")
@@ -468,11 +463,39 @@ client.on('message', msg => {
   // END RECOVERPROJ
   
   // START EDITPROJ
-  if (command == 'editarproyecto') {
-    // Edit Name - Topic - Members (add project role to others)
-    msg.reply("¡Lo siento, esto aún no está implementado!\nAlados5 está trabajando en ello.\nCuando puede. Y gratis. No se va a quejar por una donación")
+  if (command == 'editaproyecto') {
+    if (msg.channel.parentID != 552432711072088074) return msg.reply("Esto no es el canal de un proyecto.");
+    var chname = msg.channel.name;
+    if (chname === "guía" || chname === "asignaciones") return msg.reply("Esto no es el canal de un proyecto.");
+    var rolelist = Array.from(msg.guild.roles.values());
+    var foundrole = false;
+    for (var rolei=0; rolei<rolelist.length; rolei++) {
+      if(rolelist[rolei].name.replace(/ /g, "_").toLowerCase().indexOf(chname) >= 0) {
+        var projrole = rolelist[rolei];
+        foundrole = true;
+      }
+    }
+    if (!foundrole) return msg.reply("Error. No se ha encontrado el rol de este proyecto.");
+    
+    if (msg.member.roles.has(projrole.id) || msg.member.permissions.has('ADMINISTRATOR')) {
+      // Edit Name - Topic - Members (add project role to others)
+      var editype = args[0];
+      msg.channel.send(editype);
+      msg.reply("¡Lo siento, esto aún no está implementado!\nAlados5 está trabajando en ello.\nCuando puede. Y gratis. No se va a quejar por una donación")
+    }
+    else {
+      return msg.reply("No formas parte de este proyecto (no tienes el rol): No puedes editar este canal.");
+    }
+    
+    
   }
   // END EDITPROJ
+  
+  // START RMPROJ
+  if (command == 'purgaproyecto') {
+    msg.reply("¡Lo siento, esto aún no está implementado!\nAlados5 está trabajando en ello.\nCuando puede. Y gratis. No se va a quejar por una donación")
+  }
+  // END RMPROJ
   
   // ------------------------------------------------------------
   
