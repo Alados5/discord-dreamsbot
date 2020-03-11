@@ -553,15 +553,11 @@ client.on('message', msg => {
                        "Reacciona con el tick en menos de 10 segundos para confirmar.").then(sentmsg => {
         sentmsg.react('✅').then(tickreaction => {
           const filter = (reaction, user) => reaction.emoji.name === '✅' && (user.roles.has(projrole) || user.permissions.has('ADMINISTRATOR'));
-          sentmsg.awaitReactions(filter, { time: 10000 }).then(sentmsg.channel.send("OK"));
-
-          
+          tickreaction.message.awaitReactions(filter, { time: 10000 }).then(tickreaction.message.channel.send("OK"));
+            //.then(reactcol => debugch.send('```prolog\nPROYECTO "'+sentmsg.channel.name.toUpperCase()+'" ELIMINADO\n```'))
+            //.catch(sentmsg.channel.send("No se ha confirmado."))
         });
-        
-          //.then(reactcol => debugch.send('```prolog\nPROYECTO "'+sentmsg.channel.name.toUpperCase()+'" ELIMINADO\n```'))
-          //.catch(sentmsg.channel.send("No se ha confirmado."))
-      });
-      
+      });  
     }
     else {
       return msg.reply("No formas parte de este proyecto (no tienes el rol): No puedes eliminar este canal.");
