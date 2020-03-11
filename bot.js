@@ -91,8 +91,8 @@ client.on('guildMemberAdd', member => {
     }})
     
     var nmembers = member.guild.memberCount;
-    if (nmembers % 100 == 0) {
-      var milestonemsg = " \n¡Es un momento importante para el servidor! \n"+
+    if (nmembers % 100 == 0) { 
+      var milestonemsg = member.guild.defaultRole+", ¡Es un momento importante para el servidor! \n"+
                          "¡Con la llegada de " +member+ ", ya somos " +nmembers+ " imps en esta comunidad! \n"+
                          "¡Gracias y felicidades a todos! :D";
       var celebgif = "https://cdn.discordapp.com/attachments/552435323108589579/685906847835619335/normie.gif";
@@ -381,6 +381,9 @@ client.on('message', msg => {
   // END EMBED
   
   
+  
+  // - PROJECTS SECTION ------------------------------------------
+  
   // START MKPROJ
   if (command == 'nuevoproyecto') {
     if (mkproj_cd) return msg.reply("Un momento, aún estoy trabajando en la petición anterior!");
@@ -427,7 +430,25 @@ client.on('message', msg => {
   
   // START RECOVERPROJ
   if (command == 'restauraproyecto') {
-    msg.reply("¡Lo siento, esto aún no está implementado!\nAlados5 está trabajando en ello.\nCuando puede. Y gratis. No se va a quejar por una donación")
+    if (msg.channel.parentID != 552432711072088074) return;
+    var chname = msg.channel.name;
+    if (chname === "guía" || chname === "asignaciones") return;
+    var rolelist = Array.from(msg.guild.roles.values());
+    var foundrole = false;
+    for (var rolei=0; rolei<rolelist.length; rolei++) {
+      if(rolelist[rolei].name.replace(/ /g, "_").toLowerCase().indexOf(chname) >= 0) {
+        var projrole = rolelist[rolei];
+        foundrole = true;
+      }
+    }
+    if (!foundrole) return msg.reply("Error. No se ha encontrado el rol de este proyecto.");
+    if (msg.member.roles.has(projrole.id) || msg.member.permissions.has('ADMINISTRATOR')) {
+      msg.channel.overwritePermissions(msg.guild.defaultRole, {VIEW_CHANNEL:true});
+      msg.channel.send("```md\n<PROYECTO RESTAURADO>\n```")
+    }
+    else {
+      return msg.reply("No formas parte de este proyecto (no tienes el rol).\n¿Cómo es que ves esto?");
+    }
   }
   // END RECOVERPROJ
   
@@ -437,7 +458,11 @@ client.on('message', msg => {
   }
   // END EDITPROJ
   
- 
+  // ------------------------------------------------------------
+  
+  
+  
+  // - TRICKS SECTION -------------------------------------------
   
   // START TRUCOS
   if (command == 'trucos') {
@@ -505,7 +530,7 @@ client.on('message', msg => {
     
   }
   // END TRUCOS
-  
+  // ------------------------------------------------------------
 
   
 });
