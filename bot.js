@@ -550,11 +550,12 @@ client.on('message', msg => {
       // Actually doesn't delete the project, just hides it even from them
       // TO-DO: Try to send a confirmation message to avoid accidents :)
       
-      var newmsg = msg.channel.send("¿Seguro? ¡Esta acción es irreversible!\n"+
-                                    "Reacciona con el tick para confirmar.");
-      newmsg.react('✅');
+      msg.channel.send("¿Seguro? ¡Esta acción es irreversible!\n"+
+                       "Reacciona con el tick para confirmar.").then(sentmsg => {
+        sentmsg.react('✅');
+      });
       
-      
+
       msg.reply("¡Lo siento, esto aún no está implementado!\nAlados5 está trabajando en ello.\nCuando puede. Y gratis. No se va a quejar por una donación")
     }
     else {
