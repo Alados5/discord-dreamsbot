@@ -498,6 +498,7 @@ client.on('message', msg => {
         var mentionlist = Array.from(msg.mentions.members.values());
         if (mentionlist.length == 0) return msg.reply("¡No has mencionado a ningún usuario!")
         
+        var newcollab = false;
         for (var mentioni=0; mentioni<mentionlist.length; mentioni++) {
           if (mentionlist[mentioni].roles.has(projrole.id)) {
             mentionlist[mentioni].removeRole(projrole);
@@ -506,10 +507,12 @@ client.on('message', msg => {
           else {
             mentionlist[mentioni].addRole(projrole);
             msg.channel.send(mentionlist[mentioni]+" ahora colabora en este proyecto.");
+            newcollab = true;
           }
         }
         
-        msg.channel.send("Recordad que con el rol compartís permisos sobre este canal.");
+        if (newcollab) msg.channel.send("Recordad que con el rol "+projrole+" compartís permisos sobre este proyecto:"+
+                                        " podéis cambiarle nombre, tema, colaboradores, etc.");
         msg.reply("¡Hecho!");
       }
       else {
@@ -530,6 +533,8 @@ client.on('message', msg => {
   
   // START RMPROJ
   if (command == 'purgaproyecto') {
+    // Actually doesn't delete the project, just hides it even from them
+    // TO-DO: Try to send a confirmation message to avoid accidents :)
     msg.reply("¡Lo siento, esto aún no está implementado!\nAlados5 está trabajando en ello.\nCuando puede. Y gratis. No se va a quejar por una donación")
   }
   // END RMPROJ
