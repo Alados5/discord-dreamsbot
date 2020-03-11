@@ -260,6 +260,16 @@ client.on('message', msg => {
     
   }
   // END ADMIN COMMANDS
+  
+  
+  // HELP
+  if (command == 'ayuda' || command == 'help') {
+    msg.reply("¡Hola! Soy un bot creado por Alados5.\n"+
+              "Aquí debería haber un mensaje de ayuda, pero aún no ha podido escribirlo bien. "+
+              "Mientras tanto, puedes echarle un ojo a #bienvenida, donde tienes algunos de los comandos con los que me puedes llamar.\n"+
+              "¡Disculpa las molestias!");
+  }
+  // END HELP
 
     
   // AURA - ADD/REMOVE DREAM ROLES
