@@ -533,9 +533,33 @@ client.on('message', msg => {
   
   // START RMPROJ
   if (command == 'purgaproyecto') {
-    // Actually doesn't delete the project, just hides it even from them
-    // TO-DO: Try to send a confirmation message to avoid accidents :)
-    msg.reply("¡Lo siento, esto aún no está implementado!\nAlados5 está trabajando en ello.\nCuando puede. Y gratis. No se va a quejar por una donación")
+    if (msg.channel.parentID != 552432711072088074) return msg.reply("Esto no es el canal de un proyecto.");
+    var chname = msg.channel.name;
+    if (chname === "guía" || chname === "asignaciones") return msg.reply("Esto no es el canal de un proyecto.");
+    var rolelist = Array.from(msg.guild.roles.values());
+    var foundrole = false;
+    for (var rolei=0; rolei<rolelist.length; rolei++) {
+      if(rolelist[rolei].name.replace(/ /g, "_").toLowerCase().indexOf(chname) >= 0) {
+        var projrole = rolelist[rolei];
+        foundrole = true;
+      }
+    }
+    if (!foundrole) return msg.reply("Error. No se ha encontrado el rol de este proyecto.");
+    
+    if (msg.member.roles.has(projrole.id) || msg.member.permissions.has('ADMINISTRATOR')) {
+      // Actually doesn't delete the project, just hides it even from them
+      // TO-DO: Try to send a confirmation message to avoid accidents :)
+      
+      var newmsg = msg.channel.send("¿Seguro? ¡Esta acción es irreversible!\n"+
+                                    "Reacciona con el tick para confirmar.");
+      newmsg.react('✅');
+      
+      
+      msg.reply("¡Lo siento, esto aún no está implementado!\nAlados5 está trabajando en ello.\nCuando puede. Y gratis. No se va a quejar por una donación")
+    }
+    else {
+      return msg.reply("No formas parte de este proyecto (no tienes el rol): No puedes eliminar este canal.");
+    }
   }
   // END RMPROJ
   
