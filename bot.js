@@ -430,7 +430,8 @@ client.on('message', msg => {
         msg.channel.send("Rol "+projrole+" creado y asignado.")
         msg.channel.send("Todo listo! Disfruta del nuevo Proyecto!")
       
-        ch.send("¡Aquí está, "+projrole+"! ¡Llena este canal de creatividad!");
+        ch.send("¡Aquí está, "+projrole+"! ¡Llena este canal de creatividad!\n"+
+                "Puedes editar el nombre, el tema y los miembros de este proyecto con `!editaproyecto`");
         mkproj_cd = false;
       });
     });
@@ -479,15 +480,26 @@ client.on('message', msg => {
     
     if (msg.member.roles.has(projrole.id) || msg.member.permissions.has('ADMINISTRATOR')) {
       // Edit Name - Topic - Members (add project role to others)
-      var editype = args[0];
-      msg.channel.send(editype);
+      if (args[0] == 'nombre') {
+        msg.reply("WIP");
+      }
+      else if (args[0] == 'tema') {
+        msg.reply("WIP");
+      }
+      else if (args[0] == 'miembros') {
+        msg.reply("WIP");
+      }
+      else {
+        msg.reply("Not good.");
+      }
+      
       msg.reply("¡Lo siento, esto aún no está implementado!\nAlados5 está trabajando en ello.\nCuando puede. Y gratis. No se va a quejar por una donación")
+      
+      
     }
     else {
       return msg.reply("No formas parte de este proyecto (no tienes el rol): No puedes editar este canal.");
     }
-    
-    
   }
   // END EDITPROJ
   
