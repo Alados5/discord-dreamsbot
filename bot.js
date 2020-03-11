@@ -245,8 +245,8 @@ client.on('message', msg => {
       msg.channel.send("Categoría ***"+chname+"*** creada.")
     }
     
-    if (command == 'cele100') {
-      var milestonemsg = " \n¡Es un momento importante para el servidor! \n"+
+    if (command == 'celebra100') {
+      var milestonemsg = msg.guild.defaultRole+", ¡Es un momento importante para el servidor! \n"+
                          "¡Con la llegada de [X], ya somos 100 imps en esta comunidad! \n"+
                          "¡Gracias y felicidades a todos! :D";
       var celebgif = "https://cdn.discordapp.com/attachments/552435323108589579/685906847835619335/normie.gif";
