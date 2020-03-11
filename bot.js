@@ -558,8 +558,6 @@ client.on('message', msg => {
           //.catch(sentmsg.channel.send("No se ha confirmado."))
       });
       
-
-      msg.reply("¡Lo siento, esto aún no está implementado!\nAlados5 está trabajando en ello.\nCuando puede. Y gratis. No se va a quejar por una donación")
     }
     else {
       return msg.reply("No formas parte de este proyecto (no tienes el rol): No puedes eliminar este canal.");
