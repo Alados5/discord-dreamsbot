@@ -551,7 +551,7 @@ client.on('message', msg => {
       var debugch = msg.guild.channels.find('id','684539074224455763');
       msg.channel.send("¿Seguro? ¡Esta acción es irreversible!\n"+
                        "Reacciona con el tick en menos de 5 segundos para confirmar.\n"+
-                       "Enviar cualquier mensaje cancelará el proceso.").then(sentmsg => {
+                       "Enviar cualquier mensaje cancelará el proceso de eliminación.").then(sentmsg => {
         sentmsg.react('✅').then(tickreaction => {
           //const purge_filter = (reaction, user) => reaction.emoji.name === '✅' && user.id != 573146997419278336; //&& (user.roles.has(projrole)) //|| user.permissions.has('ADMINISTRATOR'));
           //tickreaction.message.awaitReactions(purge_filter, { time: 20000 })
@@ -565,10 +565,15 @@ client.on('message', msg => {
           tickreaction.message.channel.fetchMessages({limit:1}).then(msgcol => {
             var lastmsg = msgcol.first();
             var realch = lastmsg.channel;
-            if (lastmsg.author.id != 573146997419278336) return realch.send("Proceso de purga abortado.");
+            if (lastmsg.author.id != 573146997419278336) return realch.send("Proceso de eliminación abortado.");
             var reactlist = Array.from(lastmsg.reactions.values());
             for (var reacti=0; reacti<reactlist.length; reacti++) {
-              realch.send(reactlist[reacti].emoji.name+" - "+reactlist[reacti].count+" veces.")
+              if (reactlist[reacti].emoji.name != '✅') continue;
+              if (reactlist[reacti].count < 2) return realch.send("No se ha confirmado la eliminación.");
+              
+              var reactorlist = Array.from(reactlist[reacti].users.values());
+              var allmembers = realch.guild.members;
+              realch.send("Han votado "+reactorlist.length+" usuarios.")
             }
             
           });
