@@ -552,10 +552,10 @@ client.on('message', msg => {
       msg.channel.send("¿Seguro? ¡Esta acción es irreversible!\n"+
                        "Reacciona con el tick en menos de 10 segundos para confirmar.").then(sentmsg => {
         sentmsg.react('✅')
-        const purge_filter = (reaction, user) => reaction.emoji.name === '✅' && (user.roles.has(projrole)) //|| user.permissions.has('ADMINISTRATOR'));
+        const purge_filter = (reaction, user) => reaction.emoji.name === '✅' //&& (user.roles.has(projrole)) //|| user.permissions.has('ADMINISTRATOR'));
         const collector = sentmsg.createReactionCollector(purge_filter, { time: 10000 });
-        collector.on('collect', r => sentmsg.channel.send("OK"));
-        collector.on('end', collected => sentmsg.channel.send("Timeout"));
+        collector.on('collect', sentmsg.channel.send("OK"));
+        collector.on('end', sentmsg.channel.send("Timeout"));
         
         //sentmsg.awaitReactions(purge_filter, { time: 10000 }).then(sentmsg.channel.send("OK"));
             //.then(reactcol => debugch.send('```prolog\nPROYECTO "'+sentmsg.channel.name.toUpperCase()+'" ELIMINADO\n```'))
