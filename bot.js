@@ -571,9 +571,10 @@ client.on('message', msg => {
               if (reactlist[reacti].emoji.name != '✅') continue;
               if (reactlist[reacti].count < 2) return realch.send("No se ha confirmado la eliminación.");
               
-              var reactorlist = Array.from(reactlist[reacti].users.values());
+              //var reactorlist = Array.from(reactlist[reacti].users.values());
+              var reactors = reactlist[reacti].users;
               var allmembers = realch.guild.members;
-              realch.send("Han votado "+reactorlist.length+" usuarios.")
+              realch.send("Se ha votado "+reactlist[reacti].count+"veces por "+reactors.size+" usuarios distintos.")
             }
             
           });
