@@ -550,7 +550,7 @@ client.on('message', msg => {
       // Actually doesn't delete the project, just hides it even from them
       var debugch = msg.guild.channels.find('id','684539074224455763');
       msg.reply("¿Seguro? ¡Esta acción es irreversible!\n"+
-                "**Reacciona** con el tick en menos de 10 segundos para confirmar.\n"+
+                "**Reacciona** con el tick en menos de 5 segundos para confirmar.\n"+
                 "Enviar cualquier mensaje también cancelará el proceso de eliminación.").then(sentmsg => {
         sentmsg.react('✅').then(tickreaction => {
           //const purge_filter = (reaction, user) => reaction.emoji.name === '✅' && user.id != 573146997419278336; //&& (user.roles.has(projrole)) //|| user.permissions.has('ADMINISTRATOR'));
@@ -560,7 +560,7 @@ client.on('message', msg => {
           //const collector = tickreaction.message.createReactionCollector(purge_filter, { time: 10000 });
           //collector.on('collect', tickreaction.message.channel.send("OK"));
           //collector.on('end', tickreaction.message.channel.send("Timeout"));
-          sleep(10000);
+          sleep(5000);
           
           tickreaction.message.channel.fetchMessages({limit:1}).then(msgcol => {
             var lastmsg = msgcol.first();
@@ -568,13 +568,13 @@ client.on('message', msg => {
             if (lastmsg.author.id != 573146997419278336) return realch.send("Proceso de eliminación abortado.");
             var reactlist = Array.from(lastmsg.reactions.values());
             for (var reacti=0; reacti<reactlist.length; reacti++) {
-              if (reactlist[reacti].emoji.name != '✅') continue;
-              if (reactlist[reacti].count < 2) return realch.send("No se ha confirmado la eliminación.");
+              //if (reactlist[reacti].emoji.name != '✅') continue;
+              //if (reactlist[reacti].count < 2) return realch.send("No se ha confirmado la eliminación.");
               
               //var reactorlist = Array.from(reactlist[reacti].users.values());
-              var reactors = reactlist[reacti].users;
-              var allmembers = realch.guild.members;
-              realch.send("Se ha votado "+reactlist[reacti].count+" veces por "+reactors.size+" usuarios distintos.")
+              //var reactors = reactlist[reacti].users;
+              //var allmembers = realch.guild.members;
+              realch.send("Se ha votado "+reactlist[reacti].count+" veces por "+reactlist[reacti].users.size+" usuarios distintos.")
             }
             
           });
