@@ -549,9 +549,9 @@ client.on('message', msg => {
     if (msg.member.roles.has(projrole.id) || msg.member.permissions.has('ADMINISTRATOR')) {
       // Actually doesn't delete the project, just hides it even from them
       var debugch = msg.guild.channels.find('id','684539074224455763');
-      msg.channel.send("¿Seguro? ¡Esta acción es irreversible!\n"+
-                       "Reacciona con el tick en menos de 5 segundos para confirmar.\n"+
-                       "Enviar cualquier mensaje cancelará el proceso de eliminación.").then(sentmsg => {
+      msg.reply("¿Seguro? ¡Esta acción es irreversible!\n"+
+                "**Reacciona** con el tick en menos de 5 segundos para confirmar.\n"+
+                "Enviar cualquier mensaje también cancelará el proceso de eliminación.").then(sentmsg => {
         sentmsg.react('✅').then(tickreaction => {
           //const purge_filter = (reaction, user) => reaction.emoji.name === '✅' && user.id != 573146997419278336; //&& (user.roles.has(projrole)) //|| user.permissions.has('ADMINISTRATOR'));
           //tickreaction.message.awaitReactions(purge_filter, { time: 20000 })
@@ -572,7 +572,7 @@ client.on('message', msg => {
               if (reactlist[reacti].count < 2) return realch.send("No se ha confirmado la eliminación.");
               
               //var reactorlist = Array.from(reactlist[reacti].users.values());
-              var reactors = reactlist[reacti].fetchUsers();
+              var reactors = reactlist[reacti].users;
               var allmembers = realch.guild.members;
               realch.send("Se ha votado "+reactlist[reacti].count+" veces por "+reactors.size+" usuarios distintos.")
             }
