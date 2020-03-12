@@ -550,25 +550,29 @@ client.on('message', msg => {
       // Actually doesn't delete the project, just hides it even from them
       var debugch = msg.guild.channels.find('id','684539074224455763');
       msg.channel.send("¿Seguro? ¡Esta acción es irreversible!\n"+
-                       "Reacciona con el tick en menos de 10 segundos para confirmar.").then(sentmsg => {
+                       "Reacciona con el tick en menos de 10 segundos para confirmar.\n"+
+                       "Enviar cualquier mensaje cancelará el proceso.").then(sentmsg => {
         sentmsg.react('✅').then(tickreaction => {
-          const purge_filter = (reaction, user) => reaction.emoji.name === '✅' && user.id != 573146997419278336; //&& (user.roles.has(projrole)) //|| user.permissions.has('ADMINISTRATOR'));
+          //const purge_filter = (reaction, user) => reaction.emoji.name === '✅' && user.id != 573146997419278336; //&& (user.roles.has(projrole)) //|| user.permissions.has('ADMINISTRATOR'));
           //tickreaction.message.awaitReactions(purge_filter, { time: 20000 })
           //  .then(tickreaction.message.channel.send("OK"));
           
-          const collector = tickreaction.message.createReactionCollector(purge_filter, { time: 10000 });
-          collector.on('collect', tickreaction.message.channel.send("OK"));
-          collector.on('end', tickreaction.message.channel.send("Timeout"));
+          //const collector = tickreaction.message.createReactionCollector(purge_filter, { time: 10000 });
+          //collector.on('collect', tickreaction.message.channel.send("OK"));
+          //collector.on('end', tickreaction.message.channel.send("Timeout"));
+          sleep(10000);
+          
+          tickreaction.message.channel.fetchMessages({limit:1}).then(msgcol => {
+            var lastmsg = msgcol.first();
+            var realch = lastmsg.channel;
+            if (lastmsg.author.id != 573146997419278336) return realch.send("Proceso de purga abortado.");
+            var reactlist = Array.from(lastmsg.reactions.values());
+            for (var reacti=0; reacti<reactlist.length; reacti++) {
+              realch.send(reactlist[reacti].emoji.name)
+            }
+            
+          });
         });
-        
-        //const collector = sentmsg.createReactionCollector(purge_filter, { time: 10000 });
-        //collector.on('collect', sentmsg.channel.send("OK"));
-        //collector.on('end', sentmsg.channel.send("Timeout"));
-        
-        //sentmsg.awaitReactions(purge_filter, { time: 10000 }).then(sentmsg.channel.send("OK"));
-            //.then(reactcol => debugch.send('```prolog\nPROYECTO "'+sentmsg.channel.name.toUpperCase()+'" ELIMINADO\n```'))
-            //.catch(sentmsg.channel.send("No se ha confirmado."))
-        
       });  
     }
     else {
