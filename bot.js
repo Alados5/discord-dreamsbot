@@ -552,7 +552,7 @@ client.on('message', msg => {
       msg.channel.send("¿Seguro? ¡Esta acción es irreversible!\n"+
                        "Reacciona con el tick en menos de 10 segundos para confirmar.").then(sentmsg => {
         sentmsg.react('✅').then(tickreaction => {
-          const purge_filter = (reaction, user) => reaction.emoji.name === '✅' //&& (user.roles.has(projrole)) //|| user.permissions.has('ADMINISTRATOR'));
+          const purge_filter = (reaction, user) => reaction.emoji.name === '✅' && user.id != 573146997419278336; //&& (user.roles.has(projrole)) //|| user.permissions.has('ADMINISTRATOR'));
           tickreaction.message.awaitReactions(purge_filter, { time: 10000 }).then(tickreaction.message.channel.send("OK"));
         });
         //const collector = sentmsg.createReactionCollector(purge_filter, { time: 10000 });
