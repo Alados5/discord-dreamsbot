@@ -572,8 +572,11 @@ client.on('message', msg => {
               if (reactlist[reacti].count < 2) return realch.send("No se ha confirmado la eliminación.");
               var msgreaction = reactlist[reacti];
             }
-            realch.send("Se ha votado "+msgreaction.count+" veces.")
+            
             var allmembers = realch.guild.members;
+
+            msgreaction.remove();
+            realch.send("Se ha votado "+msgreaction.count+" veces.")
             msgreaction.fetchUsers().then(rcol => {
               var reactors = Array.from(rcol.values());
               for (var useri=0; useri<reactors.length; useri++) {
