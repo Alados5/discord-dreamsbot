@@ -134,7 +134,8 @@ client.on('message', msg => {
     var cest = utc+3600000;
     
     // Purge only once a day (in real time, at 00-01h without DST, 01-02h with DST)
-    if (cest % oneday > 3600000) {
+    // DEBUG: changed oneday by 60000 and 3600000 by 5000
+    if (cest % 60000 > 5000) {
       purgeflag = false;
       return;
     }
@@ -187,7 +188,13 @@ client.on('message', msg => {
         else if (lastmsg.author.id == 573146997419278336) {
           // More than a month since ARCHIVED: delete
           if (lastmsg.content === "```md\n<PROYECTO ARCHIVADO>\n```") {
-            if (utc-lasttime > twomonths/2) {
+            // DEBUG: changed twomonths/2 by 120000 
+            if (utc-lasttime > 120000) {
+              
+              // Subtract 1 to all project numbers greater than the deleted one
+              var projnum = parseInt(projrole.name.slice(1, projrole.name.indexOf("-")-1));
+              // NOT CODED
+              
               // DELETE PROJECT & ROLE
               realch.delete();
               projrole.delete();
