@@ -573,21 +573,26 @@ client.on('message', msg => {
               var msgreaction = reactlist[reacti];
             }
             
-            realch.send("Votos totales: "+(msgreaction.count-1))
             msgreaction.fetchUsers().then(rcol => {
               var rolemembers = projrole.members;
               var reactors = Array.from(rcol.values());
               var validvotes = 0;
               for (var useri=0; useri<reactors.length; useri++) {
                 if (reactors[useri].id == 573146997419278336) continue;
-                realch.send("Ha votado: "+reactors[useri])
                 var zamembah = rolemembers.find('id', reactors[useri].id)
                 if (!zamembah) continue;
-                realch.send("Voto válido");
                 validvotes += 1;
-                
               }
               realch.send("Votos válidos: "+validvotes+"\nTotal de colaboradores: "+rolemembers.size)
+              if (validvotes >= Math.ceil(rolemembers.size/2)) {
+                realch.send("```prolog\nELIMINANDO PROYECTO\n```")
+                sleep(1000);
+                debugch.send("Se debería eliminar "+realch);
+              }
+              else {
+                realch.send("La mayoría de colaboradores no ha votado para eliminar el proyecto. No lo puedo eliminar.");
+              }
+              
             });
             
             
