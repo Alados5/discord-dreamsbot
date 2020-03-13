@@ -205,7 +205,7 @@ client.on('message', msg => {
               realch.delete();
               projrole.delete();
               
-              // Send notice through "asignaciones" [DEBUG: sent to debug channel]
+              // Send notice through "asignaciones"
               asignch.send('```prolog\nPROYECTO "'+realch.name.toUpperCase()+'" ELIMINADO\n```');
             }
           }
