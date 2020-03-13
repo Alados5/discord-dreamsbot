@@ -573,19 +573,21 @@ client.on('message', msg => {
               var msgreaction = reactlist[reacti];
             }
             
-            var allmembers = realch.guild.members;
-            //purge_filter = (reaction, user) => reaction.emoji.name === '✅' && user.id != 573146997419278336;
-            var rolefilter = (member) => member.roles.has(projrole);
-            var projmembers = allmembers.filter(rolefilter);
-            realch.send("Miembros totales: "+allmembers.size+"\nMiembros filtrados: "+projmembers.size);
-            
-            realch.send("Votos válidos: "+(msgreaction.count-1))
+            realch.send("Votos totales: "+(msgreaction.count-1))
             msgreaction.fetchUsers().then(rcol => {
+              var rolemembers = projrole.members;
               var reactors = Array.from(rcol.values());
+              var validvotes = 0;
               for (var useri=0; useri<reactors.length; useri++) {
                 if (reactors[useri].id == 573146997419278336) continue;
                 realch.send("Ha votado: "+reactors[useri])
+                var zamembah = rolemembers.find('id', reactors[useri].id)
+                if (!zamembah) continue;
+                realch.send("Voto válido");
+                validvotes += 1;
+                
               }
+              realch.send("Votos válidos: "+validvotes+"\nTotal de colaboradores: "+rolemembers.size)
             });
             
             
