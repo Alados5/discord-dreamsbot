@@ -598,6 +598,18 @@ client.on('message', msg => {
               if (validvotes >= Math.ceil(rolemembers.size/2)) {
                 realch.send("```prolog\nELIMINANDO PROYECTO\n```").then(sentmsg => {
                   sleep(1000);
+                  
+                  // Subtract 1 to all project numbers greater than the deleted one
+                  var projnum = parseInt(projrole.name.slice(1, projrole.name.indexOf("-")-1));
+                  for (var rolei=0; rolei<rolelist.length; rolei++) {
+                    var numi = parseInt(rolelist[rolei].name.slice(1, rolelist[rolei].name.indexOf("-")-1));
+                    if (isNaN(numi)) continue;
+                    if (numi>projnum) {
+                      var newname = "P"+(numi-1)+" "+rolelist[rolei].name.slice(rolelist[5].name.indexOf("-"), rolelist[rolei].name.length);
+                      rolelist[rolei].setName(newname);
+                    }
+                  }
+                  
                   // DELETE PROJECT & ROLE
                   sentmsg.channel.delete();
                   projrole.delete();
