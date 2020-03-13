@@ -576,7 +576,7 @@ client.on('message', msg => {
               //var allmembers = realch.guild.members;
             }
             var reactors = msgreaction.users;
-            realch.send(reactors.first(1))
+            realch.send("Este: "+reactors.first())
             realch.send("Se ha votado "+msgreaction.count+" veces por "+msgreaction.users.size+" usuarios distintos.")
             
           });
