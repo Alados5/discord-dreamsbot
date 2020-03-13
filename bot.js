@@ -574,9 +574,13 @@ client.on('message', msg => {
             }
             
             var allmembers = realch.guild.members;
-
+            //purge_filter = (reaction, user) => reaction.emoji.name === '✅' && user.id != 573146997419278336;
+            var rolefilter = (member) => member.roles.has(projrole);
+            var projmembers = allmembers.filter(rolefilter);
+            realch.send("Miembros filtrados: "+projmembers.size);
+            
+            realch.send("Votos válidos: "+(msgreaction.count-1))
             msgreaction.remove();
-            realch.send("Se ha votado "+msgreaction.count+" veces.")
             msgreaction.fetchUsers().then(rcol => {
               var reactors = Array.from(rcol.values());
               for (var useri=0; useri<reactors.length; useri++) {
