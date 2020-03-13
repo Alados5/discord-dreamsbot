@@ -585,14 +585,15 @@ client.on('message', msg => {
               }
               realch.send("Votos válidos: "+validvotes+"\nTotal de colaboradores: "+rolemembers.size)
               if (validvotes >= Math.ceil(rolemembers.size/2)) {
-                realch.send("```prolog\nELIMINANDO PROYECTO\n```")
-                sleep(1000);
-                // DELETE PROJECT & ROLE
-                realch.delete();
-                projrole.delete();
-                
-                // Send notice through "asignaciones" [DEBUG: sent to debug channel]
-                debugch.send('```prolog\nPROYECTO "'+realch.name.toUpperCase()+'" ELIMINADO\n```');
+                realch.send("```prolog\nELIMINANDO PROYECTO\n```").then(sentmsg => {
+                  sleep(1000);
+                  // DELETE PROJECT & ROLE
+                  sentmsg.channel.delete();
+                  projrole.delete();
+                  
+                  // Send notice through "asignaciones" [DEBUG: sent to debug channel]
+                  debugch.send('```prolog\nPROYECTO "'+realch.name.toUpperCase()+'" ELIMINADO\n```');
+                });
               }
               else {
                 realch.send("La mayoría de colaboradores no ha votado para eliminar el proyecto. No lo puedo eliminar.");
