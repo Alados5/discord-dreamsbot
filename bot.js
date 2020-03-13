@@ -130,13 +130,14 @@ client.on('message', msg => {
     // TRIGGER OF PURGE PROJECTS
     var fecha = new Date();
     var utc = fecha.getTime();
+    var cest = utc+3600000;
     
-    // Purge only once a day
-    if (utc % oneday > 3600000) {
+    // Purge only once a day (in real time, at 00-01h without DST, 01-02h with DST)
+    if (cest % oneday > 3600000) {
       // [DEBUG: See fraction of day]
-      if (utc % 60000 < 5000) {
+      if (cest % 60000 < 5000) {
         var debugch = msg.guild.channels.find('id','684539074224455763');
-        debugch.send("Fracción del día en ms: "+(utc%oneday));
+        debugch.send("Fracción del día en horas: "+((cest%oneday)/3600000));
       }
       purgeflag = false;
       return;
