@@ -605,7 +605,7 @@ client.on('message', msg => {
                     var numi = parseInt(rolelist[rolei].name.slice(1, rolelist[rolei].name.indexOf("-")-1));
                     if (isNaN(numi)) continue;
                     if (numi>projnum) {
-                      var newname = "P"+(numi-1)+" "+rolelist[rolei].name.slice(rolelist[5].name.indexOf("-"), rolelist[rolei].name.length);
+                      var newname = "P"+(numi-1)+" "+rolelist[rolei].name.slice(rolelist[rolei].name.indexOf("-"), rolelist[rolei].name.length);
                       rolelist[rolei].setName(newname);
                     }
                   }
