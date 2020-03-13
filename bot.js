@@ -193,7 +193,15 @@ client.on('message', msg => {
               
               // Subtract 1 to all project numbers greater than the deleted one
               var projnum = parseInt(projrole.name.slice(1, projrole.name.indexOf("-")-1));
-              // NOT CODED
+
+              for (var rolei=0; rolei<rolelist.length; rolei++) {
+                var numi = parseInt(rolelist[rolei].name.slice(1, rolelist[rolei].name.indexOf("-")-1));
+                if (isNaN(numi)) continue;
+                if (numi>projnum) {
+                  var newname = "P"+(numi-1)+" "+rolelist[rolei].name.slice(rolelist[rolei].name.indexOf("-"), rolelist[rolei].name.length);
+                  rolelist[rolei].setName(newname);
+                }
+              }
               
               // DELETE PROJECT & ROLE
               realch.delete();
