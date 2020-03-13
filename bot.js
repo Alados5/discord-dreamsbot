@@ -401,9 +401,9 @@ client.on('message', msg => {
   // START MKPROJ
   if (command == 'nuevoproyecto') {
     if (mkproj_cd) return msg.reply("Un momento, aún estoy trabajando en la petición anterior!");
-    mkproj_cd = true;
     var givenname = msg.content.slice(prefix.length+command.length+1);
     if (!givenname) return msg.reply("No has escrito ningún nombre!");
+    mkproj_cd = true;
     var chname = givenname.replace(/ /g, "_");
     if (msg.channel.id != 572891836687843328 && msg.channel.id != 552435323108589579) return msg.reply("Comando válido sólo en el canal de asignaciones!");
     msg.reply("Creando canal...");
