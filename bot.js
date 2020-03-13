@@ -485,7 +485,8 @@ client.on('message', msg => {
         if (!intext) return msg.reply("¡No has escrito nada!");
         var chname = intext.replace(/ /g, "_");
         msg.channel.setName(chname);
-        projrole.setName(projrole.name.slice(0,5)+intext);
+        // Keep "Pn - " regardless of length of number ("P1 - ", "P10 - ", etc.)
+        projrole.setName(projrole.name.slice(0,projrole.name.indexOf("-")+2)+intext);
         msg.reply("¡Hecho!")
       }
       else if (args[0] == 'tema') {
