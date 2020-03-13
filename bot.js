@@ -131,20 +131,20 @@ client.on('message', msg => {
     var fecha = new Date();
     var utc = fecha.getTime();
     
-    // Purge only once a day [DEBUG: changed oneday by 60000 and >3600000 by >5000]
-    if (utc % 60000 > 5000) {
+    // Purge only once a day [DEBUG: changed oneday by 3600000 and >3600000 by >30000]
+    if (utc % 3600000 > 30000) {
       purgeflag = false;
       return;
     }
     if (purgeflag) return;
     
     purgeflag = true;
-    var debugch = msg.guild.channels.find('id','684539074224455763');
+    // ID of channel: #asignaciones
+    var asignch = msg.guild.channels.find('id','572891836687843328');
     
     // Project Category ID: 552432711072088074
     var projcat = msg.guild.channels.find('id','552432711072088074');
     var projchans = Array.from(projcat.children.values());
-    debugch.send("Canales en la categoría: "+projchans.length);
     
     for (var proji=0; proji<projchans.length; proji++) {
       if (projchans[proji].name == 'guía' || projchans[proji].name == 'asignaciones') continue;
@@ -168,36 +168,35 @@ client.on('message', msg => {
         
         // More than two months from the last message: warn users
         if (utc-lasttime > twomonths) {
-          // [DEBUG: debugch instead of realch]
-          if(foundrole) debugch.send("¡Atención, "+projrole+"!\n"+
+          if(foundrole) realch.send("¡Atención, "+projrole+"!\n"+
                                      "Esto es un aviso por inactividad:\n"+
                                      "No se ha detectado ningún mensaje en los últimos dos meses en este proyecto.");
-          debugch.send("Esta es la primera fase del proceso de purga de proyectos inactivos.\n"+
+          realch.send("Esta es la primera fase del proceso de purga de proyectos inactivos.\n"+
                        "Para detenerlo, cualquier mensaje por este canal bastará.\n"+
                        "Si no se responde a este mensaje en menos de **UNA SEMANA**, este proyecto quedará **ARCHIVADO** durante **UN MES**.\n"+
                        "Si dentro de ese mes tampoco hay actividad, el proyecto será **ELIMINADO**.");
-          debugch.send("¿Está abandonado este proyecto? También se puede eliminar inmediatamente mandando `!purgaproyecto` en este canal.");
+          realch.send("¿Está abandonado este proyecto? También se puede eliminar inmediatamente mandando `!purgaproyecto` en este canal.");
           
-          // Send exactly this message: [DEBUG: debugch instead of realch]
-          debugch.send("```md\n<PROYECTO INACTIVO>\n```");
+          // Send exactly this message:
+          realch.send("```md\n<PROYECTO INACTIVO>\n```");
         }
         
         // Bot Discord User ID: 573146997419278336
         else if (lastmsg.author.id == 573146997419278336) {
-          // More than a month since ARCHIVED: delete [DEBUG: changed twomonths/2 by 180000]
+          // More than a month since ARCHIVED: delete
           if (lastmsg.content === "```md\n<PROYECTO ARCHIVADO>\n```") {
-            if (utc-lasttime > 180000) {
+            if (utc-lasttime > twomonths/2) {
               // DELETE PROJECT & ROLE
               realch.delete();
               projrole.delete();
               
               // Send notice through "asignaciones" [DEBUG: sent to debug channel]
-              debugch.send('```prolog\nPROYECTO "'+realch.name.toUpperCase()+'" ELIMINADO\n```');
+              asignch.send('```prolog\nPROYECTO "'+realch.name.toUpperCase()+'" ELIMINADO\n```');
             }
           }
-          // More than a week since INACTIVE: archive (mention users again) [DEBUG: changed oneweek by 60000]
+          // More than a week since INACTIVE: archive (mention users again)
           else if (lastmsg.content === "```md\n<PROYECTO INACTIVO>\n```") {
-            if (utc-lasttime > 60000) {
+            if (utc-lasttime > oneweek) {
               if(foundrole) realch.send("¡Alerta, "+projrole+"!\n"+
                                         "No se ha respondido al aviso de inactividad.");
               realch.send("Esta es la segunda fase del proceso de purga de proyectos inactivos.\n"+
@@ -565,6 +564,10 @@ client.on('message', msg => {
           tickreaction.message.channel.fetchMessages({limit:1}).then(msgcol => {
             var lastmsg = msgcol.first();
             var realch = lastmsg.channel;
+            
+            // ID of channel: #asignaciones
+            var asignch = msg.guild.channels.find('id','572891836687843328');
+            
             if (lastmsg.author.id != 573146997419278336) return realch.send("Proceso de eliminación abortado.");
             var reactlist = Array.from(lastmsg.reactions.values());
             for (var reacti=0; reacti<reactlist.length; reacti++) {
@@ -591,8 +594,8 @@ client.on('message', msg => {
                   sentmsg.channel.delete();
                   projrole.delete();
                   
-                  // Send notice through "asignaciones" [DEBUG: sent to debug channel]
-                  debugch.send('```prolog\nPROYECTO "'+realch.name.toUpperCase()+'" ELIMINADO\n```');
+                  // Send notice through "asignaciones"
+                  asignch.send('```prolog\nPROYECTO "'+realch.name.toUpperCase()+'" ELIMINADO\n```');
                 });
               }
               else {
