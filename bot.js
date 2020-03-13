@@ -568,14 +568,14 @@ client.on('message', msg => {
             if (lastmsg.author.id != 573146997419278336) return realch.send("Proceso de eliminación abortado.");
             var reactlist = Array.from(lastmsg.reactions.values());
             for (var reacti=0; reacti<reactlist.length; reacti++) {
-              //if (reactlist[reacti].emoji.name != '✅') continue;
-              //if (reactlist[reacti].count < 2) return realch.send("No se ha confirmado la eliminación.");
-              
-              //var reactorlist = Array.from(reactlist[reacti].users.values());
-              //var reactors = reactlist[reacti].users;
+              if (reactlist[reacti].emoji.name != '✅') continue;
+              if (reactlist[reacti].count < 2) return realch.send("No se ha confirmado la eliminación.");
+              var msgreaction = reactlist[reacti];
+              //var reactorlist = Array.from(msgreaction.users.values());
+              //var reactors = msgreaction.users;
               //var allmembers = realch.guild.members;
-              realch.send("Se ha votado "+reactlist[reacti].count+" veces por "+reactlist[reacti].users.size+" usuarios distintos.")
             }
+            realch.send("Se ha votado "+msgreaction.count+" veces por "+msgreaction.users.size+" usuarios distintos.")
             
           });
         });
