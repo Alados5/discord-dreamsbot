@@ -577,13 +577,13 @@ client.on('message', msg => {
             //purge_filter = (reaction, user) => reaction.emoji.name === '✅' && user.id != 573146997419278336;
             var rolefilter = (member) => member.roles.has(projrole);
             var projmembers = allmembers.filter(rolefilter);
-            realch.send("Miembros filtrados: "+projmembers.size);
+            realch.send("Miembros totales: "+allmembers.size+"\nMiembros filtrados: "+projmembers.size);
             
             realch.send("Votos válidos: "+(msgreaction.count-1))
-            msgreaction.remove();
             msgreaction.fetchUsers().then(rcol => {
               var reactors = Array.from(rcol.values());
               for (var useri=0; useri<reactors.length; useri++) {
+                if (reactors[useri].id == 573146997419278336) continue;
                 realch.send("Ha votado: "+reactors[useri])
               }
             });
