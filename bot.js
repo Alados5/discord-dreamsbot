@@ -131,8 +131,13 @@ client.on('message', msg => {
     var fecha = new Date();
     var utc = fecha.getTime();
     
-    // Purge only once a day [DEBUG: changed oneday by 3600000 and >3600000 by >30000]
-    if (utc % 3600000 > 30000) {
+    // Purge only once a day
+    if (utc % oneday > 3600000) {
+      // [DEBUG: See fraction of day]
+      if (utc % 60000 < 5000) {
+        var debugch = msg.guild.channels.find('id','684539074224455763');
+        debugch.send("Fracción del día en ms: "+(utc%oneday));
+      }
       purgeflag = false;
       return;
     }
