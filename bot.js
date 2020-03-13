@@ -571,12 +571,15 @@ client.on('message', msg => {
               if (reactlist[reacti].emoji.name != '✅') continue;
               if (reactlist[reacti].count < 2) return realch.send("No se ha confirmado la eliminación.");
               var msgreaction = reactlist[reacti];
+              msgreaction.remove();
+              
               //var reactorlist = Array.from(msgreaction.users.values());
               //var reactors = msgreaction.users;
               //var allmembers = realch.guild.members;
             }
-            var reactors = msgreaction.users;
-            realch.send("Este: "+reactors.first())
+            //var reactors =
+            msgreaction.fetchUsers().then(rcol => realch.send("Este: "+rcol.first()));
+            //realch.send("Este: "+reactors.first())
             realch.send("Se ha votado "+msgreaction.count+" veces por "+msgreaction.users.size+" usuarios distintos.")
             
           });
