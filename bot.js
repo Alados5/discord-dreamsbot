@@ -95,10 +95,11 @@ client.on('guildMemberAdd', member => {
       }
     }})
     
-    var nmembers = member.guild.memberCount;
+    var nmembers = member.guild.memberCount - 1;
     if (nmembers % 100 == 0) { 
       var milestonemsg = member.guild.defaultRole+", ¡Es un momento importante para el servidor! \n"+
                          "¡Con la llegada de " +member+ ", ya somos " +nmembers+ " imps en esta comunidad! \n"+
+                         "(Si veis "+(nmembers+1)+" miembros es porque yo no cuento, ¡soy un bot!)\n"+
                          "¡Gracias y felicidades a todos! :D";
       var celebgif = "https://cdn.discordapp.com/attachments/552435323108589579/685906847835619335/normie.gif";
       channel.send(milestonemsg, {files: [celebgif]});
@@ -134,11 +135,6 @@ client.on('message', msg => {
     
     // Purge only once a day (in real time, at 00-01h without DST, 01-02h with DST)
     if (cest % oneday > 3600000) {
-      // [DEBUG: See fraction of day]
-      if (cest % 60000 < 5000) {
-        var debugch = msg.guild.channels.find('id','684539074224455763');
-        debugch.send("Fracción del día en horas: "+((cest%oneday)/3600000));
-      }
       purgeflag = false;
       return;
     }
@@ -256,8 +252,10 @@ client.on('message', msg => {
     }
     
     if (command == 'celebra100') {
+      var nmembers = msg.guild.memberCount - 1;
       var milestonemsg = msg.guild.defaultRole+", ¡Es un momento importante para el servidor! \n"+
-                         "¡Con la llegada de [X], ya somos 100 imps en esta comunidad! \n"+
+                         "¡Con la llegada de [X], ya somos " +nmembers+ " imps en esta comunidad! \n"+
+                         "(Si veis "+(nmembers+1)+" miembros es porque yo no cuento, ¡soy un bot!)\n"+
                          "¡Gracias y felicidades a todos! :D";
       var celebgif = "https://cdn.discordapp.com/attachments/552435323108589579/685906847835619335/normie.gif";
       msg.channel.send(milestonemsg, {files: [celebgif]});
@@ -555,11 +553,12 @@ client.on('message', msg => {
     
     if (msg.member.roles.has(projrole.id) || msg.member.permissions.has('ADMINISTRATOR')) {
       // Actually doesn't delete the project, just hides it even from them
-      var debugch = msg.guild.channels.find('id','684539074224455763');
       msg.reply("¿Seguro? ¡Esta acción es irreversible!\n"+
                 "**Reacciona** con el tick en menos de 5 segundos para confirmar.\n"+
                 "Enviar cualquier mensaje también cancelará el proceso de eliminación.").then(sentmsg => {
         sentmsg.react('✅').then(tickreaction => {
+          
+          // This didn't work, but in theory are valid options:
           //const purge_filter = (reaction, user) => reaction.emoji.name === '✅' && user.id != 573146997419278336; //&& (user.roles.has(projrole)) //|| user.permissions.has('ADMINISTRATOR'));
           //tickreaction.message.awaitReactions(purge_filter, { time: 20000 })
           //  .then(tickreaction.message.channel.send("OK"));
@@ -567,6 +566,7 @@ client.on('message', msg => {
           //const collector = tickreaction.message.createReactionCollector(purge_filter, { time: 10000 });
           //collector.on('collect', tickreaction.message.channel.send("OK"));
           //collector.on('end', tickreaction.message.channel.send("Timeout"));
+          
           sleep(5000);
           
           tickreaction.message.channel.fetchMessages({limit:1}).then(msgcol => {
