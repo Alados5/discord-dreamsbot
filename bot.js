@@ -675,8 +675,9 @@ client.on('message', msg => {
 
     else if (args[0] == "tag") {
       if (!args[1]) return msg.reply("No has especificado ninguna palabra clave!");
-      var response = "Lista de trucos con esta palabra clave: \n";
+      var title = "Lista de trucos con esta palabra clave";
       var matchfound = false;
+      var response = "";
       for (var ntrick in dbindex) {
         if (dbindex.hasOwnProperty(ntrick)) {
           if (dbindex[ntrick].tags.includes(args[1])) {
@@ -686,7 +687,7 @@ client.on('message', msg => {
         }
       }
       if (matchfound) {
-        msg.channel.send(response);
+        var embedobj = mkembed(title, response, [], 11075328, "", true)
       }
       else {
         var nomatch = "No hay trucos con esta palabra clave. \n"+
