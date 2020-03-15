@@ -698,9 +698,9 @@ client.on('message', msg => {
       var title = "TRUCO " + args[0] + ": " + dbindex[args[0]].name;
       var response = dbindex[args[0]].desc + "\n";
       if (dbindex[args[0]].link) response = response + "Enlace o contenido multimedia: \n" + dbindex[args[0]].link + "\n";
-      response = response + "Enviado por: " + dbindex[args[0]].user;
+      var msgfields = [["Palabras clave:", dbindex[args[0]].tags], ["Truco proporcionado por:", dbindex[args[0]].user]];
       
-      var embedobj = mkembed(title, response, [], 11075328, "", true)
+      var embedobj = mkembed(title, response, msgfields, 11075328, "", true)
       msg.channel.send({embed:embedobj});
       
     }
