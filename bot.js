@@ -654,6 +654,9 @@ client.on('message', msg => {
   
   // START TRUCOS
   if (command == 'trucos') {
+    if (args[0]) args[0] = args[0].toLowerCase();
+    if (args[1]) args[1] = args[1].toLowerCase();
+    
     //dbindex = {1:{name:"...", tags:["..."], desc: "..."}, ...}
     //mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron)
     if (args[0] == "todo") {
@@ -698,8 +701,13 @@ client.on('message', msg => {
       var title = "TRUCO " + args[0] + ": " + dbindex[args[0]].name;
       var response = dbindex[args[0]].desc + "\n";
       if (dbindex[args[0]].link) response = response + "Enlace o contenido multimedia: \n" + dbindex[args[0]].link + "\n";
-      var msgfields = [["Palabras clave:", "--"], ["Truco proporcionado por:", dbindex[args[0]].user]];
-      //dbindex[args[0]].tags
+      var taglist = "";
+      for (var tagi=0; tagi<dbindex[args[0]].tags.length; tagi++) {
+        var thistag = dbindex[args[0]].tags[tagi];
+        taglist += thistag[0].toUpperCase() + thistag.slice(1,thistag.length) + ", ";
+      }
+      taglist = taglist.slice(0,taglist.length-2);
+      var msgfields = [["Palabras clave:", taglist], ["Truco proporcionado por:", dbindex[args[0]].user]];
       var embedobj = mkembed(title, response, msgfields, 11075328, "", true)
       msg.channel.send({embed:embedobj});
       
