@@ -688,6 +688,7 @@ client.on('message', msg => {
       }
       if (matchfound) {
         var embedobj = mkembed(title, response, [], 11075328, "", true)
+        msg.channel.send({embed:embedobj});
       }
       else {
         var nomatch = "No hay trucos con esta palabra clave. \n"+
