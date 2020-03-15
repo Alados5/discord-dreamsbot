@@ -18,11 +18,11 @@ var dbindex = {
     name: "Pintura: Spray vs Tinte",
     tags: ["básico", "esculpir", "pintura", "spray", "tinte"],
     desc: "Hay dos maneras de aplicar color a una escultura: \n"+
-          "La primera es pintar con el spray en el modo esculpir, "+
+          "- La primera es pintar con el spray en el modo esculpir, "+
           "que permite pintar de forma precisa regiones concretas de las esculturas. \n"+
-          "La segunda es, fuera del modo esculpir, abrir el menú de la escultura con L1+Cuadrado, "+
+          "- La segunda es, fuera del modo esculpir, abrir el menú de la escultura con L1+Cuadrado, "+
           "escoger un color y subir el slider de tinte, cosa que sobreescribirá el color de la escultura "+
-          "y hará que toda sea uniforme, del color seleccionado. \n"+
+          "y hará que toda sea uniforme, del color seleccionado. \n\n"+
           "Clonar una escultura y cambiarle el color a una con el slider no afecta al termo de gráficos, "+
           "en cambio, entrar en el modo esculpir y pintar con el spray sí!",
     user: "Alados5",
