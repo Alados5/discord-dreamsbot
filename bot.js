@@ -703,7 +703,7 @@ client.on('message', msg => {
       }
       else {
         var title = "No hay trucos con esta palabra clave"
-        var response = "Prueba `!trucos todo` para una lista completa con los nombres y números de los trucos. \n"+
+        var response = "Prueba `!trucos todo` para una lista completa con los nombres y números de los trucos. \n\n"+
                        "Si crees que algún truco debería tener la etiqueta propuesta no dudes en decirlo!";
         var embedobj = mkembed(title, response, [], 11075328, "", true)
         msg.channel.send({embed:embedobj});
