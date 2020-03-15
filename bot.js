@@ -688,7 +688,7 @@ client.on('message', msg => {
       if (!args[1]) return msg.reply("No has especificado ninguna palabra clave!");
       var title = "Lista de trucos con esta palabra clave";
       var matchfound = false;
-      var response = "";
+      var response = "*Nota: Se muestran sólo los títulos. Para leer el truco entero se debe pedir con `!trucos` seguido del número correspondiente.* \n\n";
       for (var ntrick in dbindex) {
         if (dbindex.hasOwnProperty(ntrick)) {
           if (dbindex[ntrick].tags.includes(args[1])) {
