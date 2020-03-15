@@ -278,6 +278,7 @@ client.on('message', msg => {
   // END ADMIN COMMANDS
   
   
+  
   // HELP
   if (command == 'ayuda' || command == 'help') {
     msg.reply("¡Hola! Soy un bot creado por Alados5.\n"+
@@ -286,7 +287,10 @@ client.on('message', msg => {
               "¡Disculpa las molestias!");
   }
   // END HELP
-
+  
+  
+  
+  // - AURA SECTION ---------------------------------------------
     
   // AURA - ADD/REMOVE DREAM ROLES
   if (command == 'aura') {       
@@ -308,7 +312,6 @@ client.on('message', msg => {
         }
     }
     
-    
     if (!therole) {
       if (modslist.indexOf(rolename) >= 0) {
           return msg.reply("Buen intento, pero no puedo hacerte mod.\n¡No es un aura de Dreams! ;)")
@@ -328,7 +331,10 @@ client.on('message', msg => {
     }
   }
   // END AURA
-    
+  // ------------------------------------------------------------
+  
+  
+  
   // CHOOSE
   if (command == 'choose') {
       var randnum = Math.random();
@@ -341,6 +347,10 @@ client.on('message', msg => {
 
   }
   // END CHOOSE
+  
+  
+  
+  // - INDREAMS.ME SECTION --------------------------------------
   
   // ICON LIST
   if (command == 'iconos') {
@@ -382,10 +392,11 @@ client.on('message', msg => {
       creator = creator.replace(/ /g, "%20");
       msg.channel.send("Las creaciones del usuario que me has dado son: \n" + baselink + creator + finallink);
   }
-    
-    
   // END INDREAMS.ME SEARCH
-
+  
+  // ------------------------------------------------------------
+  
+  
   
   // START EMBED
   if (command == "embed") {
