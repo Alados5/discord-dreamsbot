@@ -24,7 +24,7 @@ var dbindex = {
           "escoger un color y subir el slider de tinte, cosa que sobreescribirá el color de la escultura "+
           "y hará que toda sea uniforme, del color seleccionado. \n\n"+
           "Clonar una escultura y cambiarle el color a una con el slider no afecta al termo de gráficos, "+
-          "en cambio, entrar en el modo esculpir y pintar con el spray sí!\nㅤ",
+          "en cambio, entrar en el modo esculpir y pintar con el spray sí!",
     user: "Alados5",
     link: ""
   },
