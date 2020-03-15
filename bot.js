@@ -691,10 +691,11 @@ client.on('message', msg => {
         msg.channel.send({embed:embedobj});
       }
       else {
-        var nomatch = "No hay trucos con esta palabra clave. \n"+
-                      "Prueba `!trucos todo` para una lista completa con los nombres y números de los trucos. \n"+
-                      "Si crees que algún truco debería tener la etiqueta propuesta no dudes en decirlo!";
-        msg.channel.send(nomatch)
+        var title = "No hay trucos con esta palabra clave"
+        var response = "Prueba `!trucos todo` para una lista completa con los nombres y números de los trucos. \n"+
+                       "Si crees que algún truco debería tener la etiqueta propuesta no dudes en decirlo!";
+        var embedobj = mkembed(title, response, [], 11075328, "", true)
+        msg.channel.send({embed:embedobj});
       }
     }
     
