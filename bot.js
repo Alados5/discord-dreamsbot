@@ -101,7 +101,7 @@ client.on('guildMemberAdd', member => {
                          "¡Con la llegada de " +member+ ", ya somos " +nmembers+ " imps en esta comunidad! \n"+
                          "(Si veis "+(nmembers+1)+" miembros es porque yo no cuento, ¡soy un bot!)\n"+
                          "¡Gracias y felicidades a todos! :D";
-      var celebgif = "https://cdn.discordapp.com/attachments/552435323108589579/685906847835619335/normie.gif";
+      var celebgif = "https://raw.githubusercontent.com/Alados5/discord-dreamsbot/master/milestone100gif.gif";
       channel.send(milestonemsg, {files: [celebgif]});
     }
     
@@ -270,7 +270,7 @@ client.on('message', msg => {
                          "¡Con la llegada de [X], ya somos " +nmembers+ " imps en esta comunidad! \n"+
                          "(Si veis "+(nmembers+1)+" miembros es porque yo no cuento, ¡soy un bot!)\n"+
                          "¡Gracias y felicidades a todos! :D";
-      var celebgif = "https://cdn.discordapp.com/attachments/552435323108589579/685906847835619335/normie.gif";
+      var celebgif = "https://raw.githubusercontent.com/Alados5/discord-dreamsbot/master/milestone100gif.gif";
       msg.channel.send(milestonemsg, {files: [celebgif]});
     }
     
