@@ -35,7 +35,7 @@ var dbindex = {
           "seguramente tengas el slider de tinte a más del 100%. Sal del modo esculpir, "+
           "reduce su valor, y prueba de nuevo. Para más detalles consulta el truco 3.",
     user: "Alados5",
-    link: ""
+    link: "https://www.twitch.tv/videos/576250083"
   },
   5: {
     name: "Vacío",
