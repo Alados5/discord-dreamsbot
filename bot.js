@@ -493,6 +493,41 @@ client.on('message', msg => {
   }
   // END RECOVERPROJ
   
+  // START ARCHIVEPROJ
+  if (command == 'archivaproyecto') {
+    if (msg.channel.parentID != 552432711072088074) return msg.reply("Esto no es el canal de un proyecto.");
+    var chname = msg.channel.name;
+    if (chname === "guía" || chname === "asignaciones") return msg.reply("Esto no es el canal de un proyecto.");
+    var rolelist = Array.from(msg.guild.roles.values());
+    var foundrole = false;
+    for (var rolei=0; rolei<rolelist.length; rolei++) {
+      if(rolelist[rolei].name.replace(/ /g, "_").toLowerCase().indexOf(chname) >= 0) {
+        var projrole = rolelist[rolei];
+        foundrole = true;
+      }
+    }
+    if (!foundrole) return msg.reply("Error. No se ha encontrado el rol de este proyecto.");
+    
+    if (msg.member.roles.has(projrole.id) || msg.member.permissions.has('ADMINISTRATOR')) {
+      //msg.channel.overwritePermissions(msg.guild.defaultRole, {VIEW_CHANNEL:false});
+      
+      // Archive channel -> Hide it from everyone except corresponding role and admins
+      // SEND_MESSAGES, VIEW_CHANNEL
+      msg.reply("Archivando proyecto manualmente...");
+      msg.channel.overwritePermissions(msg.guild.defaultRole, {VIEW_CHANNEL:false}).then(archch => {
+        archch.overwritePermissions(projrole, {VIEW_CHANNEL:true});
+
+        // Send exactly this message:
+        archch.send("```md\n<PROYECTO ARCHIVADO>\n```");
+      });
+      
+    }
+    else {
+      return msg.reply("No formas parte de este proyecto (no tienes el rol): No puedes archivarlo.");
+    }
+  }
+  // END ARCHIVEPROJ
+  
   // START EDITPROJ
   if (command == 'editaproyecto') {
     if (msg.channel.parentID != 552432711072088074) return msg.reply("Esto no es el canal de un proyecto.");
@@ -561,6 +596,25 @@ client.on('message', msg => {
     }
   }
   // END EDITPROJ
+  
+  // START VERIFYPROJ
+  if (command == 'verificaproyecto') {
+    if (msg.channel.parentID != 552432711072088074) return msg.reply("Esto no es el canal de un proyecto.");
+    var chname = msg.channel.name;
+    if (chname === "guía" || chname === "asignaciones") return msg.reply("Esto no es el canal de un proyecto.");
+    
+    if (msg.member.permissions.has('ADMINISTRATOR')) {
+      //msg.channel.overwritePermissions(msg.guild.defaultRole, {VIEW_CHANNEL:true});
+      
+      // ADD SOMETHING TO TELL
+      
+      msg.channel.send("```md\n<PROYECTO VERIFICADO>\n```");
+    }
+    else {
+      return msg.reply("No eres moderador. No puedes verificar proyectos.");
+    }
+  }
+  // END VERIFYPROJ
   
   // START RMPROJ
   if (command == 'purgaproyecto') {
