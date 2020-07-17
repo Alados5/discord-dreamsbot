@@ -514,16 +514,17 @@ client.on('message', msg => {
       // Archive channel -> Hide it from everyone except corresponding role and admins
       // SEND_MESSAGES, VIEW_CHANNEL
       msg.reply("Archivando proyecto manualmente...");
-      msg.channel.send("Ahora el canal quedará invisible menos para los Mods y el rol de este proyecto.\n"+
-                       "Para restaurarlo se puede usar `!restauraproyecto` o contactar con un Mod\n"+
-                       "**¡ATENCIÓN!** Si no se dice nada por este canal en menos de **UN MES**, ```prolog\n"+
-                       "ESTE PROYECTO SERÁ ELIMINADO\n"+
-                       "Y se hará sin previo aviso, ya que archivar es, por defecto, lo que se hace con los proyectos inactivos.\n"+
-                       "Así que esta función de archivado manual se debe ejecutar bajo la propia responsabilidad.\n"+
-                       "Si se envía cualquier mensaje, el proceso de purga se reinicia, y tras dos meses sin actividad se marcará el proyecto como inactivo.");
       
       msg.channel.overwritePermissions(msg.guild.defaultRole, {VIEW_CHANNEL:false}).then(archch => {
         archch.overwritePermissions(projrole, {VIEW_CHANNEL:true});
+        
+        archch.send("Ahora el canal quedará invisible menos para los Mods y el rol de este proyecto.\n"+
+                    "Para restaurarlo se puede usar `!restauraproyecto` o contactar con un Mod\n"+
+                    "**¡ATENCIÓN!** Si no se dice nada por este canal en menos de **UN MES**, ```prolog\n"+
+                    "ESTE PROYECTO VA A SER ELIMINADO\n```\n"+
+                    "Y se hará sin previo aviso, ya que archivar es, por defecto, lo que se hace con los proyectos inactivos.\n"+
+                    "Así que esta función de archivado manual se debe ejecutar bajo la propia responsabilidad.\n"+
+                    "Si se envía cualquier mensaje, el proceso de purga se reinicia, y tras dos meses sin actividad se marcará el proyecto como inactivo.");
 
         // Send exactly this message:
         archch.send("```md\n<PROYECTO ARCHIVADO>\n```");
