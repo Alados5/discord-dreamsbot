@@ -518,12 +518,12 @@ client.on('message', msg => {
       msg.channel.overwritePermissions(msg.guild.defaultRole, {VIEW_CHANNEL:false}).then(archch => {
         archch.overwritePermissions(projrole, {VIEW_CHANNEL:true});
         
-        archch.send("Ahora el canal quedará invisible menos para los Mods y el rol de este proyecto.\n"+
-                    "Para restaurarlo se puede usar `!restauraproyecto` o contactar con un Mod\n"+
+        archch.send("Ahora el canal quedará invisible menos para los Mods y el rol de este proyecto. "+
+                    "Para restaurarlo se puede usar `!restauraproyecto` o contactar con un Mod.\n\n"+
                     "**¡ATENCIÓN!** Si no se dice nada por este canal en menos de **UN MES**, ```prolog\n"+
                     "ESTE PROYECTO VA A SER ELIMINADO\n```\n"+
-                    "Y se hará sin previo aviso, ya que archivar es, por defecto, lo que se hace con los proyectos inactivos.\n"+
-                    "Así que esta función de archivado manual se debe ejecutar bajo la propia responsabilidad.\n"+
+                    "Y se hará sin previo aviso, ya que archivar es, por defecto, lo que se hace con los proyectos inactivos. "+
+                    "Así que esta función de archivado manual se debe ejecutar bajo la propia responsabilidad. "+
                     "Si se envía cualquier mensaje, el proceso de purga se reinicia, y tras dos meses sin actividad se marcará el proyecto como inactivo.");
 
         // Send exactly this message:
