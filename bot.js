@@ -70,10 +70,10 @@ client.on('guildMemberAdd', member => {
   if (!channel) return;
   if (channel.id == 530381279749865484) {
     var msgcolor = 8388863;
-    var msgtitle = "¡Bienvenid@ al Servidor de Dreams en Español!";
+    var msgtitle = "¡Bienvenid@ al Dreamiverso!";
     var desctext = "A modo de presentación, y para romper el hielo, "+
-                   "normalmente pedimos a los nuevos miembros qué faceta de Dreams les gusta más, "+
-                   "y qué están haciendo o quieren hacer en el juego."+
+                   "nos puedes decir qué te gusta más de Dreams, y qué estás haciendo o quieres hacer. "+
+                   "Incluso puedes asignarte un aura o pedírsela a un moderador."+
                    "\n\n¡No dudes en compartir tus creaciones, o pedir ayuda si te hace falta! :D"+
                    "\n\nÉchale un ojo a las normas del servidor, "+
                    "seguro que pronto un humano hablará contigo para darte una bienvenida mejor que la que te puedo dar yo."+
@@ -90,7 +90,7 @@ client.on('guildMemberAdd', member => {
         "url": "https://i.imgur.com/pdmBuaV.png"
       },
       footer: {
-        "icon_url": "https://images-ext-2.discordapp.net/external/nT8HH6V_sT5nhEVJE1sgYbsiAIv44AJlyK6kbhwGabE/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/284104569586450434/9c4e15c73c4f4d7709ca9981527b2a64.png",
+        "icon_url": "https://cdn.discordapp.com/avatars/284104569586450434/5e552cc6b11f538d3a6919eb22772a9b.png",
         "text": "Beep boop, yo soy un bot creado por Alados5"
       }
     }})
@@ -104,18 +104,6 @@ client.on('guildMemberAdd', member => {
       var celebgif = "https://raw.githubusercontent.com/Alados5/discord-dreamsbot/master/milestone100gif.gif";
       channel.send(milestonemsg, {files: [celebgif]});
     }
-    
-    /*
-    channel.send(`¡Muy buenas, ${member}! ¡Te damos la bienvenida al Servidor de Dreams en Español!`+
-                 `\nA modo de presentación, y para romper el hielo, `+
-                 `normalmente pedimos a los nuevos qué faceta de Dreams les gusta más, `+
-                 `y qué están haciendo o quieren hacer en el juego.`+
-                 `\n¡No dudes en compartir tus creaciones, o pedir ayuda si te hace falta! :D`+
-                 `\nÉchale un ojo a las normas del servidor, seguro que pronto un humano hablará contigo `+
-                 `para darte una bienvenida mejor que la que te puedo dar yo.`+
-                 `\n¡Pero no dudes en usarme para lo que necesites!`+
-                 `\n \n    ***Beep boop, yo soy un bot creado por Alados5***`);
-    */
   }
 });
 
@@ -243,8 +231,13 @@ client.on('message', msg => {
   // Handles arguments to just take the first word
   const args = msg.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase(); 
-    
-  // ADMIN COMMANDS
+  
+  
+  
+  // --------------------------------------------
+  // -------------- ADMIN COMMANDS --------------
+  // --------------------------------------------
+  
   if (msg.member.permissions.has('ADMINISTRATOR')) {
     if (command == 'clear') {
       var ntoclear = parseInt(args[0]);
@@ -274,8 +267,40 @@ client.on('message', msg => {
       msg.channel.send(milestonemsg, {files: [celebgif]});
     }
     
+    if (command == 'bienvenida') {
+      var msgcolor = 8388863;
+      var msgtitle = "¡Bienvenid@ al Dreamiverso!";
+      var desctext = "A modo de presentación, y para romper el hielo, "+
+                     "nos puedes decir qué te gusta más de Dreams, y qué estás haciendo o quieres hacer. "+
+                     "Incluso puedes asignarte un aura o pedírsela a un moderador."+
+                     "\n\n¡No dudes en compartir tus creaciones, o pedir ayuda si te hace falta! :D"+
+                     "\n\nÉchale un ojo a las normas del servidor, "+
+                     "seguro que pronto un humano hablará contigo para darte una bienvenida mejor que la que te puedo dar yo."+
+                     "\n\n¡Pero no dudes en usarme para lo que necesites!";
+    
+      msg.channel.send("Reproduzco a continuación el mensaje de bienvenida: ", {embed: {
+        color: msgcolor,
+        description: desctext,
+        title: msgtitle,
+        thumbnail: {
+          "url": msg.member.user.avatarURL
+        },
+        image: {
+          "url": "https://i.imgur.com/pdmBuaV.png"
+        },
+        footer: {
+          "icon_url": "https://cdn.discordapp.com/avatars/284104569586450434/5e552cc6b11f538d3a6919eb22772a9b.png",
+          "text": "Beep boop, yo soy un bot creado por Alados5"
+        }
+      }})
+
+    }
+    
   }
-  // END ADMIN COMMANDS
+  // --------------------------------------------
+  // ------------ END ADMIN COMMANDS ------------
+  // --------------------------------------------
+
   
   
   
