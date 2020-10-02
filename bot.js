@@ -30,7 +30,7 @@ function mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron) {
   }
   if (footeron) {
     embedobj.footer = {
-      "icon_url": "https://images-ext-2.discordapp.net/external/nT8HH6V_sT5nhEVJE1sgYbsiAIv44AJlyK6kbhwGabE/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/284104569586450434/9c4e15c73c4f4d7709ca9981527b2a64.png",
+      "icon_url": "https://cdn.discordapp.com/avatars/284104569586450434/5e552cc6b11f538d3a6919eb22772a9b.png",
       "text": "Beep boop, yo soy un bot creado por Alados5"
     }
   }
