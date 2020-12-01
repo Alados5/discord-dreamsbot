@@ -241,7 +241,7 @@ client.on('message', msg => {
   // --------------------------------------------
   // -------------- ADMIN COMMANDS --------------
   // --------------------------------------------
-  /*
+  /**/
   //if (msg.member.permissions.has('ADMINISTRATOR')) {
   if (msg.author.id == 284104569586450434 || msg.author.id == 267707200577732608) {
     
@@ -303,7 +303,7 @@ client.on('message', msg => {
     }
     
   }
-  */
+  /**/
   // --------------------------------------------
   // ------------ END ADMIN COMMANDS ------------
   // --------------------------------------------
@@ -353,20 +353,20 @@ client.on('message', msg => {
           return msg.reply("Este rol no existe!")
       }
     }
-        
-    var authorid = msg.author.id;
-    debugch.send(authorid);
     
+    debugch.send('Aura: ' + therole.name);
+    
+    var authorid = msg.author.id;    
     var usrlist = Array.from(msg.guild.members.values());
     
-    debugch.send("Members: "+ usrlist[0] );
+    debugch.send("Members: "+ usrlist.length );
 
     var sender = msg.guild.members.find('id', authorid);
     if(!sender) debugch.send("User not found!");
 
     var hasrole = false;
     
-    debugch.send('Aura works until here');
+    //debugch.send('Aura works until here');
     //debugch.send(sender.user.username)
     //for (var rolei=0; rolei<userroles.length; rolei++) {
     //  if(userroles[rolei].name === therole.name) {
@@ -375,7 +375,6 @@ client.on('message', msg => {
     //} 
     
     if(hasrole) debugch.send('You have the role');
-    debugch.send('Aura: ' + therole.name);
 
     /*
     if (hasrole) {
@@ -396,6 +395,7 @@ client.on('message', msg => {
         msg.reply("Rol añadido!");
     }
     */
+    return;
   }
   // END AURA
   // ------------------------------------------------------------
