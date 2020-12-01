@@ -359,18 +359,11 @@ client.on('message', msg => {
     }
         
     var authorid = msg.author.id;
-    var memberlist = Array.from(msg.guild.members.values());
-    
-    var sender;
-    for (var memberi=0; memberi<memberlist.length; memberi++) {
-      if(memberlist[memberi].id == authorid) {
-        debugch.send('Found you!');
-        //sender = memberlist[memberi];
-      }
-    } 
-    
-    if (!sender) msg.reply("User not found!");
-    
+    debugch.send(authorid);
+
+    var sender = msg.guild.members.get(authorid);
+    if(!sender) debugch.send("User not found!");
+
     var hasrole = false;
     
     debugch.send('Aura works until here');
