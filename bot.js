@@ -242,12 +242,8 @@ client.on('message', msg => {
   // -------------- ADMIN COMMANDS --------------
   // --------------------------------------------
   /*
-  if (msg.member.permissions.has('ADMINISTRATOR')) {
-    
-    // ID of channel: #bot_debug
-    var debugch = msg.guild.channels.find('id','688107638239920282');
-    debugch.send('Admin command: ' + command);
-    return;
+  //if (msg.member.permissions.has('ADMINISTRATOR')) {
+  if (msg.author.id == 284104569586450434 || msg.author.id == 267707200577732608) {
     
     if (command == 'clear') {
       var ntoclear = parseInt(args[0]);
