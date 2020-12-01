@@ -319,10 +319,6 @@ client.on('message', msg => {
   }
   // END HELP
   
-  // ID of channel: #bot_debug
-  var debugch = msg.guild.channels.find('id','688107638239920282');
-  debugch.send('Command: ' + command);
-  return;
   
   
   // - AURA SECTION ---------------------------------------------
@@ -368,6 +364,11 @@ client.on('message', msg => {
   // END AURA
   // ------------------------------------------------------------
   
+  
+  // ID of channel: #bot_debug
+  var debugch = msg.guild.channels.find('id','688107638239920282');
+  debugch.send('Command: ' + command);
+  return;
   
   
   // CHOOSE
