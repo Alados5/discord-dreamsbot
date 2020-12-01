@@ -112,11 +112,6 @@ client.on('message', msg => {
   // Returns if author is a bot
   if(msg.author.bot) return;
   
-  // ID of channel: #bot_debug
-  var debugch = msg.guild.channels.find('id','688107638239920282');
-  debugch.send('Hi');
-  return;
-  
   var lowtext = msg.content.toLowerCase();
     
   // Returns if message doesn't start with prefix
@@ -235,8 +230,11 @@ client.on('message', msg => {
     return;
   }
   
-
-   
+  // ID of channel: #bot_debug
+  var debugch = msg.guild.channels.find('id','688107638239920282');
+  debugch.send('Hi');
+  return;
+  
   // Handles arguments to just take the first word
   const args = msg.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase(); 
