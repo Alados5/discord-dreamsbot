@@ -337,11 +337,19 @@ client.on('message', msg => {
                          "Juego":["play", "player", "juego", "jugar", "jugador", "jugadores", "4dplayers", "becario", "becarios"]};
     var modslist = ["mod", "mods", "moderador", "moderadores", "admin", "admins"];
     
+    var rolelist = Array.from(msg.guild.roles.values());
+    
     var therole;
     for(var auratype in rolenameslist) {
         if(rolenameslist[auratype].indexOf(rolename) >= 0) {
-            debugch.send('The aura exists!');
-            //therole = msg.guild.roles.find("name", auratype);
+          debugch.send('The aura exists!');
+
+          for (var rolei=0; rolei<rolelist.length; rolei++) {
+            if(rolelist[rolei].name === auratype) {
+              therole = rolelist[rolei];
+            }
+          }  
+          //therole = msg.guild.roles.find("name", auratype);
         }
     }
     
@@ -354,7 +362,7 @@ client.on('message', msg => {
       }
     }
     
-    //var rolelist = Array.from(lastmsg.guild.roles.values());
+    
     var hasrole = msg.member.roles; //.find("name", therole.name);
     debugch.send('Aura works until here');
 
