@@ -113,6 +113,9 @@ client.on('message', msg => {
   if(msg.author.bot) return;
   
   var lowtext = msg.content.toLowerCase();
+  
+  // ID of channel: #bot_debug
+  var debugch = msg.guild.channels.find('id','688107638239920282');
     
   // Returns if message doesn't start with prefix
   if(!msg.content.startsWith(prefix)) {
@@ -319,9 +322,6 @@ client.on('message', msg => {
   }
   // END HELP
   
-  // ID of channel: #bot_debug
-  var debugch = msg.guild.channels.find('id','688107638239920282');
-  
   // - AURA SECTION ---------------------------------------------
     
   // AURA - ADD/REMOVE DREAM ROLES
@@ -361,7 +361,7 @@ client.on('message', msg => {
     var authorid = msg.author.id;
     debugch.send(authorid);
 
-    var sender = msg.guild.members.get(authorid);
+    var sender = msg.guild.members.find('id', authorid);
     if(!sender) debugch.send("User not found!");
 
     var hasrole = false;
@@ -415,13 +415,7 @@ client.on('message', msg => {
   }
   // END CHOOSE
   
-  
-  // ID of channel: #bot_debug
-  //var debugch = msg.guild.channels.find('id','688107638239920282');
-  debugch.send('Debug stopped before checking command: ' + command);
-  return;
-  
-  
+ 
   
   // - INDREAMS.ME SECTION --------------------------------------
   
@@ -469,6 +463,9 @@ client.on('message', msg => {
   
   // ------------------------------------------------------------
   
+  
+  debugch.send('Debug stopped before checking command: ' + command);
+  return;
   
   
   // START EMBED
