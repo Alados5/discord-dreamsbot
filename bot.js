@@ -360,6 +360,8 @@ client.on('message', msg => {
         
     var authorid = msg.author.id;
     debugch.send(authorid);
+    
+    debugch.send("Members: "+ Array.from(msg.guild.members.values()).length );
 
     var sender = msg.guild.members.find('id', authorid);
     if(!sender) debugch.send("User not found!");
@@ -422,7 +424,7 @@ client.on('message', msg => {
   // ICON LIST
   if (command == 'iconos') {
       var iconlink = 'https://indreams.me/guide/icons';
-      msg.channel.send("La lista de iconos en Dreams puede encontrarse aquí: \n" + iconlink);
+      return msg.channel.send("La lista de iconos en Dreams puede encontrarse aquí: \n" + iconlink);
   }
   // END ICON LIST
   
@@ -431,7 +433,7 @@ client.on('message', msg => {
       var basesearchlink = 'https://indreams.me/search/results/?term=';
       var searchterm = msg.content.slice(prefix.length+command.length+1);
       searchterm = searchterm.replace(/ /g, "%20");
-      msg.channel.send("Tu búsqueda en indreams.me da esto: \n" + basesearchlink + searchterm);
+      return msg.channel.send("Tu búsqueda en indreams.me da esto: \n" + basesearchlink + searchterm);
   }
     
   if (command == 'dreamsearchf') {
@@ -441,7 +443,7 @@ client.on('message', msg => {
       var searchterm = filters.shift();
       searchterm = searchterm.replace(/ /g, "%20");
       var searchstring = searchterm + "&type=" + filters[0] + "&sort=" + filters[1];
-      msg.channel.send("Tu búsqueda filtrada en indreams.me da esto: \n" + basesearchlink + searchstring);
+      return msg.channel.send("Tu búsqueda filtrada en indreams.me da esto: \n" + basesearchlink + searchstring);
       
       //&type=dreams&sort=mostliked
   }
@@ -450,22 +452,19 @@ client.on('message', msg => {
       var basesearchlink = 'https://indreams.me/search/results/?term=@'; 
       var searchterm = msg.content.slice(prefix.length+command.length+1);
       searchterm = searchterm.replace(/ /g, "%20");
-      msg.channel.send("Tu búsqueda de un usuario en indreams.me da esto: \n" + basesearchlink + searchterm);
+      return msg.channel.send("Tu búsqueda de un usuario en indreams.me da esto: \n" + basesearchlink + searchterm);
   }
   if (command == 'creations') {
       var baselink = 'https://indreams.me/'; 
       var creator = msg.content.slice(prefix.length+command.length+1);
       var finallink = '/creations';
       creator = creator.replace(/ /g, "%20");
-      msg.channel.send("Las creaciones del usuario que me has dado son: \n" + baselink + creator + finallink);
+      return msg.channel.send("Las creaciones del usuario que me has dado son: \n" + baselink + creator + finallink);
   }
   // END INDREAMS.ME SEARCH
   
   // ------------------------------------------------------------
   
-  
-  debugch.send('Debug stopped before checking command: ' + command);
-  return;
   
   
   // START EMBED
@@ -493,6 +492,9 @@ client.on('message', msg => {
   // END EMBED
   
   
+  debugch.send('Debug stopped before checking command: ' + command);
+  return;
+ 
   
   // - PROJECTS SECTION ------------------------------------------
   
