@@ -338,7 +338,6 @@ client.on('message', msg => {
     var modslist = ["mod", "mods", "moderador", "moderadores", "admin", "admins"];
     
     var rolelist = Array.from(msg.guild.roles.values());
-    
     var therole;
     for(var auratype in rolenameslist) {
         if(rolenameslist[auratype].indexOf(rolename) >= 0) {
@@ -361,9 +360,17 @@ client.on('message', msg => {
       }
     }
     
+    var userroles = Array.from(msg.member.roles.values());
+    var hasrole = false;
     
-    //var hasrole = msg.member.roles; //.find("name", therole.name);
     debugch.send('Aura works until here');
+    for (var rolei=0; rolei<userroles.length; rolei++) {
+      if(userroles[rolei].name === therole.name) {
+        hasrole = true;
+      }
+    } 
+    
+    if(hasrole) debugch.send('You have the role');
     debugch.send('Aura: ' + therole.name);
 
     /*
