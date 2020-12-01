@@ -344,11 +344,12 @@ client.on('message', msg => {
         if(rolenameslist[auratype].indexOf(rolename) >= 0) {
           debugch.send('The aura exists!');
 
-          //for (var rolei=0; rolei<rolelist.length; rolei++) {
+          for (var rolei=0; rolei<rolelist.length; rolei++) {
+            debugch.send('Iterating...');
           //  if(rolelist[rolei].name === auratype) {
           //    therole = rolelist[rolei];
           //  }
-          //}  
+          }  
           //therole = msg.guild.roles.find("name", auratype);
         }
     }
