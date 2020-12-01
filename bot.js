@@ -504,7 +504,7 @@ client.on('message', msg => {
     var givenname = msg.content.slice(prefix.length+command.length+1);
     if (!givenname) return msg.reply("No has escrito ningún nombre!");
     var chname = givenname.replace(/ /g, "_");
-    if (msg.channel.id != 572891836687843328 && msg.channel.id != 552435323108589579) return msg.reply("Comando válido sólo en el canal de asignaciones!");
+    if (msg.channel.id != 572891836687843328 && msg.channel.id != debugch.id) return msg.reply("Comando válido sólo en el canal de asignaciones!");
     
     mkproj_cd = true;
     
@@ -524,19 +524,21 @@ client.on('message', msg => {
       msg.channel.send("Creando rol...");
       //Gray color: #95a5a6
       msg.guild.createRole({name:rolename, color:'#95a5a6'}).then(projrole => {
-        msg.member.addRole(projrole)
         projrole.setMentionable(true)
         // Make role be able to manage messages!
         ch.overwritePermissions(projrole, {MANAGE_MESSAGES:true});
-      
-        msg.channel.send("Rol "+projrole+" creado y asignado.")
-        msg.channel.send("Todo listo! Disfruta del nuevo Proyecto!")
+        msg.channel.send("Rol "+projrole+" creado.") //" creado y asignado."
+        
+        //msg.member.addRole(projrole) // Doesn't work now (???)
+        //msg.channel.send("Todo listo! Disfruta del nuevo Proyecto!")
+        msg.reply("No se ha podido asignar el rol. \nPor favor, pide a un Mod que lo haga manualmente. \nDisculpa las molestias."); // FFS (!!)
       
         ch.send("¡Aquí está, "+projrole+"! ¡Llena este canal de creatividad!\n"+
                 "Puedes editar el nombre, el tema y los miembros de este proyecto con `!editaproyecto`");
         mkproj_cd = false;
       });
     });
+    return;
   }
   // END MKPROJ
   
