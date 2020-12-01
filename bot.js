@@ -115,6 +115,7 @@ client.on('message', msg => {
   // ID of channel: #bot_debug
   var debugch = msg.guild.channels.find('id','688107638239920282');
   debugch.send('Hi');
+  return;
   
   var lowtext = msg.content.toLowerCase();
     
