@@ -241,7 +241,7 @@ client.on('message', msg => {
   // --------------------------------------------
   // -------------- ADMIN COMMANDS --------------
   // --------------------------------------------
-  /**/
+
   //if (msg.member.permissions.has('ADMINISTRATOR')) {
   if (msg.author.id == 284104569586450434 || msg.author.id == 267707200577732608) {
     
@@ -249,18 +249,19 @@ client.on('message', msg => {
       var ntoclear = parseInt(args[0]);
       if (!ntoclear || isNaN(ntoclear)) return msg.reply("Pon cuantos mensajes quieres eliminar!")
       msg.channel.bulkDelete(ntoclear+1);
+      return;
     }
  
     if (command == 'reply') {
       msg.delete();
-      msg.channel.send(msg.content.slice(7));
+      return msg.channel.send(msg.content.slice(7));
     }
     
     if (command == 'mkcategory') {
       var chname = msg.content.slice(prefix.length+command.length+1);
       msg.channel.send("Creando categoría...")
       msg.guild.createChannel(chname, "category")
-      msg.channel.send("Categoría ***"+chname+"*** creada.")
+      return msg.channel.send("Categoría ***"+chname+"*** creada.");
     }
     
     if (command == 'celebra100') {
@@ -270,7 +271,7 @@ client.on('message', msg => {
                          "(Si veis "+(nmembers+1)+" miembros es porque yo no cuento, ¡soy un bot!)\n"+
                          "¡Gracias y felicidades a todos! :D";
       var celebgif = "https://raw.githubusercontent.com/Alados5/discord-dreamsbot/master/milestone100gif.gif";
-      msg.channel.send(milestonemsg, {files: [celebgif]});
+      return msg.channel.send(milestonemsg, {files: [celebgif]});
     }
     
     if (command == 'bienvenida') {
@@ -298,12 +299,12 @@ client.on('message', msg => {
           "icon_url": "https://cdn.discordapp.com/avatars/284104569586450434/5e552cc6b11f538d3a6919eb22772a9b.png",
           "text": "Beep boop, yo soy un bot creado por Alados5"
         }
-      }})
-
+      }});
+      return;
     }
     
   }
-  /**/
+
   // --------------------------------------------
   // ------------ END ADMIN COMMANDS ------------
   // --------------------------------------------
@@ -538,9 +539,9 @@ client.on('message', msg => {
   }
   // END MKPROJ
   
-  debugch.send('Debug stopped before checking command: ' + command);
-  return;
   
+  // TEMPORARILY DEACTIVATED DUE TO .MEMBER MALFUNCTION (DISCORD WTF?)
+  /*
   // START RECOVERPROJ
   if (command == 'restauraproyecto') {
     if (msg.channel.parentID != 552432711072088074) return msg.reply("Esto no es el canal de un proyecto.");
@@ -565,6 +566,7 @@ client.on('message', msg => {
     }
   }
   // END RECOVERPROJ
+  
   
   // START ARCHIVEPROJ
   if (command == 'archivaproyecto') {
@@ -609,6 +611,7 @@ client.on('message', msg => {
     }
   }
   // END ARCHIVEPROJ
+  
   
   // START EDITPROJ
   if (command == 'editaproyecto') {
@@ -679,24 +682,6 @@ client.on('message', msg => {
   }
   // END EDITPROJ
   
-  // START VERIFYPROJ
-  if (command == 'verificaproyecto') {
-    if (msg.channel.parentID != 552432711072088074) return msg.reply("Esto no es el canal de un proyecto.");
-    var chname = msg.channel.name;
-    if (chname === "guía" || chname === "asignaciones") return msg.reply("Esto no es el canal de un proyecto.");
-    
-    if (msg.member.permissions.has('ADMINISTRATOR')) {
-      //msg.channel.overwritePermissions(msg.guild.defaultRole, {VIEW_CHANNEL:true});
-      
-      // ADD SOMETHING TO TELL
-      
-      msg.channel.send("```md\n<PROYECTO VERIFICADO>\n```");
-    }
-    else {
-      return msg.reply("No eres moderador. No puedes verificar proyectos.");
-    }
-  }
-  // END VERIFYPROJ
   
   // START RMPROJ
   if (command == 'purgaproyecto') {
@@ -794,6 +779,28 @@ client.on('message', msg => {
     }
   }
   // END RMPROJ
+  */
+  
+  // TEMPORAL MESSAGE
+  if (command == 'restauraproyecto' || command == 'archivaproyecto' || command == 'editaproyecto' || command == 'purgaproyecto') {
+    if (msg.channel.parentID != 552432711072088074) return msg.reply("Esto no es el canal de un proyecto.");
+    var chname = msg.channel.name;
+    if (chname === "guía" || chname === "asignaciones") return msg.reply("Esto no es el canal de un proyecto.");
+    var rolelist = Array.from(msg.guild.roles.values());
+    var foundrole = false;
+    for (var rolei=0; rolei<rolelist.length; rolei++) {
+      if(rolelist[rolei].name.replace(/ /g, "_").toLowerCase().indexOf(chname) >= 0) {
+        var projrole = rolelist[rolei];
+        foundrole = true;
+      }
+    }
+    if (!foundrole) return msg.reply("Error. No se ha encontrado el rol de este proyecto.");
+    
+    msg.reply("En estos momentos este comando no funciona debido a unos cambios en la Discord API. "+
+              "\nPor favor, contacta con un Mod para que haga lo que querías manualmente.\nDisculpa las molestias.");
+    
+  }
+  
   
   // ------------------------------------------------------------
   
