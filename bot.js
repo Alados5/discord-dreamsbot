@@ -234,16 +234,17 @@ client.on('message', msg => {
   const args = msg.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase(); 
   
-  // ID of channel: #bot_debug
-  var debugch = msg.guild.channels.find('id','688107638239920282');
-  debugch.send(command);
-  return;
-  
   // --------------------------------------------
   // -------------- ADMIN COMMANDS --------------
   // --------------------------------------------
   
   if (msg.member.permissions.has('ADMINISTRATOR')) {
+    
+    // ID of channel: #bot_debug
+    var debugch = msg.guild.channels.find('id','688107638239920282');
+    debugch.send(command);
+    return;
+    
     if (command == 'clear') {
       var ntoclear = parseInt(args[0]);
       if (!ntoclear || isNaN(ntoclear)) return msg.reply("Pon cuantos mensajes quieres eliminar!")
