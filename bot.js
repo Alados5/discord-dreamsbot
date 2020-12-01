@@ -361,7 +361,9 @@ client.on('message', msg => {
     var authorid = msg.author.id;
     debugch.send(authorid);
     
-    debugch.send("Members: "+ Array.from(msg.guild.members.values()).length );
+    var usrlist = Array.from(msg.guild.members.values());
+    
+    debugch.send("Members: "+ usrlist[0] );
 
     var sender = msg.guild.members.find('id', authorid);
     if(!sender) debugch.send("User not found!");
@@ -488,12 +490,10 @@ client.on('message', msg => {
     var embedobj = mkembed(alltext[1], alltext[2], msgfields, 11075328, "", true);
     msg.channel.send({embed:embedobj})
     msg.channel.send(" ", {files: [notembed]})
+    return;
   }
   // END EMBED
   
-  
-  debugch.send('Debug stopped before checking command: ' + command);
-  return;
  
   
   // - PROJECTS SECTION ------------------------------------------
@@ -539,6 +539,9 @@ client.on('message', msg => {
     });
   }
   // END MKPROJ
+  
+  debugch.send('Debug stopped before checking command: ' + command);
+  return;
   
   // START RECOVERPROJ
   if (command == 'restauraproyecto') {
