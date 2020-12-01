@@ -360,15 +360,17 @@ client.on('message', msg => {
       }
     }
     
+    debugch.send('Aura works until here');
+    
     var userroles = Array.from(msg.member.roles.values());
     var hasrole = false;
     
-    debugch.send('Aura works until here');
-    for (var rolei=0; rolei<userroles.length; rolei++) {
-      if(userroles[rolei].name === therole.name) {
-        hasrole = true;
-      }
-    } 
+    //debugch.send('Aura works until here');
+    //for (var rolei=0; rolei<userroles.length; rolei++) {
+    //  if(userroles[rolei].name === therole.name) {
+    //    hasrole = true;
+    //  }
+    //} 
     
     if(hasrole) debugch.send('You have the role');
     debugch.send('Aura: ' + therole.name);
