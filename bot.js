@@ -346,11 +346,9 @@ client.on('message', msg => {
 
           for (var rolei=0; rolei<rolelist.length; rolei++) {
             if(rolelist[rolei].name === auratype) {
-              //therole = rolelist[rolei];
-              debugch.send(rolelist[rolei].name);
+              therole = rolelist[rolei];
             }
           }  
-          //therole = msg.guild.roles.find("name", auratype);
         }
     }
     
@@ -366,6 +364,7 @@ client.on('message', msg => {
     
     //var hasrole = msg.member.roles; //.find("name", therole.name);
     debugch.send('Aura works until here');
+    debugch.send('Aura: ' + therole.name);
 
     /*
     if (hasrole) {
