@@ -364,7 +364,8 @@ client.on('message', msg => {
     var sender;
     for (var memberi=0; memberi<memberlist.length; memberi++) {
       if(memberlist[memberi].id == authorid) {
-        var sender = memberlist[memberi];
+        debugch.send('Found you!');
+        //sender = memberlist[memberi];
       }
     } 
     
@@ -373,7 +374,7 @@ client.on('message', msg => {
     var hasrole = false;
     
     debugch.send('Aura works until here');
-    debugch.send(sender.user.username)
+    //debugch.send(sender.user.username)
     //for (var rolei=0; rolei<userroles.length; rolei++) {
     //  if(userroles[rolei].name === therole.name) {
     //    hasrole = true;
