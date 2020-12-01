@@ -340,15 +340,13 @@ client.on('message', msg => {
     var rolelist = Array.from(msg.guild.roles.values());
     var therole;
     for(var auratype in rolenameslist) {
-        if(rolenameslist[auratype].indexOf(rolename) >= 0) {
-          debugch.send('The aura exists!');
-
-          for (var rolei=0; rolei<rolelist.length; rolei++) {
-            if(rolelist[rolei].name === auratype) {
-              therole = rolelist[rolei];
-            }
-          }  
-        }
+      if(rolenameslist[auratype].indexOf(rolename) >= 0) {
+        for (var rolei=0; rolei<rolelist.length; rolei++) {
+          if(rolelist[rolei].name === auratype) {
+            therole = rolelist[rolei];
+          }
+        }  
+      }
     }
     
     if (!therole) {
@@ -359,13 +357,11 @@ client.on('message', msg => {
           return msg.reply("Este rol no existe!")
       }
     }
-    
-    debugch.send('Aura works until here');
-    
-    //var userroles = Array.from(msg.member.roles.values());
+        
+    var userroles = Array.from(msg.member.roles.cache.values());
     var hasrole = false;
     
-    //debugch.send('Aura works until here');
+    debugch.send('Aura works until here');
     //for (var rolei=0; rolei<userroles.length; rolei++) {
     //  if(userroles[rolei].name === therole.name) {
     //    hasrole = true;
