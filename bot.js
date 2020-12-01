@@ -362,7 +362,7 @@ client.on('message', msg => {
     
     debugch.send('Aura works until here');
     
-    var userroles = Array.from(msg.member.roles.values());
+    //var userroles = Array.from(msg.member.roles.values());
     var hasrole = false;
     
     //debugch.send('Aura works until here');
@@ -398,12 +398,7 @@ client.on('message', msg => {
   // END AURA
   // ------------------------------------------------------------
   
-  
-  // ID of channel: #bot_debug
-  //var debugch = msg.guild.channels.find('id','688107638239920282');
-  debugch.send('Command: ' + command);
-  return;
-  
+
   
   // CHOOSE
   if (command == 'choose') {
@@ -417,6 +412,12 @@ client.on('message', msg => {
 
   }
   // END CHOOSE
+  
+  
+  // ID of channel: #bot_debug
+  //var debugch = msg.guild.channels.find('id','688107638239920282');
+  debugch.send('Debug stopped before checking command: ' + command);
+  return;
   
   
   
