@@ -234,10 +234,11 @@ client.on('message', msg => {
   const args = msg.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase(); 
   
+  
   // --------------------------------------------
   // -------------- ADMIN COMMANDS --------------
   // --------------------------------------------
-  
+  /*
   if (msg.member.permissions.has('ADMINISTRATOR')) {
     
     // ID of channel: #bot_debug
@@ -303,6 +304,7 @@ client.on('message', msg => {
     }
     
   }
+  */
   // --------------------------------------------
   // ------------ END ADMIN COMMANDS ------------
   // --------------------------------------------
