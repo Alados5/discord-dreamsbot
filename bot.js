@@ -354,13 +354,17 @@ client.on('message', msg => {
     
     // ID of channel: #bot_debug
     var debugch = msg.guild.channels.find('id','688107638239920282');
-    var hasrole = msg.member.roles.find('id', therole.id);
+    var hasrole = msg.member.roles; //.find("name", therole.name);
+    debugch.send('Aura works until here');
+
+    /*
     if (hasrole) {
       debugch.send('You have role: ' + hasrole.name);
     }
     else {
       debugch.send('You do not have role: ' + therole.name);
     }
+    */
     return;
     
     /*
