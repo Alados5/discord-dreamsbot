@@ -108,6 +108,10 @@ client.on('guildMemberAdd', member => {
 });
 
 client.on('message', msg => {
+  
+  // ID of channel: #bot_debug
+  var debugch = msg.guild.channels.find('id','688107638239920282');
+  debugch.send('Hi');
     
   // Returns if author is a bot
   if(msg.author.bot) return;
@@ -230,9 +234,7 @@ client.on('message', msg => {
     return;
   }
   
-  // ID of channel: #bot_debug
-  var debugch = msg.guild.channels.find('id','688107638239920282');
-  debugch.send('Hi');
+
    
   // Handles arguments to just take the first word
   const args = msg.content.slice(prefix.length).split(/ +/);
