@@ -354,12 +354,12 @@ client.on('message', msg => {
     
     // ID of channel: #bot_debug
     var debugch = msg.guild.channels.find('id','688107638239920282');
-    var hasrole = msg.member.roles.get(therole.id);
+    var hasrole = msg.member.roles.find('id', therole.id);
     if (hasrole) {
       debugch.send('You have role: ' + hasrole.name);
     }
     else {
-      debugch.send('You do not have role' + therole.name);
+      debugch.send('You do not have role: ' + therole.name);
     }
     return;
     
