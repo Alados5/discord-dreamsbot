@@ -319,7 +319,8 @@ client.on('message', msg => {
   }
   // END HELP
   
-  
+  // ID of channel: #bot_debug
+  var debugch = msg.guild.channels.find('id','688107638239920282');
   
   // - AURA SECTION ---------------------------------------------
     
@@ -339,7 +340,8 @@ client.on('message', msg => {
     var therole;
     for(var auratype in rolenameslist) {
         if(rolenameslist[auratype].indexOf(rolename) >= 0) {
-            therole = msg.guild.roles.find("name", auratype);
+            debugch.send('The aura exists!');
+            //therole = msg.guild.roles.find("name", auratype);
         }
     }
     
@@ -352,8 +354,7 @@ client.on('message', msg => {
       }
     }
     
-    // ID of channel: #bot_debug
-    var debugch = msg.guild.channels.find('id','688107638239920282');
+    //var rolelist = Array.from(lastmsg.guild.roles.values());
     var hasrole = msg.member.roles; //.find("name", therole.name);
     debugch.send('Aura works until here');
 
