@@ -351,7 +351,13 @@ client.on('message', msg => {
           return msg.reply("Este rol no existe!")
       }
     }
-      
+    
+    // ID of channel: #bot_debug
+    var debugch = msg.guild.channels.find('id','688107638239920282');
+    debugch.send('Roles: ' + msg.member.roles);
+    return;
+    
+    /*
     if (msg.member.roles.has(therole.id)) {
         msg.member.removeRole(therole);
         msg.reply("Rol eliminado!");
@@ -360,6 +366,7 @@ client.on('message', msg => {
         msg.member.addRole(therole);
         msg.reply("Rol añadido!");
     }
+    */
   }
   // END AURA
   // ------------------------------------------------------------
