@@ -82,7 +82,7 @@ client.on('message', (msg) => {
 
   var lowtext = msg.content.toLowerCase();
   
-  // ID of channel: #bot_debug
+  // Save channels: #bot_debug and #bienvenida
   var dreami_channels = msg.guild.channels.cache;
   var debugch = dreami_channels.find(ch => ch.id==688107638239920282);
   var welcomech = dreami_channels.find(ch => ch.id==552804145866866698);
@@ -122,7 +122,7 @@ client.on('message', (msg) => {
   
   
   // - CHOOSE ---------------------------------------------------
-  if (command == 'choose') {
+  if (command === 'choose') {
     var randnum = Math.random();
     var chopt = msg.content.slice(prefix.length+command.length+1).split(', ');
     var nopt = chopt.length;
@@ -134,6 +134,16 @@ client.on('message', (msg) => {
   // - END CHOOSE -----------------------------------------------
   
   
+  // - AURA SECTION ---------------------------------------------
+  if (command === 'aura') {
+    var rolename = msg.content.slice(prefix.length+command.length+1).toLowerCase();
+    if (!rolename) return msg.reply("No has puesto ningún rol!");
+    msg.reply('WIP');
+  }
+  // - END AURA SECTION -----------------------------------------
   
+  
+  
+
 
 });
