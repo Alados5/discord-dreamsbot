@@ -74,11 +74,12 @@ function sleep(mstime) {
 // WELCOME MESSAGE
 // --------------------------------
 client.on('guildMemberAdd', (member) => {
-  let gench = member.guild.channels.cache.find(ch => ch.name==='general');
+  //var gench = member.guild.channels.cache.find(ch => ch.name==='general');
+  
   
   // TO-REDO: MAKE & SEND THE EMBED
   
-  gench.send("¡Muy buenas!");
+  member.guild.channels.cache.get('402992536148377602').send("Hola");
   
   // TO-REDO: MEMBER COUNT!
   
