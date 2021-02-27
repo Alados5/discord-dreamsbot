@@ -267,6 +267,32 @@ client.on('message', (msg) => {
   // - END CHOOSE -----------------------------------------------
   
   
+  // - EMBED ----------------------------------------------------
+  if (command === "embed") {
+    //mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron)
+    var alltext = msg.content.slice(7).split('|');
+    var theauthor = {
+        name: msg.author.username,
+        icon_url: msg.author.avatarURL
+    };
+    var notembed = alltext[0];
+    var embedobj = mkembed(alltext[1], alltext[2], [], parseInt(alltext[3]), theauthor, false);
+    msg.channel.send({embed:embedobj})
+    msg.channel.send(" ", {files: [notembed]})
+  }
+
+  if (command === "embedt") {
+    var alltext = msg.content.slice(7).split('|');
+    var notembed = alltext[0];
+    var msgfields = [["Palabras clave:", "Meme, Prueba, Básico"], ["Truco proporcionado por:", "Alados5"]];
+    var embedobj = mkembed(alltext[1], alltext[2], msgfields, 11075328, "", true);
+    msg.channel.send({embed:embedobj})
+    msg.channel.send(" ", {files: [notembed]})
+    return;
+  }
+  // - END EMBED ------------------------------------------------
+  
+  
   // - AURA SECTION ---------------------------------------------
   if (command === 'aura') {
     var rolename = fullquery.toLowerCase();
@@ -316,7 +342,64 @@ client.on('message', (msg) => {
   // - END AURA SECTION -----------------------------------------
   
   
+  // - INDREAMS.ME SECTION --------------------------------------
   
+  // ICON LIST
+  if (command === 'iconos') {
+      var iconlink = 'https://docs.indreams.me/es/help/getting-started/icons';
+      return msg.channel.send("La lista de iconos en Dreams puede encontrarse aquí (versión en español): \n" + iconlink);
+  }
+  if (command === 'icons') {
+      var iconlink = 'https://docs.indreams.me/en/help/getting-started/icons';
+      return msg.channel.send("La lista de iconos en Dreams puede encontrarse aquí (versión en inglés): \n" + iconlink);
+  }
+  // END ICON LIST
+  
+  // INDREAMS.ME SEARCH
+  if (command == 'dreamsearch') {
+      var basesearchlink = 'https://indreams.me/search/results/?term=';
+      var searchterm = msg.content.slice(prefix.length+command.length+1);
+      searchterm = searchterm.replace(/ /g, "%20");
+      return msg.channel.send("Tu búsqueda en indreams.me da esto: \n" + basesearchlink + searchterm);
+  }
 
+  if (command == 'dreamsearchf') {
+      var basesearchlink = 'https://indreams.me/search/results/?term=';
+      var requestsearch = msg.content.slice(prefix.length+command.length+1);
+      var filters = requestsearch.split('&&');
+      var searchterm = filters.shift();
+      searchterm = searchterm.replace(/ /g, "%20");
+      var searchstring = searchterm + "&type=" + filters[0] + "&sort=" + filters[1];
+      return msg.channel.send("Tu búsqueda filtrada en indreams.me da esto: \n" + basesearchlink + searchstring);
+
+      //&type=dreams&sort=mostliked
+  }
+
+  if (command == 'dreamersearch') {
+      var basesearchlink = 'https://indreams.me/search/results/?term=@';
+      var searchterm = msg.content.slice(prefix.length+command.length+1);
+      searchterm = searchterm.replace(/ /g, "%20");
+      return msg.channel.send("Tu búsqueda de un usuario en indreams.me da esto: \n" + basesearchlink + searchterm);
+  }
+  if (command == 'creations') {
+      var baselink = 'https://indreams.me/';
+      var creator = msg.content.slice(prefix.length+command.length+1);
+      var finallink = '/creations';
+      creator = creator.replace(/ /g, "%20");
+      return msg.channel.send("Las creaciones del usuario que me has dado son: \n" + baselink + creator + finallink);
+  }
+  // END INDREAMS.ME SEARCH
+  
+  // - END INDREAMS.ME SECTION ----------------------------------
+  
+  
+  // - PROJECTS SECTION ------------------------------------------
+
+  // - END PROJECTS SECTION --------------------------------------
+  
+  
+  // - TRICKS SECTION --------------------------------------------
+  
+  // - END TRICKS SECTION ----------------------------------------
 
 });
