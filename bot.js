@@ -14,7 +14,9 @@ client.on('message', (msg) => {
   var lowtext = msg.content.toLowerCase();
   
   // ID of channel: #bot_debug
-  var debugch = msg.guild.channels.cache.find(ch => ch.id==688107638239920282);
+  var dreami_channels = msg.guild.channels.cache;
+  var debugch = dreami_channels.find(ch => ch.id==688107638239920282);
+  var welcomech = dreami_channels.find(ch => ch.id==552804145866866698);
   
   // Returns if message doesn't start with prefix
   if(!msg.content.startsWith(prefix)) {
@@ -41,9 +43,9 @@ client.on('message', (msg) => {
 
   // HELP
   if (command == 'ayuda' || command == 'help') {
-    msg.reply("¡Hola! Soy un bot creado por Alados5.\n"+
+    msg.reply("¡Hola! Soy un bot creado por Alados5.\n\n"+
               "Aquí debería haber un mensaje de ayuda, pero aún no ha podido escribirlo bien. "+
-              "Mientras tanto, puedes echarle un ojo a #bienvenida, donde tienes algunos de los comandos con los que me puedes llamar.\n"+
+              "Mientras tanto, puedes echarle un ojo a +"welcomech+", donde tienes algunos de los comandos con los que me puedes llamar.\n\n"+
               "¡Disculpa las molestias!");
   }
   // END HELP
