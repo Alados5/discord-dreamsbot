@@ -79,7 +79,7 @@ client.on('guildMemberAdd', (member) => {
   
   // TO-REDO: MAKE & SEND THE EMBED
   
-  member.guild.channels.cache.get('402992536148377602').send("Hola");
+  member.guild.channels.cache.find(ch => ch.name==='general').send("Hola");
   
   // TO-REDO: MEMBER COUNT!
   
