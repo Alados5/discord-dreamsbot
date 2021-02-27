@@ -145,7 +145,7 @@ client.on('message', (msg) => {
         
         // More than two months from the last message: warn users
         if (utc-lasttime > twomonths) {
-          if(foundrole) realch.send("¡Atención, "+projrole+"!\n"+
+          if(foundrole) realch.send("¡Atención, "+`${projrole}`+"!\n"+
                                      "Esto es un aviso por inactividad:\n"+
                                      "No se ha detectado ningún mensaje en los últimos dos meses en este proyecto.");
           realch.send("Esta es la primera fase del proceso de purga de proyectos inactivos.\n"+
@@ -188,7 +188,7 @@ client.on('message', (msg) => {
           // More than a week since INACTIVE: archive (mention users again)
           else if (lastmsg.content === "```md\n<PROYECTO INACTIVO>\n```") {
             if (utc-lasttime > oneweek) {
-              if(foundrole) realch.send("¡Alerta, "+projrole+"!\n"+
+              if(foundrole) realch.send("¡Alerta, "+`${projrole}`+"!\n"+
                                         "No se ha respondido al aviso de inactividad.");
               realch.send("Esta es la segunda fase del proceso de purga de proyectos inactivos.\n"+
                           "Para detenerlo, cualquier mensaje por este canal bastará.\n"+
