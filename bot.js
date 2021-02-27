@@ -108,7 +108,7 @@ client.on('message', (msg) => {
     var cest = utc+3600000;
     
     // Purge only once a day (in real time, at 00-02h without DST, 01-03h with DST)
-    if (cest % oneday > 7200000000) {
+    if (cest % oneday > 7200000) {
       purgeflag = false;
       return;
     }
@@ -230,6 +230,11 @@ client.on('message', (msg) => {
       if (!ntoclear || isNaN(ntoclear)) return msg.reply("Pon cuantos mensajes quieres eliminar!")
       msg.channel.bulkDelete(ntoclear+1);
       return;
+    }
+    
+    if (command === 'reply') {
+      msg.delete();
+      return msg.channel.send(msg.content.slice(7));
     }
   // TO-REDO: OTHER ADMIN COMMANDS
   }
