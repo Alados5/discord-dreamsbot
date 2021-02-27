@@ -103,8 +103,116 @@ client.on('message', (msg) => {
   
   // Returns if message doesn't start with prefix
   if(!msg.content.startsWith(prefix)) {
-    // TO-REDO: TRIGGER OF PURGE PROJECTS
+    var fecha = new Date();
+    var utc = fecha.getTime();
+    var cest = utc+3600000;
     
+    // Purge only once a day (in real time, at 00-01h without DST, 01-02h with DST)
+    if (cest % oneday > 3600000) {
+      purgeflag = false;
+      return;
+    }
+    if (purgeflag) return;
+    
+    purgeflag = true;
+    
+    // ID of channel: #asignaciones
+    var asignch = dreami_channels.find(ch => ch.id==572891836687843328);
+    
+    // Project Category ID: 552432711072088074
+    var projcat = dreami_channels.find(ch => ch.id==552432711072088074);
+    var projchans = Array.from(projcat.children.values());
+    
+    for (var proji=0; proji<projchans.length; proji++) {
+      if (projchans[proji].name == 'guía' || projchans[proji].name == 'asignaciones') continue;
+      var projich = projchans[proji];
+      var flag = "false";
+      
+      projich.messages.fetch({limit:1}).then(msgcol => {
+        var lastmsg = msgcol.first();
+        var realch = lastmsg.channel;
+        var lasttime = lastmsg.createdAt.getTime();
+        
+        // Get corresponding role:
+        var rolelist = Array.from(lastmsg.guild.roles.cache.values());
+        var foundrole = false;
+        for (var rolei=0; rolei<rolelist.length; rolei++) {
+          if(rolelist[rolei].name.replace(/ /g, "_").toLowerCase().indexOf(realch.name) >= 0) {
+            var projrole = rolelist[rolei];
+            foundrole = true;
+          }
+        }
+        
+        // More than two months from the last message: warn users
+        if (utc-lasttime > twomonths) {
+          if(foundrole) realch.send("¡Atención, "+projrole+"!\n"+
+                                     "Esto es un aviso por inactividad:\n"+
+                                     "No se ha detectado ningún mensaje en los últimos dos meses en este proyecto.");
+          realch.send("Esta es la primera fase del proceso de purga de proyectos inactivos.\n"+
+                       "Para detenerlo, cualquier mensaje por este canal bastará.\n"+
+                       "Si no se responde a este mensaje en menos de **UNA SEMANA**, este proyecto quedará **ARCHIVADO** durante **UN MES**.\n"+
+                       "Si dentro de ese mes tampoco hay actividad, el proyecto será **ELIMINADO**.");
+          realch.send("¿Está abandonado este proyecto? También se puede eliminar inmediatamente mandando `!purgaproyecto` en este canal.");
+
+          // Send exactly this message:
+          realch.send("```md\n<PROYECTO INACTIVO>\n```");
+        }
+        
+        // Bot Discord User ID: 573146997419278336
+        else if (lastmsg.author.id == 573146997419278336) {
+          // More than a month since ARCHIVED: delete
+          if (lastmsg.content === "```md\n<PROYECTO ARCHIVADO>\n```") {
+            if (utc-lasttime > twomonths/2) {
+              
+              // Subtract 1 to all project numbers greater than the deleted one
+              var projnum = parseInt(projrole.name.slice(1, projrole.name.indexOf("-")-1));
+              
+              for (var rolei=0; rolei<rolelist.length; rolei++) {
+                var numi = parseInt(rolelist[rolei].name.slice(1, rolelist[rolei].name.indexOf("-")-1));
+                if (isNaN(numi)) continue;
+                if (numi>projnum) {
+                  var newname = "P"+(numi-1)+" "+rolelist[rolei].name.slice(rolelist[rolei].name.indexOf("-"), rolelist[rolei].name.length);
+                  rolelist[rolei].setName(newname);
+                }
+              }
+              
+              // DELETE PROJECT & ROLE
+              realch.delete();
+              projrole.delete();
+              
+              // Send notice through "asignaciones"
+              asignch.send('```prolog\nPROYECTO "'+realch.name.toUpperCase()+'" ELIMINADO\n```');
+            }
+          }
+          
+          // More than a week since INACTIVE: archive (mention users again)
+          else if (lastmsg.content === "```md\n<PROYECTO INACTIVO>\n```") {
+            if (utc-lasttime > oneweek) {
+              if(foundrole) realch.send("¡Alerta, "+projrole+"!\n"+
+                                        "No se ha respondido al aviso de inactividad.");
+              realch.send("Esta es la segunda fase del proceso de purga de proyectos inactivos.\n"+
+                          "Para detenerlo, cualquier mensaje por este canal bastará.\n"+
+                          "Ahora el canal quedará invisible menos para los Mods y el rol de este proyecto.\n"+
+                          "Para restaurarlo se puede usar `!restauraproyecto` o contactar con un Mod\n"+
+                          "Si no se dice nada por este canal en menos de **UN MES**, ```prolog\n"+
+                          "ESTE PROYECTO VA A SER ELIMINADO\n"+
+                          "```Este es el último aviso, **¡si no hay actividad durante un mes no habrá vuelta atrás!**");
+              realch.send("¿Está abandonado este proyecto? También se puede eliminar inmediatamente mandando `!purgaproyecto` en este canal.");
+              
+              // Archive channel -> Hide it from everyone except corresponding role and admins
+              // SEND_MESSAGES, VIEW_CHANNEL
+              realch.overwritePermissions(realch.guild.defaultRole, {VIEW_CHANNEL:false}).then(archch => {
+                archch.overwritePermissions(projrole, {VIEW_CHANNEL:true});
+                
+                // Send exactly this message:
+                archch.send("```md\n<PROYECTO ARCHIVADO>\n```");
+              });
+
+            }
+          }
+        }
+      });  
+    }
     return;
   }
   
