@@ -202,10 +202,7 @@ client.on('message', (msg) => {
               // Archive channel -> Hide it from everyone except corresponding role and admins
               // Everyone ID: 530381279749865482
               // SEND_MESSAGES, VIEW_CHANNEL
-              realch.overwritePermissions([{
-                id: 458303268913938443,
-                deny: ['VIEW_CHANNEL'],
-              }]);
+              realch.updateOverwrite(realch.guild.roles.everyone, {VIEW_CHANNEL:false});
               //.then(archch => {
               //  archch.overwritePermissions([{
               //    id: projrole.id,
