@@ -170,6 +170,12 @@ client.on('message', (msg) => {
     }
     debugch.send('Aura: ' + therole.name);
     
+    var usr_role_mng = msg.guild.members.cache.get(msg.author.id).roles;
+    var usr_therole = usr_role_mng.cache.find(rl => rl.name === therole.name);
+    
+    msg.channel.send(usr_therole);
+
+    
     msg.reply('WIP');
   }
   // - END AURA SECTION -----------------------------------------
