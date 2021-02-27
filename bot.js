@@ -22,5 +22,5 @@ client.on('message', (msg) => {
   }
   
   msg.channel.send('Debugging');
-  msg.reply(debugch);
+  msg.reply(`${debugch}`);
 });
