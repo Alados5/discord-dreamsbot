@@ -162,24 +162,23 @@ client.on('message', (msg) => {
 
     if (!therole) {
       if (modslist.indexOf(rolename) >= 0) {
-          return msg.reply("Buen intento, pero no puedo hacerte mod.\n¡No es un aura de Dreams! ;)")
+          return msg.reply("Buen intento, pero no puedo hacerte mod.\n¡No es un aura de Dreams! 😉")
       }
       else {
           return msg.reply("El aura que has indicado no existe!")
       }
     }
-    debugch.send('Aura: ' + therole.name);
     
     var usr_role_mng = msg.guild.members.cache.get(msg.author.id).roles;
     var usr_therole = usr_role_mng.cache.find(rl => rl.name === therole.name);
     
     if(!usr_therole) {
       usr_role_mng.add(therole);
-      msg.reply("Aura añadida!");
+      msg.reply("Aura "+therole.name+" añadida!");
     }
     else {
       usr_role_mng.remove(therole);
-      msg.reply("Aura eliminada!");
+      msg.reply("Aura "+therole.name+" eliminada!");
     }
   }
   // - END AURA SECTION -----------------------------------------
