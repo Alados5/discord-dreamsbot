@@ -45,7 +45,7 @@ client.on('message', (msg) => {
   if (command === 'ayuda' || command === 'help') {
     msg.reply("¡Hola! Soy un bot creado por Alados5.\n\n"+
               "Aquí debería haber un mensaje de ayuda, pero aún no ha podido escribirlo bien. "+
-              "Mientras tanto, puedes echarle un ojo a "+welcomech+", donde tienes algunos de los comandos con los que me puedes llamar.\n\n"+
+              "Mientras tanto, puedes echarle un ojo a ${welcomech}, donde tienes algunos de los comandos con los que me puedes llamar.\n\n"+
               "¡Disculpa las molestias!");
   }
   // END HELP
