@@ -173,7 +173,8 @@ client.on('message', (msg) => {
     var usr_role_mng = msg.guild.members.cache.get(msg.author.id).roles;
     var usr_therole = usr_role_mng.cache.find(rl => rl.name === therole.name);
     
-    msg.channel.send(usr_therole.name);
+    if(!usr_therole) msg.channel.send('No tienes ese aura!');
+    else msg.channel.send(usr_therole.name);
 
     
     msg.reply('WIP');
