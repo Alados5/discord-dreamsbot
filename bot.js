@@ -74,13 +74,11 @@ function sleep(mstime) {
 // WELCOME MESSAGE
 // --------------------------------
 client.on('guildMemberAdd', (member) => {
-  var dreami_channels = member.guild.channels.cache;
-  var gench = dreami_channels.find(ch => ch.id==530381279749865484);
-  var debugch = dreami_channels.find(ch => ch.id==688107638239920282);
-  if (!gench) return debugch.send('General not found!');
-  debugch.send('General found!');
+  var gench = member.guild.channels.cache.find(ch => ch.name==='general');
+  
   // TO-REDO: MAKE & SEND THE EMBED
-  gench.send("¡Muy buenas, " + member + "!");
+  
+  gench.send("¡Muy buenas!");
   
   // TO-REDO: MEMBER COUNT!
   
