@@ -71,10 +71,23 @@ function sleep(mstime) {
 
 
 
-// TO-REDO: WELCOME MESSAGE
+// WELCOME MESSAGE
+// --------------------------------
+client.on('guildMemberAdd', member => {
+  var gench = member.guild.channels.cache.find(ch => ch.id==530381279749865484);
+  if (!channel) return;
+  
+  // TO-REDO: MAKE & SEND THE EMBED
+  channel.send("¡Muy buenas, " + member + "!");
+  
+  // TO-REDO: MEMBER COUNT!
+  
+}
 
 
 
+// MESSAGE ACTIONS
+// --------------------------------
 client.on('message', (msg) => {
   
   // Returns if author is a bot
