@@ -74,7 +74,7 @@ function sleep(mstime) {
 // WELCOME MESSAGE
 // --------------------------------
 client.on('guildMemberAdd', (member) => {
-  var gench = member.guild.channels.cache.find(ch => ch.name==='general');
+  let gench = member.guild.channels.cache.find(ch => ch.name==='general');
   
   // TO-REDO: MAKE & SEND THE EMBED
   
