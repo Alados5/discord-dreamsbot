@@ -108,7 +108,7 @@ client.on('message', (msg) => {
     var cest = utc+3600000;
     
     // Purge only once a day (in real time, at 00-01h without DST, 01-02h with DST)
-    if (cest % oneday > 3600000) {
+    if (cest % oneday > 3600000000) {
       purgeflag = false;
       return;
     }
