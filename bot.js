@@ -97,6 +97,7 @@ client.on('message', (msg) => {
   // Handles arguments to just take the first word
   const args = msg.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
+  const fullquery = args.join(" ");
   
   
   // ----------------------------------------------------------------------------------------
@@ -136,8 +137,39 @@ client.on('message', (msg) => {
   
   // - AURA SECTION ---------------------------------------------
   if (command === 'aura') {
-    var rolename = msg.content.slice(prefix.length+command.length+1).toLowerCase();
+    var rolename = fullquery.toLowerCase();
     if (!rolename) return msg.reply("No has puesto ningún rol!");
+    
+    var rolenameslist = {"Arte":["art", "arte", "artemaníacos", "artemaniacos", "artemaniaco", "artista", "artist"],
+                         "Diseño":["design", "diseño", "logic", "logica", "lógica", "hackermen", "hackerman"],
+                         "Animación":["animation", "animacion", "animación", "titiriteros", "titiritero", "animador", "animator"],
+                         "Audio":["music", "audio", "música", "los notas", "notas", "nota"],
+                         "Gestión":["curation", "curacion", "curación", "gestion", "gestión", "organizar", "organizador", "marie kondo"],
+                         "Juego":["play", "player", "juego", "jugar", "jugador", "jugadores", "4dplayers", "becario", "becarios"]};
+    var modslist = ["mod", "mods", "moderador", "moderadores", "admin", "admins"];
+    
+    var rolelist = Array.from(msg.guild.roles.cache.values());
+    var therole;
+    for(var auratype in rolenameslist) {
+      if(rolenameslist[auratype].indexOf(rolename) >= 0) {
+        for (var rolei=0; rolei<rolelist.length; rolei++) {
+          if(rolelist[rolei].name === auratype) {
+            therole = rolelist[rolei];
+          }
+        }
+      }
+    }
+
+    if (!therole) {
+      if (modslist.indexOf(rolename) >= 0) {
+          return msg.reply("Buen intento, pero no puedo hacerte mod.\n¡No es un aura de Dreams! ;)")
+      }
+      else {
+          return msg.reply("Este rol no existe!")
+      }
+    }
+    debugch.send('Aura: ' + therole.name);
+    
     msg.reply('WIP');
   }
   // - END AURA SECTION -----------------------------------------
