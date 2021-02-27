@@ -14,7 +14,7 @@ client.on('message', (msg) => {
   var lowtext = msg.content.toLowerCase();
   
   // ID of channel: #bot_debug
-  //var debugch = msg.guild.channels.find('id','688107638239920282');
+  var debugch = msg.guild.channels.cache.find('id','688107638239920282');
   
   // Returns if message doesn't start with prefix
   if(!msg.content.startsWith(prefix)) {
@@ -22,4 +22,5 @@ client.on('message', (msg) => {
   }
   
   msg.channel.send('Debugging');
+  msg.reply(debugch);
 });
