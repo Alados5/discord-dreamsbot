@@ -5,6 +5,9 @@ const client = new Discord.Client({
 });
 var prefix = '!';
 
+// THIS  MUST  BE  THIS  WAY
+client.login(process.env.BOT_TOKEN);
+
 // PROJECTS INITIAL DATA:
 var oneday = 86400000;
 var oneweek = 604800000;
@@ -111,7 +114,7 @@ client.on('guildMemberAdd', member => {
 });
 */
 
-client.on('message', msg => {
+client.on('message', (msg) => {
     
   // Returns if author is a bot
   if(msg.author.bot) return;
@@ -894,6 +897,3 @@ client.on('message', msg => {
 
   
 });
-
-// THIS  MUST  BE  THIS  WAY
-client.login(process.env.BOT_TOKEN);
