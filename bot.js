@@ -2,9 +2,78 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
+// THIS MUST BE THIS WAY:
 client.login(process.env.BOT_TOKEN);
 
+// Command prefix:
 var prefix = '!';
+
+
+
+// PROJECTS INITIAL DATA:
+var oneday = 86400000;
+var oneweek = 604800000;
+var twomonths = 5270400000;
+var purgeflag = false;
+var mkproj_cd = false;
+
+// TRICKS DATABASE:
+var dbindex = require("./trucos_db/index.js");
+dbindex = dbindex.dbindex;
+
+
+
+// - EMBED AS FUNCTION ------------
+function mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron) {
+  var embedobj = {
+      description:desctext,
+      title: msgtitle,
+  }
+  if (msgcolor) {
+    embedobj.color = msgcolor;
+  }
+  if (msgauthor) {
+    embedobj.author = msgauthor;
+  }
+  if (footeron) {
+    embedobj.footer = {
+      "icon_url": "https://cdn.discordapp.com/avatars/284104569586450434/5e552cc6b11f538d3a6919eb22772a9b.png",
+      "text": "Beep boop, yo soy un bot creado por Alados5"
+    }
+  }
+  if (msgfields.length && Array.isArray(msgfields)) {
+    //msgfields = [["name1","value1"],["name2","value2"]...];
+    var fieldsarray = [];
+    for (var f=0; f<msgfields.length; f++) {
+      var nvarray = msgfields[f];
+      var fieldobj = { name: nvarray[0], value: nvarray[1] };
+      fieldsarray.push(fieldobj);
+    }
+    embedobj.fields = fieldsarray;
+    //fields: [ {name: "field name", value: "field text value"}, {...}, ...]
+  }
+
+  return embedobj
+}
+// --------------------------------
+
+
+
+// - SLEEP FUNCTION ---------------
+function sleep(mstime) {
+  const tini = Date.now();
+  var tend = tini;
+  while (tend <= tini+mstime) {
+    tend = Date.now();
+  }
+}
+// --------------------------------
+
+
+
+// TO-REDO: WELCOME MESSAGE
+
+
 
 client.on('message', (msg) => {
   
