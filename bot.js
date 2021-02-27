@@ -18,9 +18,35 @@ client.on('message', (msg) => {
   
   // Returns if message doesn't start with prefix
   if(!msg.content.startsWith(prefix)) {
+    // TO-REDO: TRIGGER OF PURGE PROJECTS
+    
     return;
   }
   
-  msg.channel.send('Debugging');
-  msg.reply(`${debugch}`);
+  // Handles arguments to just take the first word
+  const args = msg.content.slice(prefix.length).split(/ +/);
+  const command = args.shift().toLowerCase();
+  
+  
+  // ----------------------------------------------------------------------------------------
+  // -------------- ADMIN COMMANDS ----------------------------------------------------------
+  // ----------------------------------------------------------------------------------------
+  
+  // TO-REDO: ADMIN COMMANDS
+  
+  // ----------------------------------------------------------------------------------------
+  // ------------ END ADMIN COMMANDS --------------------------------------------------------
+  // ----------------------------------------------------------------------------------------
+
+
+  // HELP
+  if (command == 'ayuda' || command == 'help') {
+    msg.reply("¡Hola! Soy un bot creado por Alados5.\n"+
+              "Aquí debería haber un mensaje de ayuda, pero aún no ha podido escribirlo bien. "+
+              "Mientras tanto, puedes echarle un ojo a #bienvenida, donde tienes algunos de los comandos con los que me puedes llamar.\n"+
+              "¡Disculpa las molestias!");
+  }
+  // END HELP
+  
+
 });
