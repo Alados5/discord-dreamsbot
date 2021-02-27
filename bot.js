@@ -200,9 +200,10 @@ client.on('message', (msg) => {
               realch.send("¿Está abandonado este proyecto? También se puede eliminar inmediatamente mandando `!purgaproyecto` en este canal.");
               
               // Archive channel -> Hide it from everyone except corresponding role and admins
+              // Everyone ID: 530381279749865482
               // SEND_MESSAGES, VIEW_CHANNEL
-              realch.overwritePermissions(realch.guild.defaultRole, {VIEW_CHANNEL:false}).then(archch => {
-                archch.overwritePermissions(projrole, {VIEW_CHANNEL:true});
+              realch.overwritePermissions([{id:530381279749865482, deny:['VIEW_CHANNEL']}]).then(archch => {
+                archch.overwritePermissions([{id:projrole.id, allow:['VIEW_CHANNEL']}]);
                 
                 // Send exactly this message:
                 archch.send("```md\n<PROYECTO ARCHIVADO>\n```");
