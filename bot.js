@@ -181,9 +181,6 @@ client.on('message', (msg) => {
       usr_role_mng.remove(therole);
       msg.reply("Aura eliminada!");
     }
-
-    
-    msg.reply('WIP');
   }
   // - END AURA SECTION -----------------------------------------
   
