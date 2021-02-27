@@ -82,7 +82,7 @@ client.on('guildMemberAdd', (member) => {
   
   // TO-REDO: MEMBER COUNT!
   
-}
+});
 
 
 
