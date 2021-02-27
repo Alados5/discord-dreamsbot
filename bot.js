@@ -110,14 +110,30 @@ client.on('message', (msg) => {
   // ----------------------------------------------------------------------------------------
 
 
-  // HELP
+  
+  // - HELP MESSAGE ---------------------------------------------
   if (command === 'ayuda' || command === 'help') {
     msg.reply("¡Hola! Soy un bot creado por Alados5.\n\n"+
               "Aquí debería haber un mensaje de ayuda, pero aún no ha podido escribirlo bien. "+
               "Mientras tanto, puedes echarle un ojo a "+`${welcomech}`+", donde tienes algunos de los comandos con los que me puedes llamar.\n\n"+
               "¡Disculpa las molestias!");
   }
-  // END HELP
+  // - END HELP MESSAGE -----------------------------------------
+  
+  
+  // - CHOOSE ---------------------------------------------------
+  if (command == 'choose') {
+    var randnum = Math.random();
+    var chopt = msg.content.slice(prefix.length+command.length+1).split(', ');
+    var nopt = chopt.length;
+
+    for (var opti=1; opti<=nopt; opti++) {
+      if (randnum <= opti/nopt) return msg.channel.send(chopt[opti-1])
+    }
+  }
+  // - END CHOOSE -----------------------------------------------
+  
+  
   
 
 });
