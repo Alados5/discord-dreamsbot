@@ -203,7 +203,7 @@ client.on('message', (msg) => {
               // Everyone ID: 530381279749865482
               // SEND_MESSAGES, VIEW_CHANNEL
               realch.overwritePermissions([{
-                id: 530381279749865482,
+                id: 458303268913938443,
                 deny: ['VIEW_CHANNEL'],
               }]);
               //.then(archch => {
