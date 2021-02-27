@@ -74,14 +74,46 @@ function sleep(mstime) {
 // WELCOME MESSAGE
 // --------------------------------
 client.on('guildMemberAdd', (member) => {
-  //var gench = member.guild.channels.cache.find(ch => ch.name==='general');
+  var gench = member.guild.channels.cache.find(ch => ch.name==='general');
+  if (!gench) return;
   
+  var msgcolor = 8388863;
+  var msgtitle = "¡Bienvenid@ al Dreamiverso!";
+  var desctext = "A modo de presentación, y para romper el hielo, "+
+                   "nos puedes decir qué te gusta más de Dreams, y qué estás haciendo o quieres hacer. "+
+                   "Incluso puedes asignarte un aura o pedírsela a un moderador."+
+                   "\n\n¡No dudes en compartir tus creaciones, o pedir ayuda si te hace falta! :D"+
+                   "\n\nÉchale un ojo a las normas del servidor, "+
+                   "seguro que pronto un humano hablará contigo para darte una bienvenida mejor que la que te puedo dar yo."+
+                   "\n\n¡Pero no dudes en usarme para lo que necesites!";
   
-  // TO-REDO: MAKE & SEND THE EMBED
+  gench.send("¡Muy buenas, " + member + "!", {embed: {
+    color: msgcolor,
+    description: desctext,
+    title: msgtitle,
+    thumbnail: {
+      "url": member.user.avatarURL
+    },
+    image: {
+      "url": "https://i.imgur.com/pdmBuaV.png"
+    },
+    footer: {
+      "icon_url": "https://cdn.discordapp.com/avatars/284104569586450434/5e552cc6b11f538d3a6919eb22772a9b.png",
+      "text": "Beep boop, yo soy un bot creado por Alados5"
+    }
+  }});
   
-  member.guild.channels.cache.find(ch => ch.name==='general').send("Hola");
-  
-  // TO-REDO: MEMBER COUNT!
+  /*
+  var nmembers = member.guild.memberCount - 1;
+  if (nmembers % 100 == 0) {
+    var milestonemsg = member.guild.defaultRole+", ¡Es un momento importante para el servidor! \n"+
+                       "¡Con la llegada de " +member+ ", ya somos " +nmembers+ " imps en esta comunidad! \n"+
+                       "(Si veis "+(nmembers+1)+" miembros es porque yo no cuento, ¡soy un bot!)\n"+
+                       "¡Gracias y felicidades a todos! :D";
+    var celebgif = "https://raw.githubusercontent.com/Alados5/discord-dreamsbot/master/milestone100gif.gif";
+    gench.send(milestonemsg, {files: [celebgif]});
+  }
+  */
   
 });
 
@@ -224,7 +256,10 @@ client.on('message', (msg) => {
   // ----------------------------------------------------------------------------------------
   // -------------- ADMIN COMMANDS ----------------------------------------------------------
   // ----------------------------------------------------------------------------------------
+  // TO-DO: Change to actual role/permission checking
   if (msg.author.id == 284104569586450434 || msg.author.id == 267707200577732608) {
+    
+    // CLEAR MESSAGES IN BULK
     if (command === 'clear') {
       var ntoclear = parseInt(args[0]);
       if (!ntoclear || isNaN(ntoclear)) return msg.reply("Pon cuantos mensajes quieres eliminar!")
@@ -232,17 +267,59 @@ client.on('message', (msg) => {
       return;
     }
     
+    // REPLY WITH SAME TEXT
     if (command === 'reply') {
       msg.delete();
       return msg.channel.send(msg.content.slice(7));
     }
-  // TO-REDO: OTHER ADMIN COMMANDS
+    
+    // CELEBRATORY GIF
+    if (command === 'celebra100') {
+      var nmembers = msg.guild.memberCount - 1;
+      var milestonemsg = msg.guild.roles.everyone+", ¡Es un momento importante para el servidor! \n"+
+                         "¡Con la llegada de [X], ya somos " +nmembers+ " imps en esta comunidad! \n"+
+                         "(Si veis "+(nmembers+1)+" miembros es porque yo no cuento, ¡soy un bot!)\n"+
+                         "¡Gracias y felicidades a todos! :D";
+      var celebgif = "https://raw.githubusercontent.com/Alados5/discord-dreamsbot/master/milestone100gif.gif";
+      return msg.channel.send(milestonemsg, {files: [celebgif]});
+    }
+    
+    // WELCOME TEXT
+    if (command === 'bienvenida') {
+      var msgcolor = 8388863;
+      var msgtitle = "¡Bienvenid@ al Dreamiverso!";
+      var desctext = "A modo de presentación, y para romper el hielo, "+
+                     "nos puedes decir qué te gusta más de Dreams, y qué estás haciendo o quieres hacer. "+
+                     "Incluso puedes asignarte un aura o pedírsela a un moderador."+
+                     "\n\n¡No dudes en compartir tus creaciones, o pedir ayuda si te hace falta! :D"+
+                     "\n\nÉchale un ojo a las normas del servidor, "+
+                     "seguro que pronto un humano hablará contigo para darte una bienvenida mejor que la que te puedo dar yo."+
+                     "\n\n¡Pero no dudes en usarme para lo que necesites!";
+
+      msg.channel.send("Reproduzco a continuación el mensaje de bienvenida: ", {embed: {
+        color: msgcolor,
+        description: desctext,
+        title: msgtitle,
+        thumbnail: {
+          "url": msg.member.user.avatarURL
+        },
+        image: {
+          "url": "https://i.imgur.com/pdmBuaV.png"
+        },
+        footer: {
+          "icon_url": "https://cdn.discordapp.com/avatars/284104569586450434/5e552cc6b11f538d3a6919eb22772a9b.png",
+          "text": "Beep boop, yo soy un bot creado por Alados5"
+        }
+      }});
+      return;
+    }
   }
   // ----------------------------------------------------------------------------------------
   // ------------ END ADMIN COMMANDS --------------------------------------------------------
   // ----------------------------------------------------------------------------------------
 
 
+  
   
   // - HELP MESSAGE ---------------------------------------------
   if (command === 'ayuda' || command === 'help') {
@@ -356,14 +433,14 @@ client.on('message', (msg) => {
   // END ICON LIST
   
   // INDREAMS.ME SEARCH
-  if (command == 'dreamsearch') {
+  if (command === 'dreamsearch') {
       var basesearchlink = 'https://indreams.me/search/results/?term=';
       var searchterm = msg.content.slice(prefix.length+command.length+1);
       searchterm = searchterm.replace(/ /g, "%20");
       return msg.channel.send("Tu búsqueda en indreams.me da esto: \n" + basesearchlink + searchterm);
   }
 
-  if (command == 'dreamsearchf') {
+  if (command === 'dreamsearchf') {
       var basesearchlink = 'https://indreams.me/search/results/?term=';
       var requestsearch = msg.content.slice(prefix.length+command.length+1);
       var filters = requestsearch.split('&&');
@@ -375,13 +452,13 @@ client.on('message', (msg) => {
       //&type=dreams&sort=mostliked
   }
 
-  if (command == 'dreamersearch') {
+  if (command === 'dreamersearch') {
       var basesearchlink = 'https://indreams.me/search/results/?term=@';
       var searchterm = msg.content.slice(prefix.length+command.length+1);
       searchterm = searchterm.replace(/ /g, "%20");
       return msg.channel.send("Tu búsqueda de un usuario en indreams.me da esto: \n" + basesearchlink + searchterm);
   }
-  if (command == 'creations') {
+  if (command === 'creations') {
       var baselink = 'https://indreams.me/';
       var creator = msg.content.slice(prefix.length+command.length+1);
       var finallink = '/creations';
