@@ -1,6 +1,8 @@
 // CLIENT:
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const client = new Discord.Client({
+  partials:['USER','CHANNEL','GUILD_MEMBER','MESSAGE','REACTION'],
+});
 var prefix = '!';
 
 // PROJECTS INITIAL DATA:
@@ -65,6 +67,7 @@ function sleep(mstime) {
 
 
 // WELCOME MESSAGE
+/*
 client.on('guildMemberAdd', member => {
   const channel = member.guild.channels.find('name', 'general');
   if (!channel) return;
@@ -106,6 +109,7 @@ client.on('guildMemberAdd', member => {
     }
   }
 });
+*/
 
 client.on('message', msg => {
     
@@ -120,6 +124,7 @@ client.on('message', msg => {
   // Returns if message doesn't start with prefix
   if(!msg.content.startsWith(prefix)) {
     
+    /*
     // TRIGGER OF PURGE PROJECTS
     var fecha = new Date();
     var utc = fecha.getTime();
@@ -229,7 +234,7 @@ client.on('message', msg => {
         }
       });
     }
-    
+    */
     return;
   }
   
@@ -241,7 +246,7 @@ client.on('message', msg => {
   // --------------------------------------------
   // -------------- ADMIN COMMANDS --------------
   // --------------------------------------------
-
+  /*
   //if (msg.member.permissions.has('ADMINISTRATOR')) {
   if (msg.author.id == 284104569586450434 || msg.author.id == 267707200577732608) {
     
@@ -304,7 +309,7 @@ client.on('message', msg => {
     }
     
   }
-
+  */
   // --------------------------------------------
   // ------------ END ADMIN COMMANDS ------------
   // --------------------------------------------
@@ -319,6 +324,7 @@ client.on('message', msg => {
   }
   // END HELP
   
+  /*
   // - AURA SECTION ---------------------------------------------
     
   // AURA - ADD/REMOVE DREAM ROLES
@@ -377,32 +383,28 @@ client.on('message', msg => {
     
     if(hasrole) debugch.send('You have the role');
 
-    /*
-    if (hasrole) {
-      debugch.send('You have role: ' + hasrole.name);
-    }
-    else {
-      debugch.send('You do not have role: ' + therole.name);
-    }
-    */
+    //if (hasrole) {
+    //  debugch.send('You have role: ' + hasrole.name);
+    //}
+    //else {
+    //  debugch.send('You do not have role: ' + therole.name);
+    //}
     
-    /*
-    if (msg.member.roles.has(therole.id)) {
-        msg.member.removeRole(therole);
-        msg.reply("Rol eliminado!");
-    }
-    else {
-        msg.member.addRole(therole);
-        msg.reply("Rol añadido!");
-    }
-    */
+    //if (msg.member.roles.has(therole.id)) {
+    //    msg.member.removeRole(therole);
+    //    msg.reply("Rol eliminado!");
+    //}
+    //else {
+    //    msg.member.addRole(therole);
+    //    msg.reply("Rol añadido!");
+    //}
     return;
   }
   // END AURA
   // ------------------------------------------------------------
-  
+  */
 
-  
+  /*
   // CHOOSE
   if (command == 'choose') {
       var randnum = Math.random();
@@ -415,9 +417,9 @@ client.on('message', msg => {
 
   }
   // END CHOOSE
-  
+  */
  
-  
+  /*
   // - INDREAMS.ME SECTION --------------------------------------
   
   // ICON LIST
@@ -463,9 +465,9 @@ client.on('message', msg => {
   // END INDREAMS.ME SEARCH
   
   // ------------------------------------------------------------
+  */
   
-  
-  
+  /*
   // START EMBED
   if (command == "embed") {
     //mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron)
@@ -490,11 +492,10 @@ client.on('message', msg => {
     return;
   }
   // END EMBED
-  
+  */
  
-  
   // - PROJECTS SECTION ------------------------------------------
-  
+  /*
   // START MKPROJ
   if (command == 'nuevoproyecto') {
     if (mkproj_cd) return msg.reply("Un momento, aún estoy trabajando en la petición anterior!");
@@ -538,7 +539,7 @@ client.on('message', msg => {
     return;
   }
   // END MKPROJ
-  
+  */
   
   // TEMPORARILY DEACTIVATED DUE TO .MEMBER MALFUNCTION (DISCORD WTF?)
   /*
@@ -780,7 +781,7 @@ client.on('message', msg => {
   }
   // END RMPROJ
   */
-  
+  /*
   // TEMPORAL MESSAGE
   if (command == 'restauraproyecto' || command == 'archivaproyecto' || command == 'editaproyecto' || command == 'purgaproyecto') {
     if (msg.channel.parentID != 552432711072088074) return msg.reply("Esto no es el canal de un proyecto.");
@@ -800,12 +801,12 @@ client.on('message', msg => {
               "\nPor favor, contacta con un Mod para que haga lo que querías manualmente.\nDisculpa las molestias.");
     
   }
-  
+  */
   
   // ------------------------------------------------------------
   
   
-  
+  /*
   // - TRICKS SECTION -------------------------------------------
   
   // START TRUCOS
@@ -889,6 +890,7 @@ client.on('message', msg => {
   }
   // END TRUCOS
   // ------------------------------------------------------------
+  */
 
   
 });
