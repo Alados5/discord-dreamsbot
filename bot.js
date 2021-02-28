@@ -685,6 +685,7 @@ client.on('message', (msg) => {
           msg.channel.messages.fetch({limit:1}).then(msgcol => {
             var lastmsg = msgcol.first();
             var realch = lastmsg.channel;
+            realch.send(realch.guild.members.cache.size);
             
             // Any message from anyone other than the bot aborts purge
             if (lastmsg.author.id != 573146997419278336) return realch.send("Proceso de eliminación abortado.");
@@ -700,19 +701,18 @@ client.on('message', (msg) => {
             // Process data: reactions were from Project members, and the majority voted
             msgreaction.users.fetch().then(rcol => {
               var reactors = Array.from(rcol.values());
-              realch.send(reactors.length);
-              var rolemembers = projrole.members;
-              realch.send(`${projrole}`);
+              var rolemembers = projrole.members; //ONLY CACHED MEMBERS!
               
               var validvotes = 0;
               for (var useri=0; useri<reactors.length; useri++) {
-                realch.send(`${reactors[useri]}`);
                 if (reactors[useri].id == 573146997419278336) continue;
+                realch.send(`${reactors[useri]}`);
                 var zamembah = rolemembers.get(reactors[useri].id);
                 if (!zamembah) continue;
                 validvotes += 1;
               }
               realch.send("Votos válidos: "+validvotes+"\nTotal de colaboradores: "+rolemembers.size);
+              //msg.member.roles.cache.get(projrole.id)
               
               realch.send("WIP!");
             }); 
