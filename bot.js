@@ -701,8 +701,7 @@ client.on('message', (msg) => {
             msgreaction.users.fetch().then(rcol => {
               var reactors = Array.from(rcol.values());
               
-              realch.send("Miembros totales (cache): " + realch.guild.members.cache.size);
-              realch.guild.members.fetch().then(mcol => {
+              realch.guild.members.fetch({force: true}).then(mcol => {
                 realch.send("Miembros totales (fetch): " + mcol.size);
               });
               
@@ -711,7 +710,6 @@ client.on('message', (msg) => {
               var validvotes = 0;
               for (var useri=0; useri<reactors.length; useri++) {
                 if (reactors[useri].id == 573146997419278336) continue;
-                realch.send(`${reactors[useri]}`);
                 var zamembah = rolemembers.get(reactors[useri].id);
                 if (!zamembah) continue;
                 validvotes += 1;
