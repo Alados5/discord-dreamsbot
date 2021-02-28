@@ -255,8 +255,7 @@ client.on('message', (msg) => {
   // ----------------------------------------------------------------------------------------
   // -------------- ADMIN COMMANDS ----------------------------------------------------------
   // ----------------------------------------------------------------------------------------
-  // TO-DO: Change to actual role/permission checking
-  if (msg.author.id == 284104569586450434 || msg.author.id == 267707200577732608) {
+  if (msg.member.permissions.has('ADMINISTRATOR')) {
     
     // CLEAR MESSAGES IN BULK
     if (command === 'clear') {
@@ -542,9 +541,48 @@ client.on('message', (msg) => {
     }
   }
   // END RECOVERPROJECT
-  
+
   // START ARCHIVEPROJECT
-  
+  if (command === 'archivaproyecto') {
+    if (msg.channel.parentID != projcat.id) return msg.reply("Esto no es el canal de un proyecto.");
+    var chname = msg.channel.name;
+    if (chname === "guía" || chname === "asignaciones") return msg.reply("Esto no es el canal de un proyecto.");
+    
+    var rolelist = Array.from(msg.guild.roles.cache.values());
+    var foundrole = false;
+    for (var rolei=0; rolei<rolelist.length; rolei++) {
+      if(rolelist[rolei].name.replace(/ /g, "_").toLowerCase().indexOf(chname) >= 0) {
+        var projrole = rolelist[rolei];
+        foundrole = true;
+      }
+    }
+    if (!foundrole) return msg.reply("Error. No se ha encontrado el rol de este proyecto.");
+    
+    if (msg.member.roles.cache.get(projrole.id) || msg.member.permissions.has('ADMINISTRATOR')) {
+      msg.reply("Archivando proyecto manualmente...");
+      
+      // Archive channel -> Hide it from everyone except corresponding role and admins
+      msg.channel.updateOverwrite(msg.guild.roles.everyone, {VIEW_CHANNEL:false}).then(archch => {
+        archch.updateOverwrite(projrole, {VIEW_CHANNEL:true});
+        
+        archch.send("Ahora el canal quedará invisible menos para los Mods y el rol de este proyecto. "+
+                    "Para restaurarlo se puede usar `!restauraproyecto` o contactar con un Mod.\n\n"+
+                    "**¡ATENCIÓN!** Si no se dice nada por este canal en menos de **UN MES**, ```prolog\n"+
+                    "ESTE PROYECTO VA A SER ELIMINADO\n```\n"+
+                    "Y se hará sin previo aviso, ya que archivar es, por defecto, lo que se hace con los proyectos inactivos. "+
+                    "Así que esta función de archivado manual se debe ejecutar bajo la propia responsabilidad. "+
+                    "Si se envía cualquier mensaje, el proceso de purga se reinicia, y tras dos meses sin actividad se marcará el proyecto como inactivo.");
+        
+        // Send exactly this message:
+        archch.send("```md\n<PROYECTO ARCHIVADO>\n```");
+      });
+      
+      msg.channel.send("WIP");
+    }
+    else {
+      return msg.reply("No formas parte de este proyecto (no tienes el rol): No puedes archivarlo.");
+    }
+  }
   // END ARCHIVEPROJECT
   
   // START EDITPROJECT
