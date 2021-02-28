@@ -682,7 +682,24 @@ client.on('message', (msg) => {
         sentmsg.react('✅').then(tickreaction => {
           sleep(10000);
           
-          msg.channel.send("WIP");
+          msg.channel.messages.fetch({limit:1}).then(msgcol => {
+            var lastmsg = msgcol.first();
+            var realch = lastmsg.channel;
+            
+            // Any message from anyone other than the bot aborts purge
+            if (lastmsg.author.id != 573146997419278336) return realch.send("Proceso de eliminación abortado.");
+            
+            // Process reactions
+            var reactlist = Array.from(lastmsg.reactions.cache.values());
+            for (var reacti=0; reacti<reactlist.length; reacti++) {
+              if (reactlist[reacti].emoji.name != '✅') continue;
+              if (reactlist[reacti].count < 2) return realch.send("No se ha confirmado la eliminación.");
+              var msgreaction = reactlist[reacti];
+            }
+            
+            realch.send("WIP!");
+            
+          });
         });
       });
       
