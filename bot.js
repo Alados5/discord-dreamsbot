@@ -476,8 +476,7 @@ client.on('message', (msg) => {
   if (command === 'nuevoproyecto') {
     if (mkproj_cd) return msg.reply("Un momento, aún estoy trabajando en la petición anterior!");
     
-    // Remove all non-alphanumeric chars (change spaces to underscores to keep them, remove chars, change back to spaces)
-    //var givenname = msg.content.slice(prefix.length+command.length+1).replace(/ /g, "_").replace(/\W/g, '').replace(/_/g, " ");
+    // Remove all non-alphanumeric chars, but keep spaces and hyphens
     var givenname = msg.content.slice(prefix.length+command.length+1).replace(/[^\w- ]+/g,'');
     if (!givenname) return msg.reply("No has escrito ningún nombre!");
     
@@ -504,12 +503,11 @@ client.on('message', (msg) => {
       color: '#95a5a6',
       mentionable: true
     }}).then(projrole => {
-      msg.channel.send('Rol '+`${projrole}`+' creado!');
+      msg.guild.members.cache.get(msg.author.id).roles.add(projrole);
+      msg.channel.send('Rol '+`${projrole}`+' creado y asignado!');
+      msg.channel.send("Todo listo! Disfruta del nuevo Proyecto!");
       mkproj_cd = false;
     });
-    
-    //msg.guild.members.cache.get(msg.author.id).roles.add(projrole);
-    
     
     
   }
