@@ -514,14 +514,40 @@ client.on('message', (msg) => {
         mkproj_cd = false;
       });
     });
-    
-    
-    
-    
-    
-    
   }
   // END MKPROJECT
+  
+  // START RECOVERPROJECT
+  if (command === 'restauraproyecto') {
+    if (msg.channel.parentID != projcat.id) return msg.reply("Esto no es el canal de un proyecto.");
+    var chname = msg.channel.name;
+    if (chname === "guía" || chname === "asignaciones") return msg.reply("Esto no es el canal de un proyecto.");
+    
+    var rolelist = Array.from(msg.guild.roles.cache.values());
+    var foundrole = false;
+    for (var rolei=0; rolei<rolelist.length; rolei++) {
+      if(rolelist[rolei].name.replace(/ /g, "_").toLowerCase().indexOf(chname) >= 0) {
+        var projrole = rolelist[rolei];
+        foundrole = true;
+      }
+    }
+    if (!foundrole) return msg.reply("Error. No se ha encontrado el rol de este proyecto.");
+    
+    msg.channel.send("WIP, pero de momento todo funciona!");
+  }
+  // END RECOVERPROJECT
+  
+  // START ARCHIVEPROJECT
+  
+  // END ARCHIVEPROJECT
+  
+  // START EDITPROJECT
+  
+  // END EDITPROJECT
+  
+  // START RMPROJECT
+  
+  // END RMPROJECT
 
   // - END PROJECTS SECTION --------------------------------------
   
