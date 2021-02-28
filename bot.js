@@ -128,10 +128,14 @@ client.on('message', (msg) => {
 
   var lowtext = msg.content.toLowerCase();
   
-  // Save channels: #bot_debug and #bienvenida
+  // Save channels: #bot_debug, #bienvenida, #asignaciones
   var dreami_channels = msg.guild.channels.cache;
   var debugch = dreami_channels.find(ch => ch.id==688107638239920282);
   var welcomech = dreami_channels.find(ch => ch.id==552804145866866698);
+  var asignch = dreami_channels.find(ch => ch.id==572891836687843328);
+  
+  // Save Projects category
+  var projcat = dreami_channels.find(ch => ch.id==552432711072088074);
   
   // Returns if message doesn't start with prefix
   if(!msg.content.startsWith(prefix)) {
@@ -147,12 +151,7 @@ client.on('message', (msg) => {
     if (purgeflag) return;
     
     purgeflag = true;
-    
-    // ID of channel: #asignaciones
-    var asignch = dreami_channels.find(ch => ch.id==572891836687843328);
-    
-    // Project Category ID: 552432711072088074
-    var projcat = dreami_channels.find(ch => ch.id==552432711072088074);
+
     var projchans = Array.from(projcat.children.values());
     
     for (var proji=0; proji<projchans.length; proji++) {
@@ -471,6 +470,32 @@ client.on('message', (msg) => {
   
   
   // - PROJECTS SECTION ------------------------------------------
+  // Handy variables already created: asignch, debugch, projcat, mkproj_cd
+  
+  // START MKPROJECT
+  if (command === 'nuevoproyecto') {
+    if (mkproj_cd) return msg.reply("Un momento, aún estoy trabajando en la petición anterior!");
+    var givenname = msg.content.slice(prefix.length+command.length+1);
+    if (!givenname) return msg.reply("No has escrito ningún nombre!");
+    var chname = givenname.replace(/ /g, "_");
+    if (msg.channel.id != asignch.id && msg.channel.id != debugch.id) return msg.reply("Comando válido sólo en el canal de asignaciones!");
+    
+    mkproj_cd = true;
+    var totalproj = projcat.children.size - 1;
+    
+    msg.reply("Creando canal...");
+    
+    msg.guild.channels.create(chname, {
+      type: 'text',
+      parent: projcat,
+      topic: 'Proyecto creado por '+msg.author.username,
+    });
+    
+    msg.reply("Hecho!");
+    
+    
+  }
+  // END MKPROJECT
 
   // - END PROJECTS SECTION --------------------------------------
   
