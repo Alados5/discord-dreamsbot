@@ -475,8 +475,12 @@ client.on('message', (msg) => {
   // START MKPROJECT
   if (command === 'nuevoproyecto') {
     if (mkproj_cd) return msg.reply("Un momento, aún estoy trabajando en la petición anterior!");
-    var givenname = msg.content.slice(prefix.length+command.length+1);
+    
+    // Remove all non-alphanumeric chars 
+    var givenname = msg.content.slice(prefix.length+command.length+1).replace(/\W/g, '');
     if (!givenname) return msg.reply("No has escrito ningún nombre!");
+    
+    // Change spaces by underscores for the channel name 
     var chname = givenname.replace(/ /g, "_");
     if (msg.channel.id != asignch.id && msg.channel.id != debugch.id) return msg.reply("Comando válido sólo en el canal de asignaciones!");
     
@@ -487,6 +491,8 @@ client.on('message', (msg) => {
       type: 'text',
       parent: projcat,
       topic: 'Proyecto creado por '+msg.author.username,
+    }).then(ch => {
+      msg.channel.send('Canal del Proyecto creado: '+`${ch}`);
     });
     
     msg.channel.send("Creando rol...");
