@@ -700,8 +700,10 @@ client.on('message', (msg) => {
             // Process data: reactions were from Project members, and the majority voted
             var reactors = Array.from(msgreaction.users.cache.values());
             var rolemembers = projrole.members;
+            realch.send(`${projrole}`);
             var validvotes = 0;
             for (var useri=0; useri<reactors.length; useri++) {
+              realch.send(`${reactors[useri]}`);
               if (reactors[useri].id == 573146997419278336) continue;
               var zamembah = rolemembers.get(reactors[useri].id);
               if (!zamembah) continue;
