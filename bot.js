@@ -660,7 +660,38 @@ client.on('message', (msg) => {
   // END EDITPROJECT
   
   // START RMPROJECT
-  
+  if (command === 'purgaproyecto' || command === 'borraproyecto') {
+    if (msg.channel.parentID != projcat.id) return msg.reply("Esto no es el canal de un proyecto.");
+    var chname = msg.channel.name;
+    if (chname === "guía" || chname === "asignaciones") return msg.reply("Esto no es el canal de un proyecto.");
+    
+    var rolelist = Array.from(msg.guild.roles.cache.values());
+    var foundrole = false;
+    for (var rolei=0; rolei<rolelist.length; rolei++) {
+      if(rolelist[rolei].name.replace(/ /g, "_").toLowerCase().indexOf(chname) >= 0) {
+        var projrole = rolelist[rolei];
+        foundrole = true;
+      }
+    }
+    if (!foundrole) return msg.reply("Error. No se ha encontrado el rol de este proyecto.");
+    
+    if (msg.member.roles.cache.get(projrole.id) || msg.member.permissions.has('ADMINISTRATOR')) {
+      msg.reply("¿Seguro? ¡Esta acción es irreversible!\n"+
+                "**Reacciona** con el tick en menos de 10 segundos para confirmar.\n"+
+                "Enviar cualquier mensaje también cancelará el proceso de eliminación.").then(sentmsg => {
+        sentmsg.react('✅').then(tickreaction => {
+          sleep(10000);
+          
+          msg.channel.send("WIP");
+        });
+      });
+      
+    }
+    else {
+      return msg.reply("No formas parte de este proyecto (no tienes el rol): No puedes eliminar este canal.");
+    }
+    
+  }
   // END RMPROJECT
 
   // - END PROJECTS SECTION --------------------------------------
