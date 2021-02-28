@@ -477,12 +477,12 @@ client.on('message', (msg) => {
     if (mkproj_cd) return msg.reply("Un momento, aún estoy trabajando en la petición anterior!");
     
     // Remove all non-alphanumeric chars (change spaces to underscores to keep them, remove chars, change back to spaces)
-    var givenname = msg.content.slice(prefix.length+command.length+1).replace(/ /g, "_").replace(/\W/g, '').replace("_", " ");
+    var givenname = msg.content.slice(prefix.length+command.length+1).replace(/ /g, "_").replace(/\W/g, '').replace(/_/g, " ");
     if (!givenname) return msg.reply("No has escrito ningún nombre!");
     
     // Change spaces by underscores for the channel name 
     var chname = givenname.replace(/ /g, "_");
-    if (msg.channel.id != asignch.id && msg.channel.id != debugch.id) return msg.reply("Comando válido sólo en el canal de asignaciones!");
+    if (msg.channel.id != asignch.id && msg.channel.id != debugch.id) return msg.reply("Comando válido sólo en el canal "+`${asignch}`+"!");
     
     mkproj_cd = true;
     
