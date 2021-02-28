@@ -481,18 +481,27 @@ client.on('message', (msg) => {
     if (msg.channel.id != asignch.id && msg.channel.id != debugch.id) return msg.reply("Comando válido sólo en el canal de asignaciones!");
     
     mkproj_cd = true;
-    var totalproj = projcat.children.size - 1;
     
     msg.reply("Creando canal...");
-    
     msg.guild.channels.create(chname, {
       type: 'text',
       parent: projcat,
       topic: 'Proyecto creado por '+msg.author.username,
     });
     
-    msg.reply("Hecho!");
+    msg.channel.send("Creando rol...");
+    var totalproj = projcat.children.size - 1;
+    var rolename = "P" + totalproj + " - " + givenname;
+    msg.guild.roles.create({data: {
+      name: rolename,
+      color: '#95a5a6',
+      mentionable: true
+    }});
     
+    //msg.guild.members.cache.get(msg.author.id).roles.add(projrole);
+    
+    msg.reply("Hecho!");
+    mkproj_cd = false;
     
   }
   // END MKPROJECT
