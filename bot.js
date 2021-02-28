@@ -403,7 +403,7 @@ client.on('message', (msg) => {
       }
     }
     
-    var usr_role_mng = msg.guild.members.cache.get(msg.author.id).roles;
+    var usr_role_mng = msg.member.roles;
     var usr_therole = usr_role_mng.cache.find(rl => rl.name === therole.name);
     
     if(!usr_therole) {
@@ -533,8 +533,9 @@ client.on('message', (msg) => {
     }
     if (!foundrole) return msg.reply("Error. No se ha encontrado el rol de este proyecto.");
     
-    if (msg.member.roles.cache.get(projrole.id)) {
-      msg.channel.send("WIP, pero de momento todo funciona! Tienes el rol :)");
+    if (msg.member.roles.cache.get(projrole.id) || msg.member.permissions.has('ADMINISTRATOR')) {
+      msg.channel.updateOverwrite(msg.guild.roles.everyone, {VIEW_CHANNEL:true});
+      msg.channel.send("```md\n<PROYECTO RESTAURADO>\n```");
     }
     else {
       return msg.reply("No formas parte de este proyecto (no tienes el rol).\n¿Cómo es que ves esto?");
