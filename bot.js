@@ -689,13 +689,25 @@ client.on('message', (msg) => {
             // Any message from anyone other than the bot aborts purge
             if (lastmsg.author.id != 573146997419278336) return realch.send("Proceso de eliminación abortado.");
             
-            // Process reactions
+            // Check that someone reacted with the checkmark
             var reactlist = Array.from(lastmsg.reactions.cache.values());
             for (var reacti=0; reacti<reactlist.length; reacti++) {
               if (reactlist[reacti].emoji.name != '✅') continue;
               if (reactlist[reacti].count < 2) return realch.send("No se ha confirmado la eliminación.");
               var msgreaction = reactlist[reacti];
             }
+            
+            // Process data: reactions were from Project members, and the majority voted
+            var reactors = Array.from(msgreaction.users.cache.values());
+            var rolemembers = projrole.members;
+            var validvotes = 0;
+            for (var useri=0; useri<reactors.length; useri++) {
+              if (reactors[useri].id == 573146997419278336) continue;
+              var zamembah = rolemembers.get(reactors[useri].id);
+              if (!zamembah) continue;
+              validvotes += 1;
+            }
+            realch.send("Votos válidos: "+validvotes+"\nTotal de colaboradores: "+rolemembers.size);
             
             realch.send("WIP!");
             
