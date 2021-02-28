@@ -695,27 +695,27 @@ client.on('message', (msg) => {
               if (reactlist[reacti].emoji.name != '✅') continue;
               if (reactlist[reacti].count < 2) return realch.send("No se ha confirmado la eliminación.");
               var msgreaction = reactlist[reacti];
-              realch.send(msgreaction.count);
-              realch.send(msgreaction.users.cache.size);
             }
             
             // Process data: reactions were from Project members, and the majority voted
-            var reactors = Array.from(msgreaction.users.cache.values());
-            realch.send(reactors.length);
-            var rolemembers = projrole.members;
-            realch.send(`${projrole}`);
-            var validvotes = 0;
-            for (var useri=0; useri<reactors.length; useri++) {
-              realch.send(`${reactors[useri]}`);
-              if (reactors[useri].id == 573146997419278336) continue;
-              var zamembah = rolemembers.get(reactors[useri].id);
-              if (!zamembah) continue;
-              validvotes += 1;
-            }
-            realch.send("Votos válidos: "+validvotes+"\nTotal de colaboradores: "+rolemembers.size);
-            
-            realch.send("WIP!");
-            
+            msgreaction.users.fetch().then(rcol => {
+              var reactors = Array.from(rcol.values());
+              realch.send(reactors.length);
+              var rolemembers = projrole.members;
+              realch.send(`${projrole}`);
+              
+              var validvotes = 0;
+              for (var useri=0; useri<reactors.length; useri++) {
+                realch.send(`${reactors[useri]}`);
+                if (reactors[useri].id == 573146997419278336) continue;
+                var zamembah = rolemembers.get(reactors[useri].id);
+                if (!zamembah) continue;
+                validvotes += 1;
+              }
+              realch.send("Votos válidos: "+validvotes+"\nTotal de colaboradores: "+rolemembers.size);
+              
+              realch.send("WIP!");
+            }); 
           });
         });
       });
