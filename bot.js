@@ -485,6 +485,8 @@ client.on('message', (msg) => {
     if (msg.channel.id != asignch.id && msg.channel.id != debugch.id) return msg.reply("Comando válido sólo en el canal "+`${asignch}`+"!");
     
     mkproj_cd = true;
+    var totalproj = projcat.children.size - 1;
+    var rolename = "P" + totalproj + " - " + givenname;
     
     msg.reply("Creando canal...");
     msg.guild.channels.create(chname, {
@@ -493,21 +495,29 @@ client.on('message', (msg) => {
       topic: 'Proyecto creado por '+msg.author.username,
     }).then(ch => {
       msg.channel.send('Canal del Proyecto creado: '+`${ch}`);
+      
+      msg.channel.send("Creando rol...");
+      msg.guild.roles.create({data: {
+        name: rolename,
+        color: '#95a5a6',
+        mentionable: true
+      }}).then(projrole => {
+        msg.guild.members.cache.get(msg.author.id).roles.add(projrole);
+        ch.updateOverwrite(projrole, {MANAGE_MESSAGES:true});
+        
+        msg.channel.send('Rol '+`${projrole}`+' creado y asignado!');
+        msg.channel.send("Todo listo! Disfruta del nuevo Proyecto!");
+        
+        ch.send("¡Aquí está, "+`${projrole}`+"! ¡Llena este canal de creatividad!\n"+
+                "Puedes editar el nombre, el tema y los miembros de este proyecto con `!editaproyecto`");
+        
+        mkproj_cd = false;
+      });
     });
     
-    msg.channel.send("Creando rol...");
-    var totalproj = projcat.children.size - 1;
-    var rolename = "P" + totalproj + " - " + givenname;
-    msg.guild.roles.create({data: {
-      name: rolename,
-      color: '#95a5a6',
-      mentionable: true
-    }}).then(projrole => {
-      msg.guild.members.cache.get(msg.author.id).roles.add(projrole);
-      msg.channel.send('Rol '+`${projrole}`+' creado y asignado!');
-      msg.channel.send("Todo listo! Disfruta del nuevo Proyecto!");
-      mkproj_cd = false;
-    });
+    
+    
+    
     
     
   }
