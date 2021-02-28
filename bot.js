@@ -622,7 +622,25 @@ client.on('message', (msg) => {
         msg.reply("¡Hecho!")
       }
       else if (args[0] == 'miembros') {
-        msg.reply("WIP");
+        var mentionlist = Array.from(msg.mentions.members.values());
+        if (mentionlist.length == 0) return msg.reply("¡No has mencionado a ningún usuario!")
+        
+        var newcollab = false;
+        for (var mentioni=0; mentioni<mentionlist.length; mentioni++) {
+          if (mentionlist[mentioni].roles.cache.get(projrole.id)) {
+            mentionlist[mentioni].roles.remove(projrole);
+            msg.channel.send(mentionlist[mentioni]+" ya no colabora en este proyecto.");
+          }
+          else {
+            mentionlist[mentioni].roles.add(projrole);
+            msg.channel.send(mentionlist[mentioni]+" ahora colabora en este proyecto.");
+            newcollab = true;
+          }
+        }
+        
+        if (newcollab) msg.channel.send("Recordad que con el rol "+`${projrole}`+" compartís permisos sobre este proyecto:"+
+                                        " podéis cambiarle nombre, tema, colaboradores, etc.");
+        msg.reply("¡Hecho!");
       }
       else {
         msg.reply("Debes especificar qué editar: nombre, tema o miembros.\n"+
