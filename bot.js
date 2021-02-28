@@ -701,10 +701,13 @@ client.on('message', (msg) => {
             msgreaction.users.fetch().then(rcol => {
               var reactors = Array.from(rcol.values());
               
-              realch.guild.members.fetch({force: true}).then(mcol => {
+              //realch.guild.members.fetch({force: true}).then(mcol => {
                 //realch.send("Miembros totales (fetch): " + mcol.size);
-                realch.send("Hi?");
-              });
+                //realch.send("Hi?");
+              //});
+              
+              var memmap = msg.guild.roles.cache.get(projrole.id).members.map(m=>m.user.id);
+              realch.send("Map: "+memmap.size);
               
               var rolemembers = projrole.members; //ONLY CACHED MEMBERS!
               
