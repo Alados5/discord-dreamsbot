@@ -576,8 +576,7 @@ client.on('message', (msg) => {
         // Send exactly this message:
         archch.send("```md\n<PROYECTO ARCHIVADO>\n```");
       });
-      
-      msg.channel.send("WIP");
+
     }
     else {
       return msg.reply("No formas parte de este proyecto (no tienes el rol): No puedes archivarlo.");
@@ -586,7 +585,43 @@ client.on('message', (msg) => {
   // END ARCHIVEPROJECT
   
   // START EDITPROJECT
-  
+  if (command === 'editaproyecto') {
+    if (msg.channel.parentID != projcat.id) return msg.reply("Esto no es el canal de un proyecto.");
+    var chname = msg.channel.name;
+    if (chname === "guía" || chname === "asignaciones") return msg.reply("Esto no es el canal de un proyecto.");
+    
+    var rolelist = Array.from(msg.guild.roles.cache.values());
+    var foundrole = false;
+    for (var rolei=0; rolei<rolelist.length; rolei++) {
+      if(rolelist[rolei].name.replace(/ /g, "_").toLowerCase().indexOf(chname) >= 0) {
+        var projrole = rolelist[rolei];
+        foundrole = true;
+      }
+    }
+    if (!foundrole) return msg.reply("Error. No se ha encontrado el rol de este proyecto.");
+    
+    if (msg.member.roles.cache.get(projrole.id) || msg.member.permissions.has('ADMINISTRATOR')) {
+      // Edit Name - Topic - Members (add project role to others)
+      if (args[0] === 'nombre') {
+        // Remove weird characters from the start
+        var intext = msg.content.slice(prefix.length+command.length+8).replace(/[^A-Za-zÀ-ÖØ-öø-ÿ- ]+/g,'');
+        if (!intext) return msg.reply("¡No has escrito nada!");
+
+        var chname = intext.replace(/ /g, "_");
+        // CHANGE CHANNEL NAME
+        
+        // Role: Keep "Pn - " regardless of length of number ("P1 - ", "P10 - ", etc.)
+        // CHANGE ROLE NAME
+        
+        msg.channel.send("WIP\nGiven name: "+intext+".\nChannel name: "+chname);
+        //msg.reply("¡Hecho!")
+      }
+    }
+    else {
+      return msg.reply("No formas parte de este proyecto (no tienes el rol): No puedes editar este canal.");
+    }
+
+  }
   // END EDITPROJECT
   
   // START RMPROJECT
