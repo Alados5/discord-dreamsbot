@@ -702,7 +702,10 @@ client.on('message', (msg) => {
               var reactors = Array.from(rcol.values());
               
               realch.send("Miembros totales (cache): " + realch.guild.members.cache.size);
-              realch.send("Miembros totales (fetch): " + realch.guild.members.fetch().size);
+              realch.guild.members.fetch().then(mcol => {
+                realch.send("Miembros totales (fetch): " + mcol.size);
+              });
+              
               var rolemembers = projrole.members; //ONLY CACHED MEMBERS!
               
               var validvotes = 0;
