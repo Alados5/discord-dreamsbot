@@ -629,11 +629,11 @@ client.on('message', (msg) => {
         for (var mentioni=0; mentioni<mentionlist.length; mentioni++) {
           if (mentionlist[mentioni].roles.cache.get(projrole.id)) {
             mentionlist[mentioni].roles.remove(projrole);
-            msg.channel.send(mentionlist[mentioni]+" ya no colabora en este proyecto.");
+            msg.channel.send(`${mentionlist[mentioni]}`+" ya no colabora en este proyecto.");
           }
           else {
             mentionlist[mentioni].roles.add(projrole);
-            msg.channel.send(mentionlist[mentioni]+" ahora colabora en este proyecto.");
+            msg.channel.send(`${mentionlist[mentioni]}`+" ahora colabora en este proyecto.");
             newcollab = true;
           }
         }
