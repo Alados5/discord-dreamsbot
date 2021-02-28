@@ -533,7 +533,12 @@ client.on('message', (msg) => {
     }
     if (!foundrole) return msg.reply("Error. No se ha encontrado el rol de este proyecto.");
     
-    msg.channel.send("WIP, pero de momento todo funciona!");
+    if (msg.member.roles.cache.get(projrole.id)) {
+      msg.channel.send("WIP, pero de momento todo funciona! Tienes el rol :)");
+    }
+    else {
+      return msg.reply("No formas parte de este proyecto (no tienes el rol).\n¿Cómo es que ves esto?");
+    }
   }
   // END RECOVERPROJECT
   
