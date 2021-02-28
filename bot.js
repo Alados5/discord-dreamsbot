@@ -608,13 +608,30 @@ client.on('message', (msg) => {
         if (!intext) return msg.reply("¡No has escrito nada!");
 
         var chname = intext.replace(/ /g, "_");
-        // CHANGE CHANNEL NAME
+        msg.channel.setName(chname);
         
         // Role: Keep "Pn - " regardless of length of number ("P1 - ", "P10 - ", etc.)
-        // CHANGE ROLE NAME
+        projrole.setName(projrole.name.slice(0,projrole.name.indexOf("-")+2)+intext);
         
-        msg.channel.send("WIP\nGiven name: "+intext+".\nChannel name: "+chname);
-        //msg.reply("¡Hecho!")
+        msg.reply("¡Hecho!")
+      }
+      else if (args[0] == 'tema') {
+        var intext = msg.content.slice(prefix.length+command.length+6);
+        if (!intext) return msg.reply("¡No has escrito nada!");
+        msg.channel.setTopic(intext);
+        msg.reply("¡Hecho!")
+      }
+      else if (args[0] == 'miembros') {
+        msg.reply("WIP");
+      }
+      else {
+        msg.reply("Debes especificar qué editar: nombre, tema o miembros.\n"+
+                  "`!editaproyecto nombre` cambia el nombre del proyecto y del rol asociado a lo que escribas después.\n"+
+                  "`!editaproyecto tema` cambia el tema (la descripción que ves arriba desde PC"+
+                  " o en la barra lateral derecha desde móvil) del canal a lo que escribas después.\n"+
+                  "`!editaproyecto miembros` le dará el rol de este proyecto a quién menciones."+
+                  " Si mencionas a alguien que ya colabora, se le quitará el rol.\n\n"+
+                  "Si lo que quieres es eliminar el proyecto, usa `!purgaproyecto`. Pero cuidado, porque no hay vuelta atrás!");
       }
     }
     else {
