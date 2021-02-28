@@ -702,7 +702,8 @@ client.on('message', (msg) => {
               var reactors = Array.from(rcol.values());
               
               realch.guild.members.fetch({force: true}).then(mcol => {
-                realch.send("Miembros totales (fetch): " + mcol.size);
+                //realch.send("Miembros totales (fetch): " + mcol.size);
+                realch.send("Hi?");
               });
               
               var rolemembers = projrole.members; //ONLY CACHED MEMBERS!
@@ -714,7 +715,7 @@ client.on('message', (msg) => {
                 if (!zamembah) continue;
                 validvotes += 1;
               }
-              realch.send("Votos válidos: "+validvotes+"\nTotal de colaboradores: "+rolemembers.size);
+              //realch.send("Votos válidos: "+validvotes+"\nTotal de colaboradores: "+rolemembers.size);
               //msg.member.roles.cache.get(projrole.id)
               
               realch.send("WIP!");
