@@ -685,7 +685,6 @@ client.on('message', (msg) => {
           msg.channel.messages.fetch({limit:1}).then(msgcol => {
             var lastmsg = msgcol.first();
             var realch = lastmsg.channel;
-            realch.send(realch.guild.members.cache.size);
             
             // Any message from anyone other than the bot aborts purge
             if (lastmsg.author.id != 573146997419278336) return realch.send("Proceso de eliminación abortado.");
@@ -701,6 +700,9 @@ client.on('message', (msg) => {
             // Process data: reactions were from Project members, and the majority voted
             msgreaction.users.fetch().then(rcol => {
               var reactors = Array.from(rcol.values());
+              
+              realch.send("Miembros totales (cache): " + realch.guild.members.cache.size);
+              realch.send("Miembros totales (fetch): " + realch.guild.members.fetch().size);
               var rolemembers = projrole.members; //ONLY CACHED MEMBERS!
               
               var validvotes = 0;
