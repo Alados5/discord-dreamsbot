@@ -728,7 +728,12 @@ client.on('message', (msg) => {
                   sleep(1000);
                   
                   // Subtract 1 to all project numbers greater than the deleted one
-                  realch.send("WIP - Primero tendría que restar 1 a todos los roles de proyectos siguientes!");
+                  var projnum = parseInt(projrole.name.slice(1, projrole.name.indexOf("-")-1));
+                  for (var rolei=0; rolei<rolelist.length; rolei++) {
+                    var numi = parseInt(rolelist[rolei].name.slice(1, rolelist[rolei].name.indexOf("-")-1));
+                    if (isNaN(numi)) continue;
+                    realch.send(`${rolelist[rolei]}`);
+                  }
                   
                   // DELETE PROJECT & ROLE
                   realch.send("WIP - Este proyecto (canal y rol) sería eliminado ahora!");
