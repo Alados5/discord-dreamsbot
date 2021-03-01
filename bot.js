@@ -732,7 +732,11 @@ client.on('message', (msg) => {
                   for (var rolei=0; rolei<rolelist.length; rolei++) {
                     var numi = parseInt(rolelist[rolei].name.slice(1, rolelist[rolei].name.indexOf("-")-1));
                     if (isNaN(numi)) continue;
-                    realch.send(`${rolelist[rolei]}`);
+                    if (numi>projnum) {
+                      var newname = "P"+(numi-1)+" "+rolelist[rolei].name.slice(rolelist[rolei].name.indexOf("-"), rolelist[rolei].name.length);
+                      realch.send(`${newname}`);
+                      //rolelist[rolei].setName(newname);
+                    }
                   }
                   
                   // DELETE PROJECT & ROLE
