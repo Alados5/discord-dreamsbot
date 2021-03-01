@@ -735,15 +735,16 @@ client.on('message', (msg) => {
                     if (numi>projnum) {
                       var newname = "P"+(numi-1)+" "+rolelist[rolei].name.slice(rolelist[rolei].name.indexOf("-"), rolelist[rolei].name.length);
                       realch.send(`${newname}`);
-                      //rolelist[rolei].setName(newname);
+                      rolelist[rolei].setName(newname);
                     }
                   }
                   
                   // DELETE PROJECT & ROLE
-                  realch.send("WIP - Este proyecto (canal y rol) sería eliminado ahora!");
+                  realch.delete();
+                  projrole.delete();
                   
                   // Send notice through "asignaciones"
-                  realch.send("WIP - Ahora enviaría una notificación por "+`${asignch}`+"!");
+                  asignch.send('```prolog\nPROYECTO "'+realch.name.toUpperCase()+'" ELIMINADO\n```');
                   
                 });
               }
