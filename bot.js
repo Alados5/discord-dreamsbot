@@ -1,6 +1,6 @@
 // CLIENT:
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const client = new Discord.Client({ ws: { intents: ['GUILD_MEMBERS', 'GUILD_PRESENCES'] } });
 
 // THIS MUST BE THIS WAY:
 client.login(process.env.BOT_TOKEN);
