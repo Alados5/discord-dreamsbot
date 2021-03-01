@@ -710,7 +710,7 @@ client.on('message', (msg) => {
               realch.send("Map: "+memmap.size);
               
               
-              const TestRole = msg.guild.roles.cache.find(role => role.name == "P14 - Bogdan Nevera");
+              const TestRole = msg.guild.roles.cache.find(role => role.name == "P9 - Simon y Enrique");
               const Members = msg.guild.members.cache.filter(member => member.roles.cache.find(role => role == TestRole)).map(member => member.user.tag);
               msg.channel.send(`Users with ${TestRole.name}: ${Members}`);
               
@@ -724,7 +724,7 @@ client.on('message', (msg) => {
                 if (!zamembah) continue;
                 validvotes += 1;
               }
-              //realch.send("Votos válidos: "+validvotes+"\nTotal de colaboradores: "+rolemembers.size);
+              realch.send("Votos válidos: "+validvotes+"\nTotal de colaboradores: "+rolemembers.size);
               //msg.member.roles.cache.get(projrole.id)
               
               realch.send("WIP!");
