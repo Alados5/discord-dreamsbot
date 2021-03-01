@@ -761,7 +761,6 @@ client.on('message', (msg) => {
     else {
       return msg.reply("No formas parte de este proyecto (no tienes el rol): No puedes eliminar este canal.");
     }
-    
   }
   // END RMPROJECT
 
@@ -769,7 +768,45 @@ client.on('message', (msg) => {
   
   
   // - TRICKS SECTION --------------------------------------------
-  
+  if (command === 'trucos') {
+    if (args[0]) args[0] = args[0].toLowerCase();
+    if (args[1]) args[1] = args[1].toLowerCase();
+    
+    //dbindex = {1:{name:"...", tags:["..."], desc: "..."}, ...}
+    //mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron)
+    
+    // TRICK LIST
+    if (args[0] == "todo") {
+      var response = "*Nota: Se muestran sólo los títulos. Para leer el truco entero se debe pedir con `!trucos` seguido del número correspondiente.* \n\n";
+      for (var ntrick in dbindex) {
+        if (dbindex.hasOwnProperty(ntrick)) {
+          response = response + ntrick + ": " + dbindex[ntrick].name + "\n";
+        }
+      }
+      var embedobj = mkembed("Lista de todos los trucos", response, [], 11075328, "", true)
+      msg.channel.send({embed:embedobj});
+    }
+    
+    // TRICKS BY TAG
+    
+    // TRICK BY ID
+    
+    // NOTHING SPECIFIED (HELP)
+    else {
+      var response = "";
+      if (!args[0]) response = response + "No has especificado qué hacer! \n\n";
+      else response = response + "Comando no válido! \n\n";
+      response = response + "`!trucos` accede a una base de datos de trucos, pero tienes que indicar más cosas. Aquí tienes las posibles opciones: \n\n"+
+                     "  - `!trucos todo` devuelve una lista numerada con los títulos de todos los trucos de la base de datos \n\n"+
+                     "  - `!trucos tag [TAG]` devuelve una lista numerada con todos los trucos con esa palabra clave. \n"+
+                     "       Por ejemplo: `!trucos tag Esculpir` \n\n"+
+                     "  - `!trucos [N]` devuelve el truco del número escrito, completo con descripción, imagen y autor \n"+
+                     "       Por ejemplo: `!trucos 3` \n\n"+
+                     "Si tienes un truco, consejo, ayuda o tutorial chulo y quieres que esté en la base de datos, no dudes en decirlo!";
+      msg.reply(response);
+    }
+    
+  }
   // - END TRICKS SECTION ----------------------------------------
 
 });
