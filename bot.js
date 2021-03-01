@@ -823,9 +823,20 @@ client.on('message', (msg) => {
     else if (!isNaN(parseInt(args[0]))) {
       var title = "TRUCO " + args[0] + ": " + dbindex[args[0]].name;
       var response = dbindex[args[0]].desc + "\nㅤ";
-      var taglist = "";
       
-      msg.channel.send("WIP");
+      var taglist = "";
+      for (var tagi=0; tagi<dbindex[args[0]].tags.length; tagi++) {
+        var thistag = dbindex[args[0]].tags[tagi];
+        taglist += thistag[0].toUpperCase() + thistag.slice(1,thistag.length) + ", ";
+      }
+      taglist = taglist.slice(0,taglist.length-2);
+      
+      var msgfields = [["Palabras clave:", taglist], ["Truco proporcionado por:", dbindex[args[0]].user]];
+      
+      var embedobj = mkembed(title, response, msgfields, 11075328, "", true)
+      
+      msg.channel.send({embed:embedobj});
+      if (dbindex[args[0]].link) msg.channel.send("Enlace o contenido multimedia: \n" + dbindex[args[0]].link);
     }
     
     // NOTHING SPECIFIED (HELP)
