@@ -709,6 +709,12 @@ client.on('message', (msg) => {
               var memmap = msg.guild.roles.cache.get(projrole.id).members.map(m=>m.user.id);
               realch.send("Map: "+memmap.size);
               
+              
+              const TestRole = msg.guild.roles.cache.find(role => role.name == "P14 - Bogdan Nevera");
+              const Members = msg.guild.members.cache.filter(member => member.roles.cache.find(role => role == TestRole)).map(member => member.user.tag);
+              msg.channel.send(`Users with ${TestRole.name}: ${Members}`);
+              
+              
               var rolemembers = projrole.members; //ONLY CACHED MEMBERS!
               
               var validvotes = 0;
