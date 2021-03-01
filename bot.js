@@ -701,19 +701,9 @@ client.on('message', (msg) => {
             msgreaction.users.fetch().then(rcol => {
               var reactors = Array.from(rcol.values());
               
-              //realch.guild.members.fetch({force: true}).then(mcol => {
-                //realch.send("Miembros totales (fetch): " + mcol.size);
-                //realch.send("Hi?");
-              //});
-              
-              var memmap = msg.guild.roles.cache.get(projrole.id).members.map(m=>m.user.id);
-              realch.send("Map: "+memmap.size);
-              
-              
-              const TestRole = msg.guild.roles.cache.find(role => role.name == "P9 - Simon y Enrique");
-              const Members = msg.guild.members.cache.filter(member => member.roles.cache.find(role => role == TestRole)).map(member => member.user.tag);
-              msg.channel.send(`Users with ${TestRole.name}: ${Members}`);
-              
+              realch.guild.members.fetch({force: true}).then(mcol => {
+                realch.send("Miembros totales (fetch): " + mcol.size);
+              }).catch(err => realch.send("Error!"));
               
               var rolemembers = projrole.members; //ONLY CACHED MEMBERS!
               
