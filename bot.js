@@ -704,11 +704,15 @@ client.on('message', (msg) => {
             msgreaction.users.fetch().then(rcol => {
               var reactors = Array.from(rcol.values());
               
+              // Fetch all the members of the server to ensure the cache is correct
               realch.guild.members.fetch({force: true}).then(mcol => {
-                realch.send("Miembros totales (fetch): " + mcol.size);
-              }).catch(err => realch.send("Error!"));
+                if (mcol.size != realch.guild.memberCount) return realch.send("Error! Los miembros totales no cuadran!");
+              }).catch(err => {
+                return realch.send("Error! Fallo al buscar todos los miembros del proyecto!");
+              });
               
-              var rolemembers = projrole.members; //ONLY CACHED MEMBERS!
+              // Only cached members, but should be updated!
+              var rolemembers = projrole.members; 
               
               var validvotes = 0;
               for (var useri=0; useri<reactors.length; useri++) {
@@ -718,9 +722,26 @@ client.on('message', (msg) => {
                 validvotes += 1;
               }
               realch.send("Votos válidos: "+validvotes+"\nTotal de colaboradores: "+rolemembers.size);
-              //msg.member.roles.cache.get(projrole.id)
               
-              realch.send("WIP!");
+              if (validvotes >= Math.ceil(rolemembers.size/2)) {
+                realch.send("```prolog\nELIMINANDO PROYECTO\n```").then(sentmsg => {
+                  sleep(1000);
+                  
+                  // Subtract 1 to all project numbers greater than the deleted one
+                  realch.send("WIP - Primero tendría que restar 1 a todos los roles de proyectos siguientes!");
+                  
+                  // DELETE PROJECT & ROLE
+                  realch.send("WIP - Este proyecto (canal y rol) sería eliminado ahora!");
+                  
+                  // Send notice through "asignaciones"
+                  realch.send("WIP - Ahora enviaría una notificación por "+`${asignch}`+"!");
+                  
+                });
+              }
+              else {
+                realch.send("La mayoría de colaboradores no ha votado para eliminar el proyecto. No lo puedo eliminar.");
+              }
+
             }); 
           });
         });
