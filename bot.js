@@ -90,7 +90,7 @@ client.on('guildMemberAdd', (member) => {
                    "seguro que pronto un humano hablará contigo para darte una bienvenida mejor que la que te puedo dar yo."+
                    "\n\n¡Pero no dudes en usarme para lo que necesites!";
   
-  gench.send("¡Muy buenas, " + member + "!", {embed: {
+  gench.send("¡Muy buenas, "+`${member}`+"!", {embed: {
     color: msgcolor,
     description: desctext,
     title: msgtitle,
@@ -286,7 +286,7 @@ client.on('message', (msg) => {
     }
     
     // WELCOME TEXT
-    if (command === 'bienvenida') {
+    if (command === 'bienvenida' || command === 'welcome') {
       var msgcolor = 8388863;
       var msgtitle = "¡Bienvenid@ al Dreamiverso!";
       var desctext = "A modo de presentación, y para romper el hielo, "+
@@ -296,8 +296,10 @@ client.on('message', (msg) => {
                      "\n\nÉchale un ojo a las normas del servidor, "+
                      "seguro que pronto un humano hablará contigo para darte una bienvenida mejor que la que te puedo dar yo."+
                      "\n\n¡Pero no dudes en usarme para lo que necesites!";
+      
+      msg.delete();
 
-      msg.channel.send("Reproduzco a continuación el mensaje de bienvenida: ", {embed: {
+      msg.channel.send({embed: {
         color: msgcolor,
         description: desctext,
         title: msgtitle,
@@ -323,6 +325,7 @@ client.on('message', (msg) => {
   
   
   // - HELP MESSAGE ---------------------------------------------
+  // TODO: Finish and polish it :) 
   if (command === 'ayuda' || command === 'help') {
     msg.reply("¡Hola! Soy un bot creado por Alados5.\n\n"+
               "Aquí debería haber un mensaje de ayuda, pero aún no ha podido escribirlo bien. "+
@@ -788,8 +791,42 @@ client.on('message', (msg) => {
     }
     
     // TRICKS BY TAG
-    
+    else if (args[0] == "tag") {
+      if (!args[1]) return msg.reply("No has especificado ninguna palabra clave!");
+      var title = "Lista de trucos con esta palabra clave";
+      var matchfound = false;
+      var response = "*Nota: Se muestran sólo los títulos. Para leer el truco entero se debe pedir con `!trucos` seguido del número correspondiente.* \n\n";
+      
+      for (var ntrick in dbindex) {
+        if (dbindex.hasOwnProperty(ntrick)) {
+          if (dbindex[ntrick].tags.includes(args[1])) {
+            response = response + ntrick + ": " + dbindex[ntrick].name + "\n";
+            matchfound = true;
+          }
+        }
+      }
+      
+      if (matchfound) {
+        var embedobj = mkembed(title, response, [], 11075328, "", true)
+        msg.channel.send({embed:embedobj});
+      }
+      else {
+        var title = "No hay trucos con esta palabra clave"
+        var response = "Prueba `!trucos todo` para una lista completa con los nombres y números de los trucos. \n\n"+
+                       "Si crees que algún truco debería tener la etiqueta propuesta no dudes en decirlo!";
+        var embedobj = mkembed(title, response, [], 11075328, "", true)
+        msg.channel.send({embed:embedobj});
+      }
+    }
+
     // TRICK BY ID
+    else if (!isNaN(parseInt(args[0]))) {
+      var title = "TRUCO " + args[0] + ": " + dbindex[args[0]].name;
+      var response = dbindex[args[0]].desc + "\nㅤ";
+      var taglist = "";
+      
+      msg.channel.send("WIP");
+    }
     
     // NOTHING SPECIFIED (HELP)
     else {
