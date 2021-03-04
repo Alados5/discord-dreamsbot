@@ -113,7 +113,7 @@ client.on('guildMemberAdd', (member) => {
     debugch.send(`${member.guild.roles.everyone}`+" Ahora somos: "+`${nmembers}`+" miembros."); 
     
     /*
-    var milestonemsg = member.guild.roles.everyone+", ¡Es un momento importante para el servidor! \n"+
+    var milestonemsg = `${member.guild.roles.everyone}`+", ¡Es un momento importante para el servidor! \n"+
                        "¡Con la llegada de " +member+ ", ya somos " +nmembers+ " imps en esta comunidad! \n"+
                        "(Si veis "+(nmembers+1)+" miembros es porque yo no cuento, ¡soy un bot!)\n"+
                        "¡Gracias y felicidades a todos! :D";
@@ -289,7 +289,7 @@ client.on('message', (msg) => {
     // CELEBRATORY GIF
     if (command === 'celebra100') {
       var nmembers = msg.guild.memberCount - 1;
-      var milestonemsg = msg.guild.roles.everyone+", ¡Es un momento importante para el servidor! \n"+
+      var milestonemsg = `${msg.guild.roles.everyone}`+", ¡Es un momento importante para el servidor! \n"+
                          "¡Con la llegada de [X], ya somos " +nmembers+ " imps en esta comunidad! \n"+
                          "(Si veis "+(nmembers+1)+" miembros es porque yo no cuento, ¡soy un bot!)\n"+
                          "¡Gracias y felicidades a todos! :D";
