@@ -106,17 +106,23 @@ client.on('guildMemberAdd', (member) => {
     }
   }});
   
-  /*
+  
   var nmembers = member.guild.memberCount - 1;
   if (nmembers % 100 == 0) {
-    var milestonemsg = member.guild.defaultRole+", ¡Es un momento importante para el servidor! \n"+
+    var debugch = member.guild.channels.cache.find(ch => ch.id==688107638239920282);
+    debugch.send(`${member.guild.roles.everyone}`+" Ahora somos: "+`${nmembers}`+" miembros."); 
+    
+    /*
+    var milestonemsg = member.guild.roles.everyone+", ¡Es un momento importante para el servidor! \n"+
                        "¡Con la llegada de " +member+ ", ya somos " +nmembers+ " imps en esta comunidad! \n"+
                        "(Si veis "+(nmembers+1)+" miembros es porque yo no cuento, ¡soy un bot!)\n"+
                        "¡Gracias y felicidades a todos! :D";
-    var celebgif = "https://raw.githubusercontent.com/Alados5/discord-dreamsbot/master/milestone100gif.gif";
+    var celebgif = "https://raw.githubusercontent.com/Alados5/discord-dreamsbot/master/media/milestone100gif.gif";
     gench.send(milestonemsg, {files: [celebgif]});
+    */
+    
   }
-  */
+  
   
 });
 
@@ -154,6 +160,12 @@ client.on('message', (msg) => {
     if (purgeflag) return;
     
     purgeflag = true;
+    // Fetch all the members of the server to ensure the cache is correct
+    msg.guild.members.fetch({force: true}).then(mcol => {
+      if (mcol.size != msg.guild.memberCount) return debugch.send("Error! Los miembros totales no cuadran!");
+    }).catch(err => {
+      return debugch.send("Timeout Error!");
+    });
 
     var projchans = Array.from(projcat.children.values());
     
@@ -281,7 +293,7 @@ client.on('message', (msg) => {
                          "¡Con la llegada de [X], ya somos " +nmembers+ " imps en esta comunidad! \n"+
                          "(Si veis "+(nmembers+1)+" miembros es porque yo no cuento, ¡soy un bot!)\n"+
                          "¡Gracias y felicidades a todos! :D";
-      var celebgif = "https://raw.githubusercontent.com/Alados5/discord-dreamsbot/master/milestone100gif.gif";
+      var celebgif = "https://raw.githubusercontent.com/Alados5/discord-dreamsbot/master/media/milestone100gif.gif";
       return msg.channel.send(milestonemsg, {files: [celebgif]});
     }
     
@@ -686,6 +698,14 @@ client.on('message', (msg) => {
                 "**Reacciona** con el tick en menos de 10 segundos para confirmar.\n"+
                 "Enviar cualquier mensaje también cancelará el proceso de eliminación.").then(sentmsg => {
         sentmsg.react('✅').then(tickreaction => {
+          
+          // Fetch all the members of the server to ensure the cache is correct
+          msg.guild.members.fetch({force: true}).then(mcol => {
+            if (mcol.size != msg.guild.memberCount) return msg.channel.send("Error! Los miembros totales no cuadran!");
+          }).catch(err => {
+            return msg.channel.send("Error! Fallo al buscar todos los miembros del proyecto!");
+          });
+          
           sleep(10000);
           
           msg.channel.messages.fetch({limit:1}).then(msgcol => {
@@ -706,13 +726,6 @@ client.on('message', (msg) => {
             // Process data: reactions were from Project members, and the majority voted
             msgreaction.users.fetch().then(rcol => {
               var reactors = Array.from(rcol.values());
-              
-              // Fetch all the members of the server to ensure the cache is correct
-              realch.guild.members.fetch({force: true}).then(mcol => {
-                if (mcol.size != realch.guild.memberCount) return realch.send("Error! Los miembros totales no cuadran!");
-              }).catch(err => {
-                return realch.send("Error! Fallo al buscar todos los miembros del proyecto!");
-              });
               
               // Only cached members, but should be updated!
               var rolemembers = projrole.members; 
