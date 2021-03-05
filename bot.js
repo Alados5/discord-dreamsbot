@@ -343,14 +343,24 @@ client.on('message', (msg) => {
   // TODO: Finish and polish it :)
   //mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron)
   if (command === 'ayuda' || command === 'help') {
+    
+    var allroles = msg.guild.roles.cache;
+    var auraroles = [allroles.find(rl=>rl.id==573167034670645279),
+                     allroles.find(rl=>rl.id==573158623061082129),
+                     allroles.find(rl=>rl.id==573158149666897929),
+                     allroles.find(rl=>rl.id==573159517983080476),
+                     allroles.find(rl=>rl.id==573160161972322314),
+                     allroles.find(rl=>rl.id==573167239465795594)];
+    
     var title = "DreamsBot - Ayuda";
     var desc  = "¡Hola! Soy un bot creado por "+`${alados5}`+" para ayudar en El Dreamiverso, el servidor hispanohablante de Dreams en Discord. "+
                 "Si hay algún problema con el bot, no dudes en ponerte en contacto con él.\n"+
                 "Aquí tienes mis comandos básicos y cómo usarlos, ¡espero que te sean útiles!\nㅤ";
     
     var msgfields = [["Ayuda", "`!ayuda`: Reproduce este mensaje\nㅤ"],
-                     ["Aura", "`!aura [tipo]`: el bot mirará si has puesto un tipo de aura de Dreams (juego, diseño, arte, animación, audio o gestión) "+
-                              "y te asignará el rol correspondiente. Si ya tienes ese rol, te lo quitará. Ejemplo: `!aura diseño`\nㅤ"],
+                     ["Aura", "`!aura [tipo]`: el bot mirará si has puesto un tipo de aura de Dreams ("+
+                              `${auraroles[0]}, ${auraroles[1]}, ${auraroles[2]}, ${auraroles[3]}, ${auraroles[4]} o ${auraroles[5]}`+
+                              ") y te asignará el rol correspondiente. Si ya tienes ese rol, te lo quitará. Ejemplo: `!aura diseño`\nㅤ"],
                      ["Indreams", "`!dreamsearch [búsqueda]`: busca en indreams.me creaciones con el nombre especificado.\n"+
                                   "`!dreamersearch [jugador]`: busca en indreams.me jugadores con el nombre especificado.\n"+
                                   "`!creations [jugador]`: devuelve la página de creaciones del jugador especificado.\n"+
