@@ -349,7 +349,7 @@ client.on('message', (msg) => {
                 "Aquí tienes mis comandos básicos y cómo usarlos, ¡espero que te sean útiles!\nㅤ";
     
     var msgfields = [["Ayuda", "`!ayuda`: Reproduce este mensaje\nㅤ"],
-                     ["Aura", "`!aura [tipo]`: el bot mirará si has puesto un tipo de aura de Dreams (juego, diseño, arte, animación, audio o gestión)"+
+                     ["Aura", "`!aura [tipo]`: el bot mirará si has puesto un tipo de aura de Dreams (juego, diseño, arte, animación, audio o gestión) "+
                               "y te asignará el rol correspondiente. Si ya tienes ese rol, te lo quitará. Ejemplo: `!aura diseño`\nㅤ"],
                      ["Indreams", "`!dreamsearch [búsqueda]`: busca en indreams.me creaciones con el nombre especificado.\n"+
                                   "`!dreamersearch [jugador]`: busca en indreams.me jugadores con el nombre especificado.\n"+
