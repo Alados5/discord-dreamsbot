@@ -137,12 +137,14 @@ client.on('message', (msg) => {
 
   var lowtext = msg.content.toLowerCase();
   
-  // Save channels: #bot_debug, #bienvenida, #asignaciones
+  // Save channels: #bot_debug, #bienvenida, #asignaciones, #guía
   var dreami_channels = msg.guild.channels.cache;
   var debugch = dreami_channels.find(ch => ch.id==688107638239920282);
   var welcomech = dreami_channels.find(ch => ch.id==552804145866866698);
   var asignch = dreami_channels.find(ch => ch.id==572891836687843328);
   var guidech = dreami_channels.find(ch => ch.id==673198900357759017);
+  
+  var alados5 = msg.guild.members.cache.find(mem => mem.id==284104569586450434)
   
   // Save Projects category
   var projcat = dreami_channels.find(ch => ch.id==552432711072088074);
@@ -342,8 +344,9 @@ client.on('message', (msg) => {
   //mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron)
   if (command === 'ayuda' || command === 'help') {
     var title = "DreamsBot - Ayuda";
-    var desc  = "¡Hola! Soy un bot creado por Alados5 para ayudar en El Dreamiverso, el servidor hispanohablante de Dreams en Discord.\n"+
-                "Aquí tienes mis comandos básicos y cómo usarlos, ¡espero que te sean útiles!\n\n";
+    var desc  = "¡Hola! Soy un bot creado por "+`${alados5}`+" para ayudar en El Dreamiverso, el servidor hispanohablante de Dreams en Discord. "+
+                "Si hay algún problema con el bot, no dudes en ponerte en contacto con él.\n"+
+                "Aquí tienes mis comandos básicos y cómo usarlos, ¡espero que te sean útiles!\nㅤ";
     
     var msgfields = [["Ayuda", "`!ayuda`: Reproduce este mensaje\nㅤ"],
                      ["Aura", "`!aura [tipo]`: el bot mirará si has puesto un tipo de aura de Dreams (juego, diseño, arte, animación, audio o gestión)"+
