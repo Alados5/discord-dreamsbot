@@ -337,12 +337,20 @@ client.on('message', (msg) => {
   
   
   // - HELP MESSAGE ---------------------------------------------
-  // TODO: Finish and polish it :) 
+  // TODO: Finish and polish it :)
+  //mkembed(msgtitle, desctext, msgfields, msgcolor, msgauthor, footeron)
   if (command === 'ayuda' || command === 'help') {
-    msg.reply("¡Hola! Soy un bot creado por Alados5.\n\n"+
-              "Aquí debería haber un mensaje de ayuda, pero aún no ha podido escribirlo bien. "+
-              "Mientras tanto, puedes echarle un ojo a "+`${welcomech}`+", donde tienes algunos de los comandos con los que me puedes llamar.\n\n"+
-              "¡Disculpa las molestias!");
+    var title = "DreamsBot - Ayuda";
+    var desc  = "¡Hola! Soy un bot creado por Alados5 para ayudar en El Dreamiverso, el servidor hispanohablante de Dreams en Discord.\n"+
+                "Aquí tienes mis comandos básicos y cómo usarlos, ¡espero que te sean útiles!\n\n"+
+                `${welcomech}`;
+    
+    //var taglist = taglist.slice(0,taglist.length-2);
+    //var msgfields = [["Palabras clave:", taglist], ["Truco proporcionado por:", dbindex[args[0]].user]];
+    
+    var embedobj = mkembed(title, desc, [], 12481535, "", true)
+    msg.channel.send({embed:embedobj});
+
   }
   // - END HELP MESSAGE -----------------------------------------
   
