@@ -345,14 +345,14 @@ client.on('message', (msg) => {
     var desc  = "¡Hola! Soy un bot creado por Alados5 para ayudar en El Dreamiverso, el servidor hispanohablante de Dreams en Discord.\n"+
                 "Aquí tienes mis comandos básicos y cómo usarlos, ¡espero que te sean útiles!\n\n";
     
-    var msgfields = [["Ayuda", "`!ayuda`: Reproduce este mensaje"],
+    var msgfields = [["Ayuda", "`!ayuda`: Reproduce este mensaje\nㅤ"],
                      ["Aura", "`!aura [tipo]`: el bot mirará si has puesto un tipo de aura de Dreams (juego, diseño, arte, animación, audio o gestión)"+
-                              "y te asignará el rol correspondiente. Si ya tienes ese rol, te lo quitará. Ejemplo: `!aura diseño`"],
+                              "y te asignará el rol correspondiente. Si ya tienes ese rol, te lo quitará. Ejemplo: `!aura diseño`\nㅤ"],
                      ["Indreams", "`!dreamsearch [búsqueda]`: busca en indreams.me creaciones con el nombre especificado.\n"+
                                   "`!dreamersearch [jugador]`: busca en indreams.me jugadores con el nombre especificado.\n"+
                                   "`!creations [jugador]`: devuelve la página de creaciones del jugador especificado.\n"+
-                                  "`!icons` o `!iconos`: devuelve el enlace a la página oficial con todos los iconos de Dreams"],
-                     ["Proyectos", "Para una explicación extensa de cómo funcionan los proyectos y sus comandos, consulta "+`${guidech}`],
+                                  "`!icons` o `!iconos`: devuelve el enlace a la página oficial con todos los iconos de Dreams\nㅤ"],
+                     ["Proyectos", "Para una explicación extensa de cómo funcionan los proyectos y sus comandos, consulta "+`${guidech}`+"\nㅤ"],
                      ["Más info", "Tienes más información sobre el servidor y el bot en "+`${welcomech}`]];
     
     var embedobj = mkembed(title, desc, msgfields, 12481535, "", true)
