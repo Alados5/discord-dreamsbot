@@ -375,6 +375,13 @@ client.on('message', (msg) => {
   // - END HELP MESSAGE -----------------------------------------
   
   
+  // - INVITE ---------------------------------------------------
+  if (command === 'invite' || command === 'invitar' || command === 'invitación') {
+    msg.reply("Utiliza este enlace para invitar a gente a este servidor:\nhttps://discord.gg/ZWNTuTa");
+  }
+  // - END INVITE -----------------------------------------------
+  
+  
   // - CHOOSE ---------------------------------------------------
   if (command === 'choose') {
     var randnum = Math.random();
