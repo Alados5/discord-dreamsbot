@@ -38,6 +38,21 @@ var dbindex = {
     link: "https://www.twitch.tv/videos/576250083"
   },
   5: {
+    name: "Modos de entrada",
+    tags: ["intermedio", "lógica", "cables", "entrada", "input", "blend"],
+    desc: "Las conexiones de entrada de muchos artilugios permiten cambiar el modo de entrada, "+
+          "y alterar cómo interactúan el valor de entrada y el valor dentro del artilugio. "+
+          "Los modos se cambian pasando el imp sobre la pestaña de entrada y pulsando L1+X. Hay 3 modos:\n"+
+          "- **Sobrescribir** (símbolo de una puerta AND): El valor del cable de entrada se aplica directamente, "+
+          "sobrescribiendo cualquier valor que se indique dentro del artilugio. El slider quedará gris.\n"+
+          "- **??** (símbolo como una X): Modula el valor de entrada multiplicando la señal del cable con la del slider. "+
+          "El slider quedará iluminado, pasando el imp por encima se puede ver el valor original y el resultado del producto.\n"+
+          "- **??** (símbolo como un 0): Modula el valor de entrada haciendo una media ponderada entre todos los cables conectados. "+
+          "La ponderación se regula según la energía de los artilugios de donde salgan los cables.",
+    user: "Alados5",
+    link: ""
+  },
+  6: {
     name: "Vacío",
     tags: ["blank"],
     desc: "Ejemplo",
