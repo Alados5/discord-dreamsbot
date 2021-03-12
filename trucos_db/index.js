@@ -38,17 +38,18 @@ var dbindex = {
     link: "https://www.twitch.tv/videos/576250083"
   },
   5: {
-    name: "Modos de entrada",
+    name: "Modos de fusión o de entrada",
     tags: ["intermedio", "lógica", "cables", "entrada", "input", "blend"],
-    desc: "Las conexiones de entrada de muchos artilugios permiten cambiar el modo de entrada, "+
-          "y alterar cómo interactúan el valor de entrada y el valor dentro del artilugio. "+
+    desc: "Las conexiones de entrada de muchos artilugios permiten cambiar el modo de fusión "+
+          "entre la señal que traen los cables y el valor dentro del artilugio (slider). "+
           "Los modos se cambian pasando el imp sobre la pestaña de entrada y pulsando L1+X. Hay 3 modos:\n\n"+
-          "- **__Sobrescribir__** (símbolo de una puerta AND): El valor del cable de entrada se aplica directamente, "+
+          "- **__Sobrescribir__** (símbolo como una puerta AND): El valor del cable de entrada se aplica directamente, "+
           "sobrescribiendo cualquier valor que se indique dentro del artilugio. El slider quedará gris.\n\n"+
-          "- **__Multiplicar?__** (símbolo como una X): Modula el valor de entrada multiplicando la señal del cable con la del slider. "+
+          "- **__Modular__** (símbolo como una X): Modula el valor de entrada multiplicando la señal del cable con la del slider. "+
           "El slider quedará iluminado, pasando el imp por encima se puede ver el valor original y el resultado del producto.\n\n"+
-          "- **__Ponderar?__** (símbolo como un 0): Modula el valor de entrada haciendo una media ponderada entre todos los cables conectados. "+
-          "La ponderación se regula según la energía de los artilugios de donde salgan los cables.",
+          "- **__Fusionar entradas__** (símbolo como un 0): Modula el valor de entrada haciendo una media ponderada entre todos los cables conectados. "+
+          "La ponderación se regula según la energía de los artilugios de donde salgan los cables.\n\n"+
+          "¡Cuidado! Algunas entradas no permiten cambiar el modo de fusión o no tienen disponibles los 3 modos.",
     user: "Alados5",
     link: ""
   },
