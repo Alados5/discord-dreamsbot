@@ -904,11 +904,5 @@ client.on('message', (msg) => {
     
   }
   // - END TRICKS SECTION ----------------------------------------
-  
-  //Silly thing that will get removed lol
-  else if(command === "rep") {
-    msg.delete();
-    msg.reply("ACiT is better, shush!");
-  }
 
 });
